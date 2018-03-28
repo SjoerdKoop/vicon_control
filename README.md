@@ -2,16 +2,22 @@
 
 This repository includes:
 
-* A GUI and command line tools to connect to and get frames from a computer running the propietary [Vicon Tracker software](https://www.vicon.com/products/software/tracker). 
+* A GUI and command line tools to connect to and get frames from a computer running the propietary [Vicon Tracker](https://www.vicon.com/products/software/tracker). 
 * A GUI and command line tools to connect to and receive sensor data from a peer running the provided robot software.
 * Template software that can be used to close the control loop using Vicon Tracker data to create a reference for the robot.
 * Template software to be run on the robot which listens to a reference and sends sensor data.
 
 The user software is designed for ROS Lunar running on Ubuntu 16.04. The software on the robot is designed for a [BeagleBone Black](https://beagleboard.org/black)
 
+## Overview
+
+A general scheme of the recommend setup is shown below:
+
+![General Scheme](/images/general_scheme.png)
+
 # Installation
 
-Good practice is to always keep your system up to date before installing any software
+Good practice is to always keep your system up to date before installing any software:
 
 ```
 sudo apt-get update
@@ -20,9 +26,9 @@ sudo apt-get dist-upgrade
 
 ## Prerequisites
 
-Since the applications are build on the ROS framework, it is required to install and setup ROS to be able to run them. To do so, follow the instructions for your operating system in the [ROS Lunar installation guide](http://wiki.ros.org/lunar/Installation).
+Since the applications are build on the ROS framework, it is required to install and setup ROS to be able to run them. To do so, please follow the instructions described in the [ROS Lunar installation guide](http://wiki.ros.org/lunar/Installation) for your operating system.
 
-## Vicon sofware installation
+## Vicon software installation
 
 First of all, the Vicon datastream SDK has to be installed. This is achieved by running the corresponding bash script:
 
