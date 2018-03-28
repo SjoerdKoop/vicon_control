@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>ViconGUI</class>
+    <widget class="QWidget">
+        <layout class="QVBoxLayout" name="main_layout">
+			<item>
+            	<widget class="ViconVisualizer" name="vicon_visualizer_" native="true">
+					<property name="sizePolicy">
+						<sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+							<verstretch>9</verstretch>
+						</sizepolicy>
+					</property>
+                </widget>-
+            </item>
+            <item>
+                <widget class="ViconPeer" name="vicon_peer_" native="true">
+                </widget>
+            </item>
+			<item>
+                <widget class="Logger" name="vicon_logger_" native="true">
+					<property name="sizePolicy">
+						<sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+							<verstretch>1</verstretch>
+						</sizepolicy>
+					</property>
+                </widget>
+            </item>
+        </layout>
+        </widget>
+        <customwidgets>
+			<customwidget>
+                <class>Logger</class>
+                <extends>QWidget</extends>
+                <header>logger/logger.h</header>
+            </customwidget>
+            <customwidget>
+                <class>ViconPeer</class>
+                <extends>QWidget</extends>
+                <header>vicon_peer/vicon_peer.h</header>
+            </customwidget>
+            <customwidget>
+                <class>ViconVisualizer</class>
+                <extends>QWidget</extends>
+                <header>vicon_visualizer/vicon_visualizer.h</header>
+            </customwidget>
+        </customwidgets>
+    <resources/>
+    <connections/>
+</ui>

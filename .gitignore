@@ -45,3 +45,10 @@ qtcreator-*
 
 # Catkin custom files
 CATKIN_IGNORE
+
+# Vicon workspace files
+vicon_workspace/.catkin_workspace
+vicon_workspace/.vs_code/
+vicon_workspace/build/
+vicon_workspace/devel/
+vicon_workspace/install/

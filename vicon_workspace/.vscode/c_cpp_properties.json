@@ -1,0 +1,37 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/opt/ros/lunar/include/",
+                    "/home/sjoerd/vicon_workspace/devel/include/",
+					"/home/sjoerd/vicon_workspace/src/vicon_peer/include",
+					"/home/sjoerd/vicon_workspace/src/vicon_visualizer/include",
+                    "/usr/include/",
+                    "/usr/include/linux/",
+                    "/usr/include/x86_64-linux-gnu/",
+                    "/usr/include/c++/5/",
+                    "/usr/include/x86_64-linux-gnu/c++/5",
+                    "/usr/lib/gcc/x86_64-linux-gnu/5/include/"
+                ]
+            },
+            "includePath": [
+                "/opt/ros/lunar/include/",
+				"/home/sjoerd/vicon_workspace/devel/include/",
+				"/home/sjoerd/vicon_workspace/src/vicon_peer/include",
+				"/home/sjoerd/vicon_workspace/src/vicon_visualizer/include",
+                "/usr/include/linux/",
+                "/usr/include/x86_64-linux-gnu/",
+                "/usr/include/c++/5/",
+                "/usr/include/x86_64-linux-gnu/c++/5",
+                "/usr/lib/gcc/x86_64-linux-gnu/5/include/"
+            ],
+            "name": "Linux",
+            "intelliSenseMode": "clang-x64",
+            "defines": ["_WIN32"]
+        }
+    ],
+    "version": 3
+}
