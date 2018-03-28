@@ -1,38 +1,24 @@
 #!/bin/bash
 
-
-### ROS ###
-# Check if ROS lunar is installed
-# If installed, source ROS packages
-# And make is persistent by adding it to ~/.bashrc of the user and continue
-
-ROS_SETUP_FILE="/opt/ros/lunar/setup.bash"
-ROS_COMMAND="source $ROS_SETUP_FILE"
-[ -f $ROS_SETUP_FILE ] &&
 {
-	echo "Sourcing ROS packages..."
-	eval "$ROS_COMMAND"
-	grep -qF -- "$ROS_COMMAND" ~/.bashrc || echo "$ROS_COMMAND" >> ~/.bashrc
+	{
+		### Package generation ###
+		# Call catkin_make in vicon_workspace
 
-	### Package generation ###
-	# Call catkin_make in vicon_workspace
+		catkin_make -C vicon_workspace/
+	} && {
+		### Package discovery ###
+		# Source vicon_workspace so that ROS finds the generated packages
+		# And make it persistent by adding it to ~/.bashrc of the user
 
-	echo "Invoking catkin_make in vicon_workspace..."
-	catkin_make -C vicon_workspace/
-
-
-	### Package discovery ###
-	# Source vicon_workspace so that ROS finds the generated packages
-	# And make it persistent by adding it to ~/.bashrc of the user
-
-	echo "Sourcing generated packages so ROS finds them..."
-	VICON_SETUP_FILE="$PWD/vicon_workspace/devel/setup.bash"
-	VICON_COMMAND="source $VICON_SETUP_FILE"
-	eval "$VICON_COMMAND"
-	grep -qF -- "$VICON_COMMAND" ~/.bashrc || echo "$VICON_COMMAND" >> ~/.bashrc
-
+		echo "Sourcing generated packages so ROS finds them..."
+		VICON_SETUP_FILE="$PWD/vicon_workspace/devel/setup.bash"
+		VICON_COMMAND="source $VICON_SETUP_FILE"
+		eval "$VICON_COMMAND"
+		grep -qF -- "$VICON_COMMAND" ~/.bashrc || echo "$VICON_COMMAND" >> ~/.bashrc
+	}
 } || {
 	#If ROS lunar is not found, notify user
-        echo "File $ROS_SETUP_FILE not found. Check ROS lunar installation."
+        echo "Could not run \"catkin_make\", make sure ROS is properly installed."
 }
 
