@@ -9,14 +9,16 @@ This repository includes:
 
 The user software is designed for ROS Lunar running on Ubuntu 16.04. The software on the robot is designed for a [BeagleBone Black](https://beagleboard.org/black)
 
-## Prerequisites
+# Installation
 
-Good practice is to always keep your system up to date
+Good practice is to always keep your system up to date before installing any software
 
 ```
 sudo apt-get update
 sudo apt-get dist-upgrade
 ```
+
+## Prerequisites
 
 Since the applications are build on the ROS framework, it is required to install and setup ROS to be able to run them. To do so, follow the instructions for your operating system in the [ROS Lunar installation guide](http://wiki.ros.org/lunar/Installation).
 
@@ -44,9 +46,10 @@ TO BE ADDED
 
 TO BE ADDED
 
-## To be added
+# To be added
 
 This repository is not yet complete. The following components are still in development and will be added in the future:
 
 * Workspace for robot GUI and command line tools to run on 
+* Software that can be used to control the robot using Vicon Tracker data
 * Sofware that is run on the BeagleBone Black
