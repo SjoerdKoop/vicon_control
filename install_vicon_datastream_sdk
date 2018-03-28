@@ -1,0 +1,17 @@
+#!/bin/bash
+
+
+### Vicon datastream SDK ###
+# Installs the Vicon Datastream SDK
+# Which involves copying the library and corresponding headers
+
+echo "Installing Vicon datastream SDK..."
+
+echo "Copying libViconDataStreamSDK_CPP.so to /usr/lib/..."
+cp vicon_datastream_sdk/libViconDataStreamSDK_CPP.so /usr/lib/
+echo "Copying DataStreamClient.h to /usr/include/..."
+cp vicon_datastream_sdk/DataStreamClient.h /usr/include/
+echo "Copying IDataStreamClientBase.h to /usr/include/..."
+cp vicon_datastream_sdk/IDataStreamClientBase.h /usr/include/
+
+echo "Installation succesful!"
