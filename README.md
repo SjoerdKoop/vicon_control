@@ -24,7 +24,7 @@ In this scheme, the components are set up in a modular fashion so that component
 
 This results in the cascaded control loop as shown below:
 
-![Control Loop](/images/control_loop.png { height=100px })
+![Control Loop](/images/control_loop.png height="100")
 
 # Installation
 
