@@ -9,7 +9,7 @@
 #include <vector>							// std::vector
 
 // Vicon tools
-#include "vicon_tools/ros_object.h"		// vicon_tools::ros_object
+#include "vicon_tools/ros_object.h"			// vicon_tools::ros_object
 
 // Constructor
 ViconClient::ViconClient() 
@@ -129,7 +129,7 @@ vicon_tools::ros_object_array MarkerClient::extractData()
             struct Vector3D best_marker_position;
 
             // Euclidian norm of predicted object position and the most like marker's position
-            double bestNorm = DBL_MAX;
+            double best_norm = DBL_MAX;
 
             for (int j = 0; j < marker_count; j++) {
                 // Look for marker in excluded markers
@@ -141,26 +141,26 @@ vicon_tools::ros_object_array MarkerClient::extractData()
                     Output_GetUnlabeledMarkerGlobalTranslation umgtOutput = client_->GetUnlabeledMarkerGlobalTranslation(i);
 
                     // Calculate norm
-                    double dx = objects_[i].pos.x_ - umgtOutput.Translation[0];
-                    double dy = objects_[i].pos.y_ - umgtOutput.Translation[1];
-                    double dz = objects_[i].pos.z_ - umgtOutput.Translation[2];
+                    double dx = objects_[i].pos_.x_ - umgtOutput.Translation[0];
+                    double dy = objects_[i].pos_.y_ - umgtOutput.Translation[1];
+                    double dz = objects_[i].pos_.z_ - umgtOutput.Translation[2];
                     double norm = std::sqrt(dx * dx + dy * dy + dz * dz);
 
                     // If norm is smaller, set this marker to be the best fit for current object
-                    if (norm < bestNorm) {
+                    if (norm < best_norm) {
                         best_marker_id = j;
                         best_marker_position = Vector3D(umgtOutput.Translation);
-                        bestNorm = norm;
+                        best_norm = norm;
                     }
 
                     // If this is the first detection of the object, the first detected marker is assumed to be the object
-                    if (!objects_[i].isInitialized) {
+                    if (!objects_[i].isInitialized_) {
                         break;
                     }
                 }
             }
 
-            if (bestNorm < NORM_THRESHOLD || !objects_[i].isInitialized) {
+            if (best_norm < NORM_THRESHOLD || !objects_[i].isInitialized_) {
                 // Update objects to most likely marker
                 objects_[i].updatePosition(best_marker_position, delta_time);
 
@@ -180,9 +180,9 @@ vicon_tools::ros_object_array MarkerClient::extractData()
 
 		// Copy data to ros_object message
 		memcpy(&object.id, &i, sizeof(unsigned short));
-		memcpy(&object.x, &objects_[i].pos.x_, sizeof(double));
-		memcpy(&object.y, &objects_[i].pos.y_, sizeof(double));
-		memcpy(&object.z, &objects_[i].pos.z_, sizeof(double));
+		memcpy(&object.x, &objects_[i].pos_.x_, sizeof(double));
+		memcpy(&object.y, &objects_[i].pos_.y_, sizeof(double));
+		memcpy(&object.z, &objects_[i].pos_.z_, sizeof(double));
 		memcpy(&object.rx, &zero, sizeof(double));
 		memcpy(&object.ry, &zero, sizeof(double));
 		memcpy(&object.rz, &zero, sizeof(double));

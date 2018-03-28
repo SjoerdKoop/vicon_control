@@ -1,19 +1,21 @@
 // Declarations
 #include "vicon_visualizer/visualization.h"
 
-// Vicon visualizer
-#include "vicon_visualizer/ros_object.h"	// vicon_visualizer::ros_object
+// Vicon tools
+#include "vicon_tools/ros_object.h"				// vicon_tools::ros_object
 
 // Initializes the namespace
-void Visualization::init() {
+void Visualization::init()
+{
 	// Set up publisher
 	ros::NodeHandle n;
-	markerPub = n.advertise<visualization_msgs::Marker>("object_marker", 1);
+	marker_pub = n.advertise<visualization_msgs::Marker>("object_marker", 1);
 }
 
 
 // Creates a marker
-visualization_msgs::Marker Visualization::createMarker(const vicon_visualizer::ros_object object) {
+visualization_msgs::Marker Visualization::createMarker(const vicon_tools::ros_object object)
+{
 	visualization_msgs::Marker marker;			// Marker object
 
 	// Set default settings
@@ -43,7 +45,8 @@ visualization_msgs::Marker Visualization::createMarker(const vicon_visualizer::r
 }
 
 // Creates a marker that removes it from the visualizer
-visualization_msgs::Marker Visualization::createRemovalMarker(int id) {
+visualization_msgs::Marker Visualization::createRemovalMarker(int id)
+{
 	visualization_msgs::Marker marker;			// Marker object
 
 	// Set id
@@ -58,35 +61,40 @@ visualization_msgs::Marker Visualization::createRemovalMarker(int id) {
 }
 
 // Handle for when a remove message has arrived
-void Visualization::onObjectRemove(const vicon_visualizer::remove_objects::ConstPtr& msg) {
+void Visualization::onObjectRemove(const vicon_tools::remove_objects::ConstPtr& msg)
+{
 	visualization_msgs::Marker marker;			// Holds marker to remove
 
 	// For each ID
-	for (int i = 0; i < msg->ids.size(); i++) {
+	for (int i = 0; i < msg->ids.size(); i++)
+	{
 		// Create marker
 		marker = createRemovalMarker(msg->ids[i]);
 
 		// Publish ball marker
-		markerPub.publish(marker);
+		marker_pub.publish(marker);
 	}
 }
 
 // Handle for when an update message has arrived
-void Visualization::onObjectUpdate(const vicon_visualizer::ros_object_array::ConstPtr& msg) {
+void Visualization::onObjectUpdate(const vicon_tools::ros_object_array::ConstPtr& msg)
+{
 	visualization_msgs::Marker marker;			// Holds marker to send
 
 	// For each object
-	for (int i = 0; i < msg->objects.size(); i++) {
+	for (int i = 0; i < msg->objects.size(); i++)
+	{
 		// Create marker
 		marker = createMarker(msg->objects[i]);
 
 		// Publish ball marker
-		markerPub.publish(marker);
+		marker_pub.publish(marker);
 	}
 }
 
 // Set the default marker
-void Visualization::setDefaultMarkerSettings(visualization_msgs::Marker* marker) {
+void Visualization::setDefaultMarkerSettings(visualization_msgs::Marker* marker)
+{
 	// Set default info
 	marker->header.frame_id = "/object_frame";			// Attach to general object_frame
 	marker->ns = "objects";								// Marker lives in the objects namespace
@@ -106,7 +114,8 @@ void Visualization::setDefaultMarkerSettings(visualization_msgs::Marker* marker)
 }
 
 // Terminates the namespace
-void Visualization::terminate() {
+void Visualization::terminate()
+{
 	// Shutdown publisher
-	markerPub.shutdown();
+	marker_pub.shutdown();
 }

@@ -4,18 +4,12 @@
 // Export
 #include <pluginlib/class_list_macros.h>		// PLUGINLIB_EXPORT_CLASS
 
-// Default IP address
-#define DEFAULT_IP_ADDRESS "192.168.10.1"
-
-// Default port
-#define DEFAULT_PORT 801
-
-#include <QHostAddress>
-
-#include <iostream>
+// Qt
+#include <QHostAddress>							// QHostAddress
 
 // Constructor
-ViconPeer::ViconPeer(QWidget* parent) : QWidget(parent) {
+ViconPeer::ViconPeer(QWidget* parent) : QWidget(parent)
+{
 	// Extend the widget with all attributes and children from UI file
 	ui_.setupUi(this);
 
@@ -44,18 +38,21 @@ ViconPeer::ViconPeer(QWidget* parent) : QWidget(parent) {
 	ui_.button_->setText("Connect");
 
 	// Disable button if needed
-	if (!hasValidIPAddress()) {
+	if (!hasValidIPAddress())
+	{
 		ui_.button_->setEnabled(false);
 	}
 
 	// Disable markers edit box if needed
-	if (!ui_.markers_check_->isChecked()) {
+	if (!ui_.markers_check_->isChecked())
+	{
 		ui_.markers_edit_->setEnabled(false);
 	}
 }
 
 // Destructor
-ViconPeer::~ViconPeer() {
+ViconPeer::~ViconPeer()
+{
 	// Kill processes
 	client_process_.kill();
 	ping_process_.kill();
@@ -66,7 +63,8 @@ ViconPeer::~ViconPeer() {
 }
 
 // Fires when the button is pressed
-void ViconPeer::buttonPressed() {
+void ViconPeer::buttonPressed()
+{
 	if (client_process_.state() == QProcess::NotRunning)
 	{
 		// If a valid IPv4 address is set
@@ -166,7 +164,8 @@ void ViconPeer::connectIfActiveHost(int ping_exit_code, QProcess::ExitStatus pin
 }
 
 // Disables the GUI
-void ViconPeer::disableGUI() {
+void ViconPeer::disableGUI()
+{
 	ui_.button_->setEnabled(false);
 	ui_.ip_edit_->setEnabled(false);
 	ui_.markers_check_->setEnabled(false);
@@ -176,7 +175,8 @@ void ViconPeer::disableGUI() {
 }
 
 // Disconnects from Vicon
-void ViconPeer::disconnectFromVicon() {
+void ViconPeer::disconnectFromVicon()
+{
 	// Disconnect -> kill client process
 	client_process_.kill();
 	client_process_.waitForFinished();
@@ -188,13 +188,15 @@ void ViconPeer::disconnectFromVicon() {
 	enableGUI();
 
 	// Disable button if needed
-	if (!hasValidIPAddress()) {
+	if (!hasValidIPAddress())
+	{
 		ui_.button_->setEnabled(false);
 	}
 }
 
 // Enables the GUI
-void ViconPeer::enableGUI() {
+void ViconPeer::enableGUI()
+{
 	ui_.button_->setEnabled(true);
 	ui_.ip_edit_->setEnabled(true);
 	ui_.markers_check_->setEnabled(true);
@@ -208,7 +210,8 @@ void ViconPeer::enableGUI() {
 }
 
 // Check whether the IP edit box has a valid IPv4 address
-bool ViconPeer::hasValidIPAddress() {
+bool ViconPeer::hasValidIPAddress()
+{
 	// Convert input to IP address
 	QHostAddress ipAddress(ui_.ip_edit_->text());
 
@@ -217,27 +220,33 @@ bool ViconPeer::hasValidIPAddress() {
 }
 
 // Fires when return is pressed in the IP edit box
-void ViconPeer::ipReturnPressed() {
+void ViconPeer::ipReturnPressed()
+{
 	// Clear focus
 	ui_.ip_edit_->clearFocus();
 
 	// If a valid IPv4 address is set
-	if (hasValidIPAddress()) {
+	if (hasValidIPAddress())
+	{
 		// Connect
 		connectToVicon();
 	}
 }
 
 // Fires when text has changed in the IP edit box
-void ViconPeer::ipTextChanged(const QString& newText) {
+void ViconPeer::ipTextChanged(const QString& newText)
+{
 	// If there is a no robot connected
-	if (!isViconConnected) {
+	if (!isViconConnected)
+	{
 		// If addres is a valid IPv4 address
-		if (hasValidIPAddress()) {
+		if (hasValidIPAddress())
+		{
 			// Enable connect button
 			ui_.button_->setEnabled(true);
 		}
-		else {
+		else
+		{
 			// Disable connect button
 			ui_.button_->setEnabled(false);
 		}
@@ -260,20 +269,19 @@ void ViconPeer::onClientDisconnect(int client_exit_code, QProcess::ExitStatus cl
 
 
 // Fires when port editing is finished
-void ViconPeer::portEditingFinished() {
+void ViconPeer::portEditingFinished()
+{
 	// Clear focus
 	ui_.port_edit_->clearFocus();
 	
 	// If the port edit box is enabled
-	if (ui_.port_edit_->isEnabled()) {
+	if (ui_.port_edit_->isEnabled())
+	{
 		// If a valid IPv4 address is set
-		if (hasValidIPAddress()) {
+		if (hasValidIPAddress())
+		{
 			// Connect
 			connectToVicon();
 		}
 	}
-}
-
-void ViconPeer::test(QProcess::ProcessError error) {
-	std::cout << "Error" << std::endl;
 }

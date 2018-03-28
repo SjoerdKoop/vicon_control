@@ -1,13 +1,5 @@
-/*
-  Copyright 2016 Lucas Walter
-*/
 #ifndef VICON_GUI_VICON_GUI_H
 #define VICON_GUI_VICON_GUI_H
-
-// Vicon
-//#include "vicon_peer/vicon_peer.h"
-//#include "vicon_visualizer/vicon_visualizer.h"
-
 
 #include <rqt_gui_cpp/plugin.h>
 #include <vicon_gui/ui_vicon_gui.h>

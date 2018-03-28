@@ -3,22 +3,26 @@
 
 // Vicon tools
 #include "vicon_tools/clients.h"			// ObjectClient
-#include "vicon_tools/vicon_tools.h"		// isValidIp, isValidPort
+#include "vicon_tools/general_tools.h"		// isValidIp, isValidPort
 
 // Checks whether provided arguments are correct
-bool checkArguments(int argc, char* argv[]) {
+bool checkArguments(int argc, char* argv[])
+{
 	// If the number of arguments is not correct
-	if (argc != 3) {
+	if (argc != 3)
+	{
 		return false;
 	}
 	else {
         // Check Vicon datastream IP address
-		if (!isValidIp(argv[1])) {
+		if (!isValidIp(argv[1]))
+		{
 			return false;
 		}
 
 		// Check Vicon datastream port
-		if (!isValidPort(argv[2])) {
+		if (!isValidPort(argv[2]))
+		{
 			return false;
 		}
 	}
@@ -27,7 +31,8 @@ bool checkArguments(int argc, char* argv[]) {
 	return true;
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
 	// Initialize ROS
 	ros::init(argc, argv, "vicon_objects");
 

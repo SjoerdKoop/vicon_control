@@ -6,8 +6,6 @@ project(logger)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
 	roscpp
-	roslint
-	rqt_gui
 	rqt_gui_cpp
 )
 
@@ -44,15 +42,15 @@ set(${PROJECT_NAME}_HDRS
 )
 
 set(${PROJECT_NAME}_UIS
-ui/${PROJECT_NAME}/logger.ui
+	ui/${PROJECT_NAME}/logger.ui
 )
 
 if("${qt_gui_cpp_USE_QT_MAJOR_VERSION} " STREQUAL "5 ")
-  qt5_wrap_cpp(${PROJECT_NAME}_MOCS ${${PROJECT_NAME}_HDRS})
-  qt5_wrap_ui(${PROJECT_NAME}_UIS_H ${${PROJECT_NAME}_UIS})
+	qt5_wrap_cpp(${PROJECT_NAME}_MOCS ${${PROJECT_NAME}_HDRS})
+	qt5_wrap_ui(${PROJECT_NAME}_UIS_H ${${PROJECT_NAME}_UIS})
 else()
-  qt4_wrap_cpp(${PROJECT_NAME}_MOCS ${${PROJECT_NAME}_HDRS})
-  qt4_wrap_ui(${PROJECT_NAME}_UIS_H ${${PROJECT_NAME}_UIS})
+	qt4_wrap_cpp(${PROJECT_NAME}_MOCS ${${PROJECT_NAME}_HDRS})
+	qt4_wrap_ui(${PROJECT_NAME}_UIS_H ${${PROJECT_NAME}_UIS})
 endif()
 
 
@@ -73,7 +71,7 @@ add_library(${PROJECT_NAME}
 	${${PROJECT_NAME}_SRCS}
 	${${PROJECT_NAME}_MOCS}
 	${${PROJECT_NAME}_UIS_H}
-	)
+)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above

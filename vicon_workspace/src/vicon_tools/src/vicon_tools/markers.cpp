@@ -3,27 +3,32 @@
 
 // Vicon tools
 #include "vicon_tools/clients.h"			// MarkerClient
-#include "vicon_tools/vicon_tools.h"		// isValidIp, isValidPort, isValidPositiveInteger
+#include "vicon_tools/general_tools.h"		// isValidIp, isValidPort, isValidPositiveInteger
 
 // Checks whether provided arguments are correct
-bool checkArguments(int argc, char* argv[]) {
+bool checkArguments(int argc, char* argv[])
+{
 	// If the number of arguments is not correct
-	if (argc != 4) {
+	if (argc != 4)
+	{
 		return false;
 	}
 	else {
         // Check Vicon datastream IP address
-		if (!isValidIp(argv[1])) {
+		if (!isValidIp(argv[1]))
+		{
 			return false;
 		}
 
 		// Check Vicon datastream port
-		if (!isValidPort(argv[2])) {
+		if (!isValidPort(argv[2]))
+		{
 			return false;
 		}
 
 		// Check number of tracked markers
-		if (!isValidPositiveInteger(argv[2])) {
+		if (!isValidPositiveInteger(argv[2]))
+		{
 			return false;
 		}
 	}

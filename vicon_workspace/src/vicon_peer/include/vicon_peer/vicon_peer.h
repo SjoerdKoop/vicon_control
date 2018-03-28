@@ -1,5 +1,5 @@
-#ifndef VICON_PEER_VICON_PEER_WIDGET_H
-#define VICON_PEER_VICON_PEER_WIDGET_H
+#ifndef VICON_PEER_VICON_PEER_H
+#define VICON_PEER_VICON_PEER_H
 
 // Qt
 #include <QProcess>								// QProcess
@@ -21,11 +21,11 @@ class ViconPeer : public QWidget {
 	private:
 		QWidget* widget_;					// The main widget
 		Ui::ViconPeer ui_;					// The UI
-		bool isViconConnected;
-		QProcess client_process_;
-		QProcess ping_process_;
-		bool trackObjects_;
-		int number_of_markers_;
+		bool isViconConnected;				// Holds whether a client is connected to the Vicon datastream
+		QProcess client_process_;			// Client process
+		QProcess ping_process_;				// Ping process
+		bool trackObjects_;					// Whether to track objects
+		int number_of_markers_;				// How many markers to track
 
 		// Disables the GUI
 		void disableGUI();
@@ -70,8 +70,6 @@ class ViconPeer : public QWidget {
 
 		// Fires when port editing is finished
 		void portEditingFinished();
-
-		void test(QProcess::ProcessError error);
 };
 
-#endif // VICON_PEER_VICON_PEER_WIDGET_H
+#endif // VICON_PEER_VICON_PEER_H

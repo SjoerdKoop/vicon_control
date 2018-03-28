@@ -1,5 +1,5 @@
-#ifndef VICON_CLIENTS_H
-#define VICON_CLIENTS_H
+#ifndef VICON_TOOLS_CLIENTS_H
+#define VICON_TOOLS_CLIENTS_H
 
 // ROS
 #include "ros/ros.h"							// ros::*
@@ -82,4 +82,4 @@ class ObjectClient : public ViconClient
 
 };
 
-#endif // VICON_CLIENTS_H
+#endif // VICON_TOOLS_CLIENTS_H

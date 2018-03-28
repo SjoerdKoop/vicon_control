@@ -19,5 +19,6 @@ Logger::Logger(QWidget* parent) : QWidget(parent) {
 
 // Fires when log request is acquired
 void Logger::log(const QString& msg) {
+	// Emit logging of message in the text box
 	emit logMessage(msg);
 }

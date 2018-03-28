@@ -6,7 +6,6 @@
 
 // ROS
 #include "ros/ros.h"													// ros::*
-#include "visualization_msgs/Marker.h"									// visualization_msgs::Marker
 
 // RViz
 #include "rviz/display.h"												// rviz::Display
@@ -15,7 +14,8 @@
 // Vicon visualizer
 #include "vicon_visualizer/ui_vicon_visualizer.h"						// Ui::ViconVisualizer
 
-class ViconVisualizer : public QWidget {
+class ViconVisualizer : public QWidget
+{
 	Q_OBJECT
 
 	public:
@@ -26,11 +26,10 @@ class ViconVisualizer : public QWidget {
 		~ViconVisualizer();
 
 	private:
-		bool isAcceptingMarkers;						// Holds whether the marker dispaly is accepting marker messages
+		bool isAcceptingMarkers_;						// Holds whether the marker dispaly is accepting marker messages
 		rviz::Display* markers_;						// Marker display
-		visualization_msgs::Marker defaultMarker;		// Default marker
-		ros::Subscriber objectSub;     					// Subscriber to object_update
-		ros::Subscriber removeSub;     					// Subscriber to object_remove
+		ros::Subscriber object_sub_;     				// Subscriber to object_update
+		ros::Subscriber remove_sub_;     				// Subscriber to object_remove
 		Ui::ViconVisualizer	ui_;						// Ui::ViconVisualizer
 
 

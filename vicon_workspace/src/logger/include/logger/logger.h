@@ -1,13 +1,11 @@
 #ifndef LOGGER_LOGGER_H
 #define LOGGER_LOGGER_H
 
-// Qt
-#include <QWidget>			// QWidget
-
-// Vicon visualizer
+// Logger
 #include "logger/ui_logger.h"
 
-class Logger : public QWidget {
+class Logger : public QWidget
+{
 	Q_OBJECT
 
 	public:
@@ -15,7 +13,7 @@ class Logger : public QWidget {
 		Logger(QWidget* parent);
 
 	private:
-		Ui::Logger	ui_;	// Ui::Logger
+		Ui::Logger	ui_;		// Ui::Logger
 
 	signals:
 		// Fired when message has been acquired that has to be logged
