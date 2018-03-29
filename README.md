@@ -41,11 +41,7 @@ Since the applications are build on the ROS framework, it is required to install
 
 ## Vicon software installation
 
-First of all, the Vicon datastream SDK has to be installed. This is achieved by running the corresponding bash script:
-
-`sudo vicon_control/install_vicon_datastream_sdk`
-
-This script has be to be run as superuser, since it involves copying files to system directories (/usr/lib and /usr/include). If the Vicon datastream SDK is successfully installed, the Vicon software can be installed with:
+The Vicon software can be installed with:
 
 `. vicon_control/install_vicon`
 
