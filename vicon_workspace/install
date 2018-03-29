@@ -7,14 +7,14 @@ DIR=$(dirname "${BASH_SOURCE[0]}")
 		### Package generation ###
 		# Call catkin_make in vicon_workspace
 
-		catkin_make -C $DIR/vicon_workspace/
+		catkin_make -C $DIR
 	} && {
 		### Package discovery ###
 		# Source vicon_workspace so that ROS finds the generated packages
 		# And make it persistent by adding it to ~/.bashrc of the user
 
 		echo "Sourcing generated packages so ROS finds them..."
-		VICON_SETUP_FILE="$DIR/vicon_workspace/devel/setup.bash"
+		VICON_SETUP_FILE="$DIR/devel/setup.bash"
 		VICON_COMMAND="source $VICON_SETUP_FILE"
 		eval "$VICON_COMMAND"
 		grep -qF -- "$VICON_COMMAND" ~/.bashrc || echo "$VICON_COMMAND" >> ~/.bashrc

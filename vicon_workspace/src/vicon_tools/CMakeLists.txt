@@ -25,11 +25,11 @@ catkin_package(CATKIN_DEPENDS message_runtime)
 
 
 ## Specify additional locations of header files
-include_directories(${catkin_INCLUDE_DIRS} include ${CMAKE_SOURCE_DIR}/vicon_datastream_sdk/include)
+include_directories(${catkin_INCLUDE_DIRS} include ${CMAKE_SOURCE_DIR}/vicon_datastream_sdk)
 
 
 ## Specify additional locations of libraries
-link_directories(${CMAKE_SOURCE_DIR}/vicon_datastream_sdk/lib)
+link_directories(${CMAKE_SOURCE_DIR}/vicon_datastream_sdk)
 
 
 ## Declare C++ libraries
