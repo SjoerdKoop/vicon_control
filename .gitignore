@@ -48,7 +48,7 @@ CATKIN_IGNORE
 
 # Vicon workspace files
 vicon_workspace/.catkin_workspace
-vicon_workspace/.vs_code/
+vicon_workspace/.vscode/
 vicon_workspace/build/
 vicon_workspace/devel/
 vicon_workspace/install/
