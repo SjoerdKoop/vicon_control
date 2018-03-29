@@ -43,7 +43,7 @@ Since the applications are build on the ROS framework, it is required to install
 
 The Vicon software can be installed with:
 
-`. vicon_control/install`
+`. vicon_control/vicon_workspace/install`
 
 *Note the dot and space before the script location. This script makes sure ROS discovers the packages in vicon_workspace for future bash sessions (e.g. terminals). The dot ensures that this is also the case for the current terminal.*
 
