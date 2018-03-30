@@ -105,7 +105,7 @@ void ViconPeer::connectIfActiveHost(int ping_exit_code, QProcess::ExitStatus pin
 	if (ping_exit_code == 0) 
 	{
 		// Create argument list
-		QStringList args = QStringList() << "vicon";
+		QStringList args = QStringList() << "vicon_tools";
 
 		// Set appropriate arguments
 		if (ui_.markers_check_->isChecked()) 
