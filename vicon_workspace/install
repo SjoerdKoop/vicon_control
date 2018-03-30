@@ -2,26 +2,27 @@
 
 # Set script directory
 DIR=$(dirname "$(realpath "$BASH_SOURCE[0]")")
-echo $DIR
-{
-	{
-		### Package generation ###
-		# Call catkin_make in vicon_workspace
 
-		catkin_make -C $DIR
-	} && {
-		### Package discovery ###
-		# Source vicon_workspace so that ROS finds the generated packages
-		# And make it persistent by adding it to ~/.bashrc of the user
+### Package generation ###
+# Call catkin_make in vicon_workspace
 
-		echo "Sourcing generated packages so ROS finds them..."
-		VICON_SETUP_FILE="$DIR/devel/setup.bash"
-		VICON_COMMAND="source $VICON_SETUP_FILE"
-		eval "$VICON_COMMAND"
-		grep -qF -- "$VICON_COMMAND" ~/.bashrc || echo "$VICON_COMMAND" >> ~/.bashrc
-	}
-} || {
-	#If ROS lunar is not found, notify user
-        echo "Could not run \"catkin_make\", make sure ROS is properly installed."
-}
+catkin_make -C $DIR
+
+# If catkin_make was succesful
+if [ $? -eq 0 ]; then
+	### Package discovery ###
+	# Source vicon_workspace so that ROS finds the generated packages
+	# And make it persistent by adding it to ~/.bashrc of the user
+
+	echo "Sourcing generated packages so ROS finds them..."
+	VICON_SETUP_FILE="$DIR/devel/setup.bash"
+	VICON_COMMAND="source $VICON_SETUP_FILE"
+	eval "$VICON_COMMAND"
+	grep -qF -- "$VICON_COMMAND" ~/.bashrc || echo "$VICON_COMMAND" >> ~/.bashrc
+
+# If catkin_make was unsuccesful
+else
+	### Print error message ###
+	echo "Could not run \"catkin_make\", make sure ROS is properly installed."
+fi
 
