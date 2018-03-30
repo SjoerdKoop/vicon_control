@@ -47,7 +47,7 @@ The Vicon software can be installed with:
 
 *Note the dot and space before the script location. This script makes sure ROS discovers the packages in vicon_workspace for future bash sessions (e.g. terminals). The dot ensures that this is also the case for the current terminal.*
 
-Furthermore, the connection to the Vicon Tracker PC has to be properly set up. Currently, this PC has an IP address of 192.168.10.1 and is sending messages over subnet (with netmask) 255.255.254.0. Consequently, the user PC has to have an IP address of 192.168.10.x (1 < x < 255) and must reside in the same subnet of 255.255.254.0. An example image of setting this up in the standard ubuntu desktop environment is shown below:
+The next step is to properly set the connection to the Vicon Tracker PC. Currently, this PC has an IP address of 192.168.10.1 and is sending messages over subnet (with netmask) 255.255.254.0. Consequently, the user PC has to have an IP address of 192.168.10.x (1 < x < 255) and must reside in the same subnet of 255.255.254.0. Example settings in the standard ubuntu desktop environment are shown below:
 
 ![Connection Settings](connection_settings.png)
 
