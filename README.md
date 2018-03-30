@@ -49,9 +49,9 @@ The Vicon software can be installed with:
 
 The next step is to properly set the connection to the Vicon Tracker PC. Currently, this PC has an IP address of 192.168.10.1 and is sending messages over subnet (with netmask) 255.255.254.0. Consequently, the user PC has to have an IP address of 192.168.10.x (1 < x < 255) and must reside in the same subnet of 255.255.254.0. Example settings in the standard ubuntu desktop environment are shown below:
 
-*When revising the settings, the GUI converted 255.255.254.0 to 23. This is completely normal and means that it is properly set up.*
-
 ![Connection Settings](/images/connection_settings.png)
+
+*When revising the settings, the GUI converted 255.255.254.0 to 23. This is completely normal and means that it is properly set up.*
 
 ## Robot workspace installation
 
