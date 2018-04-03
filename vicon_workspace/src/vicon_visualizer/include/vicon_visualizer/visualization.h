@@ -22,7 +22,7 @@ namespace Visualization {
 	visualization_msgs::Marker createMarker(const vicon_tools::ros_object object);
 
 	// Creates a marker that removes it from the visualizer
-	visualization_msgs::Marker createRemovalMarker(int id);
+	visualization_msgs::Marker createRemovalMarker(std::string name);
 
 	// Handle for when a remove message has arrived
 	void onObjectRemove(const vicon_tools::remove_objects::ConstPtr& msg);

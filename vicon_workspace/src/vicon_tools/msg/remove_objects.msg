@@ -1,1 +1,1 @@
-uint16[] ids
+string[] names

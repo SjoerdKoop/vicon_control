@@ -19,14 +19,21 @@ ViconPeer::ViconPeer(QWidget* parent) : QWidget(parent)
 	// Set object name
 	setObjectName("Robot peer");
 
-	// Connect UI signals to slots
+	// Button signal
 	connect(ui_.button_, SIGNAL(pressed()), this, SLOT(buttonPressed()));
+
+	// Check box signals
+	connect(ui_.markers_check_, SIGNAL(stateChanged(int)), this, SLOT(markersCheckBoxStateChanged(int)));
+	connect(ui_.objects_check_, SIGNAL(stateChanged(int)), this, SLOT(objectsCheckBoxStateChanged(int)));
+
+	// Edit box signals
 	connect(ui_.ip_edit_, SIGNAL(returnPressed()), this, SLOT(ipReturnPressed()));
 	connect(ui_.ip_edit_, SIGNAL(textChanged(const QString&)), this, SLOT(ipTextChanged(const QString&)));
-	connect(ui_.markers_check_, SIGNAL(stateChanged(int)), this, SLOT(markersCheckBoxStateChanged(int)));
+	connect(ui_.markers_edit_, SIGNAL(editingFinished()), this, SLOT(markersEditingFinished()));
+	connect(ui_.markers_edit_, SIGNAL(valueChanged(int)), this, SLOT(markersValueChanged(int)));
 	connect(ui_.port_edit_, SIGNAL(editingFinished()), this, SLOT(portEditingFinished()));
 
-	// Connect other signals to slots
+	// Process signals
 	connect(&this->ping_process_, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(connectIfActiveHost(int, QProcess::ExitStatus)));
 	connect(&this->client_process_, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(onClientDisconnect(int, QProcess::ExitStatus)));
 	
@@ -34,20 +41,15 @@ ViconPeer::ViconPeer(QWidget* parent) : QWidget(parent)
 	client_process_.setProgram("rosrun");
 	ping_process_.setProgram("ping");
 
-	// Set initial state
-	ui_.button_->setText("Connect");
-
-	// Disable button if needed
-	if (!hasValidIPAddress())
-	{
-		ui_.button_->setEnabled(false);
-	}
+	updateButton();
 
 	// Disable markers edit box if needed
 	if (!ui_.markers_check_->isChecked())
 	{
 		ui_.markers_edit_->setEnabled(false);
 	}
+
+	//ui_.markers_edit_->setKeyboardTracking(false);
 }
 
 // Destructor
@@ -87,9 +89,6 @@ void ViconPeer::connectToVicon()
 	{
 		disconnectFromVicon();
 	}
-	
-	// Disable GUI
-	disableGUI();
 
 	// Setup ping process and start
 	ping_process_.setArguments(QStringList() << "-w1" << ui_.ip_edit_->text());
@@ -97,8 +96,193 @@ void ViconPeer::connectToVicon()
 
 	// Log connection message
 	log("Connecting to " + ui_.ip_edit_->text() + " at port " + QString::number(ui_.port_edit_->value()) + "...");
+
+	// Update button state
+	updateButton();
+
+	// Disable input
+	disableInput();
 }
 
+// Disables the GUI
+void ViconPeer::disableInput()
+{
+	ui_.ip_edit_->setEnabled(false);
+	ui_.markers_check_->setEnabled(false);
+	ui_.markers_edit_->setEnabled(false);
+	ui_.objects_check_->setEnabled(false);
+	ui_.port_edit_->setEnabled(false);
+}
+
+// Disconnects from Vicon
+void ViconPeer::disconnectFromVicon()
+{
+	// Disconnect -> kill client process
+	client_process_.kill();
+	client_process_.waitForFinished();
+
+	// Change button text
+	ui_.button_->setText("Connect");
+
+	// Enable input
+	enableInput();
+
+	// Disable button if needed
+	if (!hasValidIPAddress())
+	{
+		ui_.button_->setEnabled(false);
+	}
+}
+
+// Enables input
+void ViconPeer::enableInput()
+{
+	ui_.ip_edit_->setEnabled(true);
+	ui_.markers_check_->setEnabled(true);
+
+	if (ui_.markers_check_->isChecked()) {
+		ui_.markers_edit_->setEnabled(true);
+	}
+
+	ui_.objects_check_->setEnabled(true);
+	ui_.port_edit_->setEnabled(true);
+}
+
+// Check whether the IP edit box has a valid IPv4 address
+bool ViconPeer::hasValidIPAddress()
+{
+	// Convert input to IP address
+	QHostAddress ipAddress(ui_.ip_edit_->text());
+
+	//Return whether it is a valid IPv4 address
+	return QAbstractSocket::IPv4Protocol == ipAddress.protocol();
+}
+
+
+/* Button slot */
+
+// Updates button
+void ViconPeer::updateButton()
+{
+	// If there is no client running
+	if (client_process_.state() == QProcess::NotRunning && ping_process_.state() == QProcess::NotRunning)
+	{
+		// Set text to "Connect"
+		ui_.button_->setText("Connect");
+
+		// If a valid mode is selected
+		if ((ui_.markers_check_->isChecked() && ui_.markers_edit_->value() > 0) || ui_.objects_check_->isChecked())
+		{
+			// If a valid IP address is given
+			if (hasValidIPAddress())
+			{	
+				// Enable button
+				ui_.button_->setEnabled(true);
+			}
+			// If no valid IP address is given
+			else
+			{	
+				// Disable button
+				ui_.button_->setEnabled(false);
+			}
+		}
+		// If no valid mode is selected
+		else 
+		{
+			// Disable button
+			ui_.button_->setEnabled(false);
+		}
+	}
+	// If a client is running
+	else
+	{
+		// Set text to "Disconnect"
+		ui_.button_->setText("Disconnect");
+
+		// If a host is not currently being pinged
+		if (ping_process_.state() == QProcess::NotRunning)
+		{
+			// Enable button
+			ui_.button_->setEnabled(true);
+		}
+		// If a host is being pinged
+		else
+		{
+			// Disable button
+			ui_.button_->setEnabled(false);
+		}
+	}
+}
+
+/* Check box slots */
+
+// Fires when state of the markers checkbox has changed
+void ViconPeer::markersCheckBoxStateChanged(int state) 
+{
+	// Enables setting amount of markers
+	ui_.markers_edit_->setEnabled(ui_.markers_check_->isChecked());
+
+	// Update button state
+	updateButton();
+}
+
+// Fires when state of the objects checkbox has changed
+void ViconPeer::objectsCheckBoxStateChanged(int state) 
+{
+	// Update button state
+	updateButton();
+}
+
+/* Edit box slots */
+
+// Fires when return is pressed in the IP edit box
+void ViconPeer::ipReturnPressed()
+{
+	// Clear focus
+	ui_.ip_edit_->clearFocus();
+
+	// If a valid IPv4 address is set
+	if (hasValidIPAddress())
+	{
+		// Connect
+		connectToVicon();
+	}
+}
+
+// Fires when text has changed in the IP edit box
+void ViconPeer::ipTextChanged(const QString& newText)
+{
+	// If there is a no robot connected
+	if (!isViconConnected)
+	{
+		// Update button state
+		updateButton();
+	}
+}
+// Fires when markers editing is finished
+void ViconPeer::markersEditingFinished()
+{
+	// Clear focus
+	ui_.markers_edit_->clearFocus();
+}
+
+// Fires when markers edit value changed
+void ViconPeer::markersValueChanged(int new_value)
+{
+	// Update button state
+	updateButton();
+}
+
+// Fires when port editing is finished
+void ViconPeer::portEditingFinished()
+{
+	// Clear focus
+	ui_.port_edit_->clearFocus();
+}
+
+/* Process slots */
+
+// Starts client if host is active
 void ViconPeer::connectIfActiveHost(int ping_exit_code, QProcess::ExitStatus ping_exit_status) 
 {
 	// If host has been found
@@ -127,8 +311,11 @@ void ViconPeer::connectIfActiveHost(int ping_exit_code, QProcess::ExitStatus pin
 			}
 			else 
 			{
-				// Enable GUI
-				enableGUI();
+				// Update button state
+				updateButton();
+
+				// Enable input
+				enableInput();
 
 				return;
 			}
@@ -138,150 +325,38 @@ void ViconPeer::connectIfActiveHost(int ping_exit_code, QProcess::ExitStatus pin
 		client_process_.setArguments(args);
 		client_process_.start();
 		
-		// Change button text
-		ui_.button_->setText("Disconnect");
 
 		// Log connection message
 		log("Connected!");
 
-		// Reenable disconnect button
-		ui_.button_->setEnabled(true);
+		// Update button state
+		updateButton();
 
-		// Disable some GUI functionality while connected
-		ui_.ip_edit_->setEnabled(false);
-		ui_.markers_check_->setEnabled(false);
-		ui_.markers_edit_->setEnabled(false);
-		ui_.objects_check_->setEnabled(false);
-		ui_.port_edit_->setEnabled(false);
+		// Disable input
+		disableInput();
 	}
 	else 
 	{
 		log("Could not connect: No active host.");
 
-		// Enable GUI
-		enableGUI();
+		// Update button state
+		updateButton();
+
+		// Enable input
+		enableInput();
 	}
-}
-
-// Disables the GUI
-void ViconPeer::disableGUI()
-{
-	ui_.button_->setEnabled(false);
-	ui_.ip_edit_->setEnabled(false);
-	ui_.markers_check_->setEnabled(false);
-	ui_.markers_edit_->setEnabled(false);
-	ui_.objects_check_->setEnabled(false);
-	ui_.port_edit_->setEnabled(false);
-}
-
-// Disconnects from Vicon
-void ViconPeer::disconnectFromVicon()
-{
-	// Disconnect -> kill client process
-	client_process_.kill();
-	client_process_.waitForFinished();
-
-	// Change button text
-	ui_.button_->setText("Connect");
-
-	// Enable GUI
-	enableGUI();
-
-	// Disable button if needed
-	if (!hasValidIPAddress())
-	{
-		ui_.button_->setEnabled(false);
-	}
-}
-
-// Enables the GUI
-void ViconPeer::enableGUI()
-{
-	ui_.button_->setEnabled(true);
-	ui_.ip_edit_->setEnabled(true);
-	ui_.markers_check_->setEnabled(true);
-
-	if (ui_.markers_check_->isChecked()) {
-		ui_.markers_edit_->setEnabled(true);
-	}
-
-	ui_.objects_check_->setEnabled(true);
-	ui_.port_edit_->setEnabled(true);
-}
-
-// Check whether the IP edit box has a valid IPv4 address
-bool ViconPeer::hasValidIPAddress()
-{
-	// Convert input to IP address
-	QHostAddress ipAddress(ui_.ip_edit_->text());
-
-	//Return whether it is a valid IPv4 address
-	return QAbstractSocket::IPv4Protocol == ipAddress.protocol();
-}
-
-// Fires when return is pressed in the IP edit box
-void ViconPeer::ipReturnPressed()
-{
-	// Clear focus
-	ui_.ip_edit_->clearFocus();
-
-	// If a valid IPv4 address is set
-	if (hasValidIPAddress())
-	{
-		// Connect
-		connectToVicon();
-	}
-}
-
-// Fires when text has changed in the IP edit box
-void ViconPeer::ipTextChanged(const QString& newText)
-{
-	// If there is a no robot connected
-	if (!isViconConnected)
-	{
-		// If addres is a valid IPv4 address
-		if (hasValidIPAddress())
-		{
-			// Enable connect button
-			ui_.button_->setEnabled(true);
-		}
-		else
-		{
-			// Disable connect button
-			ui_.button_->setEnabled(false);
-		}
-	}
-}
-
-
-// Fires when state of the markers checkbox has changed
-void ViconPeer::markersCheckBoxStateChanged(int state) 
-{
-	ui_.markers_edit_->setEnabled(ui_.markers_check_->isChecked());
 }
 
 // Fires when client disconnects
 void ViconPeer::onClientDisconnect(int client_exit_code, QProcess::ExitStatus client_exit_status)
 {
-	std::cout << "Exit code: " << client_exit_code << std::endl;
-	disconnectFromVicon();// Fires when client disconnects
-}
+	// Disconnect -> kill client process
+	client_process_.kill();
+	client_process_.waitForFinished();
 
+	// Update button state
+	updateButton();
 
-// Fires when port editing is finished
-void ViconPeer::portEditingFinished()
-{
-	// Clear focus
-	ui_.port_edit_->clearFocus();
-	
-	// If the port edit box is enabled
-	if (ui_.port_edit_->isEnabled())
-	{
-		// If a valid IPv4 address is set
-		if (hasValidIPAddress())
-		{
-			// Connect
-			connectToVicon();
-		}
-	}
+	// Enable input
+	enableInput();
 }

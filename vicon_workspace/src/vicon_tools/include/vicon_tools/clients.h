@@ -29,7 +29,7 @@ class ViconClient
 {
 	public:
 		// Constructor
-		ViconClient();
+		ViconClient(int number_of_markers);
 
 		// Destructor
 		~ViconClient();
@@ -48,8 +48,31 @@ class ViconClient
 		Client* client_;								// Datastream client
 		vicon_tools::ros_object_array object_array;		// Array of objects to publish on topic "object_update"
 
+		// Generates ros_object_array from markers
+		vicon_tools::ros_object_array getMarkers();
+
+		// Generates ros_object_array from objects
+		vicon_tools::ros_object_array getObjects();
+
 	private:
 		ros::Publisher pub_;							// Publisher
+		std::vector<TrackedObject> objects_;			// Tracked objects
+
+};
+
+// Class defining a client that publishes markers and objects
+class DualClient : public ViconClient
+{
+	public:
+		// Constructor
+		DualClient(int number_of_markers);
+
+		// Runs the client
+		void run() override;
+
+	private:
+		// Extracts desired data from the client
+		vicon_tools::ros_object_array extractData() override;
 };
 
 // Class defining a client that publishes markers
@@ -62,24 +85,23 @@ class MarkerClient : public ViconClient
 		// Runs the client
 		void run() override;
 
-	private:
-		std::vector<TrackedObject> objects_;		// Tracked objects
-
 		// Extracts desired data from the client
-		vicon_tools::ros_object_array extractData() override;
+		virtual vicon_tools::ros_object_array extractData() override;
 };
 
 // Class defining a client that publishes objects
 class ObjectClient : public ViconClient
 {
 	public:
+		// Constructor
+		ObjectClient();
+
 		// Runs the client
 		void run() override;
 
 	private:
 		// Extracts desired data from the client
-		vicon_tools::ros_object_array extractData() override;
-
+		virtual vicon_tools::ros_object_array extractData() override;
 };
 
 #endif // VICON_TOOLS_CLIENTS_H

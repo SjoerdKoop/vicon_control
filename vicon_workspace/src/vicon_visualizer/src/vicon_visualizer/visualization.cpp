@@ -23,7 +23,7 @@ visualization_msgs::Marker Visualization::createMarker(const vicon_tools::ros_ob
 
 	// Set timestamp and id
 	marker.header.stamp = ros::Time::now();
-	marker.id = object.id;
+	marker.id = 0;
 
 	// Set coordinates
 	marker.pose.position.x = object.x;
@@ -45,18 +45,18 @@ visualization_msgs::Marker Visualization::createMarker(const vicon_tools::ros_ob
 }
 
 // Creates a marker that removes it from the visualizer
-visualization_msgs::Marker Visualization::createRemovalMarker(int id)
+visualization_msgs::Marker Visualization::createRemovalMarker(std::string name)
 {
 	visualization_msgs::Marker marker;			// Marker object
 
-	// Set id
+/*	// Set id
 	marker.id = id;
 
 	// Set up removal
 	marker.header.frame_id = "/object_frame";			// Attach to general object_frame	
 	marker.ns = "objects";								// Marker lives in the objects namespace
 	marker.action = visualization_msgs::Marker::DELETE;
-
+*/
 	return marker;
 }
 
@@ -66,10 +66,10 @@ void Visualization::onObjectRemove(const vicon_tools::remove_objects::ConstPtr& 
 	visualization_msgs::Marker marker;			// Holds marker to remove
 
 	// For each ID
-	for (int i = 0; i < msg->ids.size(); i++)
+	for (int i = 0; i < msg->names.size(); i++)
 	{
 		// Create marker
-		marker = createRemovalMarker(msg->ids[i]);
+		marker = createRemovalMarker(msg->names[i]);
 
 		// Publish ball marker
 		marker_pub.publish(marker);
@@ -83,7 +83,7 @@ void Visualization::onObjectUpdate(const vicon_tools::ros_object_array::ConstPtr
 
 	// For each object
 	for (int i = 0; i < msg->objects.size(); i++)
-	{
+	{std::cout << "X: " << msg->objects[i].x << std::endl;
 		// Create marker
 		marker = createMarker(msg->objects[i]);
 

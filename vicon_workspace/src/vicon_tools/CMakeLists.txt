@@ -60,3 +60,8 @@ target_link_libraries(markers ${catkin_LIBRARIES} clients general_tools)
 add_executable(objects src/${PROJECT_NAME}/objects.cpp)
 add_dependencies(objects ${PROJECT_NAME}_generate_messages_cpp)
 target_link_libraries(objects ${catkin_LIBRARIES} clients general_tools)
+
+# Dual client program
+add_executable(dual src/${PROJECT_NAME}/dual.cpp)
+add_dependencies(dual ${PROJECT_NAME}_generate_messages_cpp)
+target_link_libraries(dual ${catkin_LIBRARIES} clients general_tools)

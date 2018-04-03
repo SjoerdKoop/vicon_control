@@ -12,11 +12,16 @@
 #include "vicon_tools/ros_object.h"			// vicon_tools::ros_object
 
 // Constructor
-ViconClient::ViconClient() 
+ViconClient::ViconClient(int number_of_markers) 
 {
 	// Initialize publisher
 	ros::NodeHandle n;
 	pub_ = n.advertise<vicon_tools::ros_object_array>("object_update", 1);
+
+    // Populate objects_ if needed (markers only)
+    for (int i = 0; i < number_of_markers; i++) {
+        objects_.push_back(TrackedObject());
+    }
 
 	// Create datastream client
 	client_ = new Client();
@@ -87,27 +92,9 @@ void ViconClient::run()
 		ros::spinOnce();
 	}
 }
-// Constructor
-MarkerClient::MarkerClient(int number_of_markers) : ViconClient()
-{
-    // Populate objects_
-    for (int i = 0; i < number_of_markers; i++) {
-        objects_.push_back(TrackedObject());
-    }
-}
 
-// Runs the client
-void MarkerClient::run()
-{
-	// Enable unlabeled markers
-	client_->EnableUnlabeledMarkerData();
-	
-	// Run main loop
-	ViconClient::run();
-}
-
-// Extracts desired data from the client
-vicon_tools::ros_object_array MarkerClient::extractData()
+// Generates ros_object_array from markers
+vicon_tools::ros_object_array ViconClient::getMarkers()
 {
 	vicon_tools::ros_object_array object_array;	// Holds ros_object_array message
 
@@ -174,18 +161,18 @@ vicon_tools::ros_object_array MarkerClient::extractData()
 	double zero = 0;
 
 	// For each object
-	for (unsigned short i = 0; i < objects_.size(); i++) {
+	for (int i = 0; i < objects_.size(); i++) {
 		// Create new ros_object message
 		vicon_tools::ros_object object;
 
 		// Copy data to ros_object message
-		memcpy(&object.id, &i, sizeof(unsigned short));
-		memcpy(&object.x, &objects_[i].pos_.x_, sizeof(double));
-		memcpy(&object.y, &objects_[i].pos_.y_, sizeof(double));
-		memcpy(&object.z, &objects_[i].pos_.z_, sizeof(double));
-		memcpy(&object.rx, &zero, sizeof(double));
-		memcpy(&object.ry, &zero, sizeof(double));
-		memcpy(&object.rz, &zero, sizeof(double));
+		object.name = "Marker" + std::to_string(i);
+		object.x = objects_[i].pos_.x_;
+		object.y = objects_[i].pos_.y_;
+		object.z = objects_[i].pos_.z_;
+		object.rx = 0;
+		object.ry = 0;
+		object.rz = 0;
 
 		// Add object to array
 		object_array.objects.push_back(object);
@@ -194,18 +181,8 @@ vicon_tools::ros_object_array MarkerClient::extractData()
 	return object_array;
 }
 
-// Runs the client
-void ObjectClient::run()
-{
-	// Enable segments
-	client_->EnableSegmentData();
-	
-	// Run main loop
-	ViconClient::run();
-}
-
-// Extracts desired data from the client
-vicon_tools::ros_object_array ObjectClient::extractData()
+// Generates ros_object_array from objects
+vicon_tools::ros_object_array ViconClient::getObjects()
 {
     Output_GetSegmentGlobalRotationEulerXYZ o_gsgr;	// Holds rotation output
     Output_GetSegmentGlobalTranslation o_gsgt;		// Holds translation output
@@ -232,18 +209,94 @@ vicon_tools::ros_object_array ObjectClient::extractData()
 			o_gsgr = client_->GetSegmentGlobalRotationEulerXYZ(subject_name, root_segment_name);
 
 			// Copy data to ros_object message
-			memcpy(&object.id, &i, sizeof(unsigned short));
-			memcpy(&object.x, &o_gsgt.Translation[0], sizeof(double));
-			memcpy(&object.y, &o_gsgt.Translation[1], sizeof(double));
-			memcpy(&object.z, &o_gsgt.Translation[2], sizeof(double));
-			memcpy(&object.rx, &o_gsgr.Rotation[0], sizeof(double));
-			memcpy(&object.ry, &o_gsgr.Rotation[1], sizeof(double));
-			memcpy(&object.rz, &o_gsgr.Rotation[2], sizeof(double));
-			std::cout << "X: " << o_gsgt.Result << std::endl;
+			object.name = subject_name;
+			object.x = o_gsgt.Translation[0];
+			object.y = o_gsgt.Translation[1];
+			object.z = o_gsgt.Translation[2];
+			object.rx = o_gsgr.Rotation[0];
+			object.ry = o_gsgr.Rotation[1];
+			object.rz = o_gsgr.Rotation[2];
+			
 			// Add object to array
 			object_array.objects.push_back(object);
 		}
     }
 
     return object_array;
+}
+
+// Constructor
+DualClient::DualClient(int number_of_markers) : ViconClient(number_of_markers)
+{
+}
+
+// Runs the client
+void DualClient::run()
+{	
+	// Enable segments and unlabeled markers
+	client_->EnableSegmentData();
+	client_->EnableUnlabeledMarkerData();
+
+	// Run main loop as a MarkerClient
+	ViconClient::run();
+}
+
+
+// Extracts desired data from the client
+vicon_tools::ros_object_array DualClient::extractData()
+{
+	// Get data
+	vicon_tools::ros_object_array objects1 = ViconClient::getMarkers();
+	vicon_tools::ros_object_array objects2 = ViconClient::getObjects();
+
+	// Merge arrays
+	for (int i = 0; i < objects2.objects.size(); i++)
+	{
+		objects1.objects.push_back(objects2.objects[i]);
+	}
+	
+	// Return message with merged arrays
+	return objects1;
+}
+
+// Constructor
+MarkerClient::MarkerClient(int number_of_markers) : ViconClient(number_of_markers)
+{
+}
+
+// Runs the client
+void MarkerClient::run()
+{
+	// Enable unlabeled markers
+	client_->EnableUnlabeledMarkerData();
+	
+	// Run main loop
+	ViconClient::run();
+}
+
+// Extracts desired data from the client
+vicon_tools::ros_object_array MarkerClient::extractData()
+{
+	return getMarkers();
+}
+
+// Constructor
+ObjectClient::ObjectClient() : ViconClient(0)
+{
+}
+
+// Runs the client
+void ObjectClient::run()
+{
+	// Enable segments
+	client_->EnableSegmentData();
+	
+	// Run main loop
+	ViconClient::run();
+}
+
+// Extracts desired data from the client
+vicon_tools::ros_object_array ObjectClient::extractData()
+{
+	return getObjects();
 }

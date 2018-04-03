@@ -19,7 +19,7 @@ In this scheme, the components are set up in a modular fashion so that component
 
 * The vicon software creates a client using the [Vicon datastream SDK](https://www.vicon.com/products/software/datastream-sdk) and generates an array of objects over the ROS topic "object_update". A replacement would only have to satisfy publishing the same data over the same topic.
 * The vision controller listens to the "object_update" topic and should generate a suitable reference from the detected objects. This reference should be an array of floats, sent over the ROS topic "reference_update".
-* The robot software creates a peer which listens to the "reference_update" topic and converts the message into and UDP message to be send. This peer also listens to the robot and visualizer sensor data.
+* The robot software creates a peer which listens to the "reference_update" topic and converts the message into and UDP message to be send. This peer also listens to the robot and visualizes sensor data.
 * The robot controller listens to the UDP reference message and should should control the plant accordingly. It also sends periodic data to the other end of the socket.
 
 This results in the cascaded control loop as shown below:
@@ -47,7 +47,7 @@ The Vicon software can be installed with:
 
 *Note the dot and space before the script location. This script makes sure ROS discovers the packages in vicon_workspace for future bash sessions (e.g. terminals). The dot ensures that this is also the case for the current terminal.*
 
-The next step is to properly set the connection to the Vicon Tracker PC. Currently, this PC has an IP address of 192.168.10.1 and is sending messages over subnet (with netmask) 255.255.254.0. Consequently, the user PC has to have an IP address of 192.168.10.x (1 < x < 255) and must reside in the same subnet of 255.255.254.0. Example settings in the standard ubuntu desktop environment are shown below:
+The next step is to properly set the connection to the Vicon Tracker PC. Currently, this PC has an IP address of 192.168.10.1 and is sending messages over port 801 on subnet (with netmask) 255.255.254.0. Consequently, the user PC has to have an IP address of 192.168.10.x (1 < x < 255) and must reside in the same subnet of 255.255.254.0. Example settings in the standard ubuntu desktop environment are shown below:
 
 ![Connection Settings](/images/connection_settings.png)
 
@@ -55,15 +55,45 @@ The next step is to properly set the connection to the Vicon Tracker PC. Current
 
 ## Robot workspace installation
 
-TO BE ADDED
-
 ## Setting up the controller
-
-TO BE ADDED
 
 ## Setting up the robot
 
-TO BE ADDED
+# Communication
+
+As shown in the general scheme, communication is an integral part connecting all the subsystems. Communication from the cameras to the Vicon Tracker, and from the Vicon Tracker to the user pc is predefined by Vicon. Therefore, four communication instances are defined.
+
+## ROS: object_update
+
+To communicate between the Vicon software and the vision controller, a *ros_object_array* message is send over topic *object_update*. This message consist of and array of *ros_object*:
+
+```
+vicon_control/vicon_workspace/msg/ros_object_array.msg
+
+ros_object[] objects
+```
+
+Where a *ros_object* is defined by a name, three translational values and three rotational values:
+
+```
+vicon_control/vicon_workspace/msg/ros_object.msg 
+
+string name
+float64 x
+float64 y
+float64 z
+float64 rx
+float64 ry
+float64 rz
+```
+
+The name will either be the defined name in the Vicon Tracker software for objects or "Marker<id>" for markers. The ROS data type of *float64* coincides with the *c++* datatype of *double*. Additionally for markers, the rotational values will always be 0, since it is impossible to deduce rotation from a single marker.
+
+## ROS: reference_update
+
+## UDP: reference
+ 
+## UDP: sensor data
 
 # To be added
 
