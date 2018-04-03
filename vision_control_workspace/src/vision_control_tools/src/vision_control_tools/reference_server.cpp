@@ -1,8 +1,6 @@
 // ROS
-#include "ros/ros.h"									// ros::*
-
-// Vision control tools
-#include "vision_control_tools/reference.h"			// vision_control_tools::reference
+#include "ros/ros.h"						// ros::*
+#include "std_msgs/Float32MultiArray.h"		// std_msgs::Float32MultiArray
 
 // Main function
 int main(int argc, char* argv[])
@@ -12,7 +10,7 @@ int main(int argc, char* argv[])
 	ros::NodeHandle n;
 
 	// Initialize subscriber
-	ros::Publisher pub = n.advertise<vision_control_tools::reference>("reference_update", 1);
+	ros::Publisher pub = n.advertise<std_msgs::Float32MultiArray>("reference_update", 1);
 
 	// Spin
 	ros::spinOnce();

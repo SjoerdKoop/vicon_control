@@ -7,12 +7,11 @@ add_compile_options(-std=c++11)
 
 
 ## Find catkin macros and libraries
-find_package(catkin REQUIRED COMPONENTS roscpp message_generation)
+find_package(catkin REQUIRED COMPONENTS roscpp std_msgs message_generation)
 
 
 ## Add and generate messages
 add_message_files(FILES
-	reference.msg
 	ros_object.msg
 	ros_object_array.msg
 )
@@ -25,7 +24,7 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 
 
 ## Create package
-catkin_package(CATKIN_DEPENDS message_runtime)
+catkin_package(CATKIN_DEPENDS std_msgs message_runtime)
 
 
 ## Declare C++ libraries

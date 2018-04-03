@@ -76,7 +76,7 @@ As shown in the general scheme, communication is an integral part connecting all
 
 ## ROS: object_update
 
-To communicate between the Vicon software and the vision controller, a *ros_object_array* message is send over topic *object_update*. This message consist of and array of *ros_object*:
+To communicat from the Vicon workspace to the vision controller, a *ros_object_array* message is send over topic *object_update*. This message consist of and array of *ros_object*:
 
 ```
 vicon_tools/ros_object_array.msg
@@ -101,6 +101,17 @@ float64 rz
 The name will either be the defined name in the Vicon Tracker software for objects or "marker&lt;id&gt;" for markers. The ROS data type of *float64* coincides with the *c++* datatype of *double*. Additionally for markers, the rotational values will always be 0, since it is impossible to deduce rotation from a single marker.
 
 ## ROS: reference_update
+
+To communicate from the vision controller to the robot workspace, a standard *Float32MultiArray* message is send over topic *object_update*. This message can be found in the *std_msgs* package and is defined as:
+
+```
+std_msgs/Float32MultiArray.msg
+--------------------------------
+MultiArrayLayout layout
+float32[] data
+```
+
+Since we only use one dimension, the *layout* variable is not relevant. Reference values should be added (*data.push_back(value)*) in the same order as they are to be read by the robot.
 
 ## UDP: reference
  

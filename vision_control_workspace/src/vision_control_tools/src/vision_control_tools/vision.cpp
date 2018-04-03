@@ -1,6 +1,9 @@
 // Declarations
 #include "vision_control_tools/vision.h"
 
+// ROS
+#include "std_msgs/Float32MultiArray.h"				// std_msgs::Float32MultiArray
+
 // Vision control tools
 #include "vision_control_tools/ros_object.h"		// vision_control_tools::ros_object
 
@@ -9,7 +12,7 @@ void Vision::init(VisionController* controller)
 {
 	// Initialize publisher and subscriber
 	ros::NodeHandle n;
-	pub_ = n.advertise<vision_control_tools::reference>("reference_update", 1);
+	pub_ = n.advertise<std_msgs::Float32MultiArray>("reference_update", 1);
 	sub_ = n.subscribe<vision_control_tools::ros_object_array>("object_update", 1, onObjectUpdate);
 
 	// Set controller

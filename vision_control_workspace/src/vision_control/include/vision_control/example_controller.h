@@ -1,6 +1,9 @@
 #ifndef VISION_CONTROL_EXAMPLE_CONTROLLER_H
 #define VISION_CONTROL_EXAMPLE_CONTROLLER_H
 
+// ROS
+#include "std_msgs/Float32MultiArray.h"					// std_msgs::Float32MultiArray
+
 // System
 #include <string>										// std::string
 
@@ -19,7 +22,7 @@ class ExampleController : public VisionController
 		// Differences from VisionController:
 		// Is not virtual (virtual keyword missing before function definition)
 		// Is overrrides parent function (override keyword after function definition)
-		vision_control_tools::reference objectsToReference(const vision_control_tools::ros_object_array::ConstPtr& obj) override;
+		std_msgs::Float32MultiArray objectsToReference(const vision_control_tools::ros_object_array::ConstPtr& obj) override;
 
 	private:
 		std::string object_name_;	// The name of the object

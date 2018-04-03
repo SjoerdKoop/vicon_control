@@ -14,10 +14,10 @@ ExampleController::ExampleController(int P, std::string object_name, std::string
 }
 
 // Generates reference from updated objects
-vision_control_tools::reference ExampleController::objectsToReference(const vision_control_tools::ros_object_array::ConstPtr& obj)
+std_msgs::Float32MultiArray ExampleController::objectsToReference(const vision_control_tools::ros_object_array::ConstPtr& obj)
 {
 	// Create reference message
-	vision_control_tools::reference ref;
+	std_msgs::Float32MultiArray ref;
 
 	/* Example: Moving robot to object in the Z direction with standard P action */
 
@@ -47,12 +47,12 @@ vision_control_tools::reference ExampleController::objectsToReference(const visi
 	if (object_id != -1 && robot_id != -1)
 	{
 		// Create reference
-		ref.reference.push_back(P_ * (obj->objects[object_id].z - obj->objects[robot_id].z));
+		ref.data.push_back(P_ * (obj->objects[object_id].z - obj->objects[robot_id].z));
 	}
 	else
 	{
 		// Set reference to 0
-		ref.reference.push_back(0);
+		ref.data.push_back(0);
 	}
 
 	/* Example end */

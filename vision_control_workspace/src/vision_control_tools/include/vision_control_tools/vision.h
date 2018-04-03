@@ -5,7 +5,6 @@
 #include "ros/ros.h"									// ros::*
 
 // Vision control tools
-#include "vision_control_tools/reference.h"				// vision_control_tools::reference
 #include "vision_control_tools/ros_object_array.h"		// vision_control_tools::ros_object_array
 #include "vision_control_tools/vision_controller.h"		// VisionController
 
