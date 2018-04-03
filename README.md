@@ -39,7 +39,7 @@ sudo apt-get dist-upgrade
 
 Since the applications are build on the ROS framework, it is required to install and setup ROS to be able to run them. To do so, please follow the instructions described in the [ROS Lunar installation guide](http://wiki.ros.org/lunar/Installation) for your operating system. Another ROS version might still be able to run the software, but is not supported.
 
-*In the follow installation scripts, there will be a dot followed by a space before the actual file. This scripts makes sure ROS discovers the packages in the corresponding workspace for future bash sessions (e.g. terminals). The dot ensures that this is also the case for the current terminal.*
+*Before the following installation scripts, there will be a dot followed by a space before the actual file. This scripts makes sure ROS discovers the packages in the corresponding workspace for future bash sessions (e.g. terminals). The dot ensures that this is also the case for the current terminal.*
 
 ## Vicon workspace installation
 
@@ -102,7 +102,7 @@ The name will either be the defined name in the Vicon Tracker software for objec
 
 ## ROS: reference_update
 
-To communicate from the vision controller to the robot workspace, a standard *Float32MultiArray* message is send over topic *object_update*. This message can be found in the *std_msgs* package and is defined as:
+To communicate from the vision controller to the robot workspace, a standard *[Float32MultiArray](https://docs.ros.org/api/std_msgs/html/msg/Float32MultiArray.html)* message is send over topic *object_update*. This message can be found in the *std_msgs* package and is defined as:
 
 ```
 std_msgs/Float32MultiArray.msg
@@ -111,7 +111,7 @@ MultiArrayLayout layout
 float32[] data
 ```
 
-Since we only use one dimension, the *layout* variable is not relevant. Reference values should be added (*data.push_back(value)*) in the same order as they are to be read by the robot.
+Since we only use one dimension, the *layout* variable is not relevant. A *float32* in ROS coincides with a *float* in *c++*, this is used instead of a double to effectively halve the magnitude of communication messages without losing relevant accuracy. Reference values should be added (*data.push_back(value)*) in the same order as they are to be read by the robot.
 
 ## UDP: reference
  
@@ -122,5 +122,4 @@ Since we only use one dimension, the *layout* variable is not relevant. Referenc
 This repository is not yet complete. The following components are still in development and will be added in the future:
 
 * Workspace for robot GUI and command line tools to run on 
-* Software that can be used to control the robot using Vicon Tracker data
 * Sofware that is run on the BeagleBone Black
