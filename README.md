@@ -56,12 +56,13 @@ The next step is to properly set the connection to the Vicon Tracker PC. Current
 ## Vision control workspace installation
 
 The vision control workspace can be installed with:
+
 `. vicon_control/vision_control_workspace/installation`
 
 In this workspace are two packages.
 
-* *vision_control_tools*: Consist of required components and helpful tools. The executable *object_client* listens to the topic *object_update* and prints any incoming updates. The executable *reference_server* allows the user to send a reference over topic *reference_update*.
-* *vision_control*: Consists of an executable which activates a defined controller together with an example controller.
+* *vision_control_tools*: Consists of required components and helpful tools. The executable *object_client* listens to the topic *object_update* and prints any incoming updates. The executable *reference_server* allows the user to send a reference over topic *reference_update*.
+* *vision_control*: Consists of an executable which activates a defined controller and an example controller.
 
 Controllers should inherit from *VisionController* and should override the *objectsToReference* function. An example implementation can be seen as the example controller.
 
@@ -78,16 +79,16 @@ As shown in the general scheme, communication is an integral part connecting all
 To communicate between the Vicon software and the vision controller, a *ros_object_array* message is send over topic *object_update*. This message consist of and array of *ros_object*:
 
 ```
-ros_object_array.msg
-
+vicon_tools/ros_object_array.msg
+--------------------------------
 ros_object[] objects
 ```
 
 Where a *ros_object* is defined by a name, three translational values and three rotational values:
 
 ```
-ros_object.msg 
-
+vicon_tools/ros_object.msg 
+--------------------------
 string name
 float64 x
 float64 y
