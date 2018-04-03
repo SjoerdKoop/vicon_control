@@ -87,7 +87,7 @@ float64 ry
 float64 rz
 ```
 
-The name will either be the defined name in the Vicon Tracker software for objects or "Marker &lt; id &gt; " for markers. The ROS data type of *float64* coincides with the *c++* datatype of *double*. Additionally for markers, the rotational values will always be 0, since it is impossible to deduce rotation from a single marker.
+The name will either be the defined name in the Vicon Tracker software for objects or "Marker&lt;id&gt;" for markers. The ROS data type of *float64* coincides with the *c++* datatype of *double*. Additionally for markers, the rotational values will always be 0, since it is impossible to deduce rotation from a single marker.
 
 ## ROS: reference_update
 
