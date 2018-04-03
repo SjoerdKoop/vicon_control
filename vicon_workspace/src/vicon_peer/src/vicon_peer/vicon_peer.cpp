@@ -349,7 +349,7 @@ void ViconPeer::connectIfActiveHost(int ping_exit_code, QProcess::ExitStatus pin
 
 // Fires when client disconnects
 void ViconPeer::onClientDisconnect(int client_exit_code, QProcess::ExitStatus client_exit_status)
-{
+{std::cout << "Exit code: " << client_exit_code << std::endl;
 	// Disconnect -> kill client process
 	client_process_.kill();
 	client_process_.waitForFinished();

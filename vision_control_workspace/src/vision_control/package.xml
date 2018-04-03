@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+	<!-- Package information -->
+	<name>vision_control</name>
+	<version>1.0.0</version>
+	<description>The vision_control package</description>
+	<maintainer email="s.j.m.koopmans@student.tue.nl">Sjoerd Koopmans</maintainer>
+	<license>BSD</license>
+	<url type="website">https://github.com/SjoerdKoop/vicon_control</url>
+
+	<!-- Catkin -->
+	<buildtool_depend>catkin</buildtool_depend>
+
+	<!-- Build dependencies -->
+	<build_depend>roscpp</build_depend>
+	<build_depend>vision_control_tools</build_depend>
+	<build_export_depend>vision_control_tools</build_export_depend>
+
+	<!-- Execution dependencies -->
+	<exec_depend>roscpp</exec_depend>
+	<exec_depend>vision_control_tools</exec_depend>
+</package>

@@ -85,8 +85,12 @@ void ViconClient::run()
 		// Extract desired data from the client
 		object_array = extractData();
 
-		// Publish objectArray over topic "object_update"
-		pub_.publish(object_array);
+		// If an object update is acquired
+		if (object_array.objects.size() > 0)
+		{
+			// Publish objectArray over topic "object_update"
+			pub_.publish(object_array);
+		}
 
 		// Spin once
 		ros::spinOnce();
@@ -166,7 +170,7 @@ vicon_tools::ros_object_array ViconClient::getMarkers()
 		vicon_tools::ros_object object;
 
 		// Copy data to ros_object message
-		object.name = "Marker" + std::to_string(i);
+		object.name = "marker" + std::to_string(i);
 		object.x = objects_[i].pos_.x_;
 		object.y = objects_[i].pos_.y_;
 		object.z = objects_[i].pos_.z_;

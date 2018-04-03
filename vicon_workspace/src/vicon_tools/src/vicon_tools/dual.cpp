@@ -37,7 +37,8 @@ bool checkArguments(int argc, char* argv[])
 	return true;
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
 	// Initialize ROS
 	ros::init(argc, argv, "vicon_dual");
 
