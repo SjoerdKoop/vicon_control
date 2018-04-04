@@ -12,6 +12,13 @@ int main(int argc, char* argv[])
 	// Initialize subscriber
 	ros::Publisher pub = n.advertise<std_msgs::Float32MultiArray>("reference_update", 1);
 
+	// Wait for subscriber
+	std::cout << "Waiting for a subscriber..." << std::endl;
+	while(ros::ok() && pub.getNumSubscribers() == 0) {
+		usleep(1000);
+	}
+	std::cout << "Subscriber connected!" <<std::endl;
+
 	// Spin
 	ros::spinOnce();
 }
