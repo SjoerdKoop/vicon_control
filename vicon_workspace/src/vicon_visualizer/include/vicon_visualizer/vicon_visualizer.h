@@ -34,11 +34,29 @@ class ViconVisualizer : public QWidget
 
 
 	private slots:
+		/* Button slots */
+
 		// Fires when the pause button is pressed
 		void pauseButtonPressed();
 
 		// Fires when the reset button is pressed
 		void resetButtonPressed();
+
+		/* Combo box slot */
+
+		// Fires when shape combo box has changed
+		void shapeComboCurrentIndexChanged(int index);
+
+		/* Edit box slots */
+
+		// Fires when X scale editiing is finished
+		void scaleXEditingFinished();
+
+		// Fires when Y scale editiing is finished
+		void scaleYEditingFinished();
+
+		// Fires when Z scale editiing is finished
+		void scaleZEditingFinished();
 };
 
 #endif  // VICON_VISUALIZER_VICON_VISUALIZER_H

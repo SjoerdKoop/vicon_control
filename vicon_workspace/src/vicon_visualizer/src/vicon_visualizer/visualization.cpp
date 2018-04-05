@@ -14,16 +14,16 @@ void Visualization::init()
 
 
 // Creates a marker
-visualization_msgs::Marker Visualization::createMarker(const vicon_tools::ros_object object)
+visualization_msgs::Marker Visualization::createMarker(const vicon_tools::ros_object object, int id)
 {
 	visualization_msgs::Marker marker;			// Marker object
 
 	// Set default settings
 	setDefaultMarkerSettings(&marker);
-
+	
 	// Set timestamp and id
 	marker.header.stamp = ros::Time::now();
-	marker.id = 0;
+	marker.id = id;
 
 	// Set coordinates
 	marker.pose.position.x = object.x;
@@ -83,9 +83,9 @@ void Visualization::onObjectUpdate(const vicon_tools::ros_object_array::ConstPtr
 
 	// For each object
 	for (int i = 0; i < msg->objects.size(); i++)
-	{std::cout << "X: " << msg->objects[i].x << std::endl;
+	{
 		// Create marker
-		marker = createMarker(msg->objects[i]);
+		marker = createMarker(msg->objects[i], i);
 
 		// Publish ball marker
 		marker_pub.publish(marker);
@@ -98,19 +98,57 @@ void Visualization::setDefaultMarkerSettings(visualization_msgs::Marker* marker)
 	// Set default info
 	marker->header.frame_id = "/object_frame";			// Attach to general object_frame
 	marker->ns = "objects";								// Marker lives in the objects namespace
-	marker->type = visualization_msgs::Marker::SPHERE;	// Set marker to sphere
+	marker->type = shape_;								// Set marker to default
 	marker->action = visualization_msgs::Marker::ADD;	// Add (update) marker
 
 	// Set default scale
-	marker->scale.x = BALL_SIZE;
-	marker->scale.y = BALL_SIZE;
-	marker->scale.z = BALL_SIZE;
+	marker->scale.x = scale_x_;
+	marker->scale.y = scale_y_;
+	marker->scale.z = scale_z_;
 
 	// Set default color
 	marker->color.r = 0.0f;
 	marker->color.g = 1.0f;
 	marker->color.b = 0.0f;
 	marker->color.a = 1.0;
+}
+
+// Sets X scale
+void Visualization::setScaleX(int scale_x)
+{
+	scale_x_ = scale_x;
+}
+
+// Sets Y scale
+void Visualization::setScaleY(int scale_y)
+{
+	scale_y_ = scale_y;
+}
+
+// Sets Z scale
+void Visualization::setScaleZ(int scale_z)
+{
+	scale_z_ = scale_z;
+}
+
+// Sets the default shape
+void Visualization::setShape(int index)
+{
+	switch(index)
+	{
+		case 0:
+			shape_ = visualization_msgs::Marker::ARROW;
+			break;
+		case 1:
+			shape_ = visualization_msgs::Marker::CUBE;
+			break;
+		case 2:
+			shape_ = visualization_msgs::Marker::CYLINDER;
+			break;
+		case 3:
+			shape_ = visualization_msgs::Marker::SPHERE;
+			break;
+	}
 }
 
 // Terminates the namespace

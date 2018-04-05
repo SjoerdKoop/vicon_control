@@ -59,3 +59,6 @@ vision_control_workspace/.vscode
 vision_control_workspace/build/
 vision_control_workspace/devel/
 vision_control_workspace/install/
+
+# Matlab files
+vicon_workspace/src/matlab_gen/

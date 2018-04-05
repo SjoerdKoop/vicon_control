@@ -21,16 +21,23 @@ ViconVisualizer::ViconVisualizer(QWidget* parent) : QWidget(parent)
 	// Set object name
 	setObjectName("Vicon visualizer");
 
-	// Initializer visualization namespace
+	// Extend the widget with all attributes and children from UI file
+	ui_.setupUi(this);
+
+	// Initialize visualization namespace
 	Visualization::init();
+
+	// Set parameters of visualization namespace
+	Visualization::setShape(ui_.shape_combo_->currentIndex());
+	Visualization::setScaleX(ui_.scale_x_edit_->value());
+	Visualization::setScaleY(ui_.scale_y_edit_->value());
+	Visualization::setScaleZ(ui_.scale_z_edit_->value());
 
 	// Set up subscribers
 	ros::NodeHandle n;
 	object_sub_ = n.subscribe<vicon_tools::ros_object_array>("object_update", 1, Visualization::onObjectUpdate);
 	remove_sub_ = n.subscribe<vicon_tools::remove_objects>("object_remove", 1, Visualization::onObjectRemove);
 
-	// Extend the widget with all attributes and children from UI file
-	ui_.setupUi(this);
 
 	// Create RViz visualization manager
 	rviz::VisualizationManager* vis_man = new rviz::VisualizationManager(ui_.panel_);
@@ -55,9 +62,17 @@ ViconVisualizer::ViconVisualizer(QWidget* parent) : QWidget(parent)
 	current_view_vontroller->yaw(3.0f * M_PI / 4.0f);
 	current_view_vontroller->zoom(-10000.0f);
 
-	// Connect UI signals to slots
+	// Button signals
 	connect(ui_.pause_button_, SIGNAL(pressed()), this, SLOT(pauseButtonPressed()));
 	connect(ui_.reset_button_, SIGNAL(pressed()), this, SLOT(resetButtonPressed()));
+
+	// Combo box signal
+	connect(ui_.shape_combo_, SIGNAL(currentIndexChanged(int)), this, SLOT(shapeComboCurrentIndexChanged(int)));
+
+	// Edit box signals
+	connect(ui_.scale_x_edit_, SIGNAL(editingFinished()), this, SLOT(scaleXEditingFinished()));
+	connect(ui_.scale_y_edit_, SIGNAL(editingFinished()), this, SLOT(scaleYEditingFinished()));
+	connect(ui_.scale_z_edit_, SIGNAL(editingFinished()), this, SLOT(scaleZEditingFinished()));
 }
 
 // Destructor
@@ -70,6 +85,8 @@ ViconVisualizer::~ViconVisualizer()
 	// Terminate Visualization namespace
 	Visualization::terminate();
 }
+
+/* Button slots */
 
 // Fires when the pause button is pressed
 void ViconVisualizer::pauseButtonPressed()
@@ -91,5 +108,59 @@ void ViconVisualizer::pauseButtonPressed()
 // Fires when the reset button is pressed
 void ViconVisualizer::resetButtonPressed()
 {
+	// Reset markers
+	markers_->reset();
+}
+
+/* Combo box slot */
+
+// Fires when shape combo box has changed
+void ViconVisualizer::shapeComboCurrentIndexChanged(int index)
+{
+	// Update shape
+	Visualization::setShape(ui_.shape_combo_->currentIndex());
+
+	// Reset markers
+	markers_->reset();
+}
+
+/* Edit box slots */
+
+// Fires when X scale editiing is finished
+void ViconVisualizer::scaleXEditingFinished()
+{
+	// Clear focus
+	ui_.scale_x_edit_->clearFocus();
+
+	// Set value
+	Visualization::setScaleX(ui_.scale_x_edit_->value());
+
+	// Reset markers
+	markers_->reset();
+}
+
+// Fires when Y scale editiing is finished
+void ViconVisualizer::scaleYEditingFinished()
+{	
+	// Clear focus
+	ui_.scale_y_edit_->clearFocus();
+
+	// Set value
+	Visualization::setScaleY(ui_.scale_y_edit_->value());
+
+	// Reset markers
+	markers_->reset();
+}
+
+// Fires when Z scale editiing is finished
+void ViconVisualizer::scaleZEditingFinished()
+{	
+	// Clear focus
+	ui_.scale_z_edit_->clearFocus();
+
+	// Set value
+	Visualization::setScaleZ(ui_.scale_z_edit_->value());
+
+	// Reset markers
 	markers_->reset();
 }

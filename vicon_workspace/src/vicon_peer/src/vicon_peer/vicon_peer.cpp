@@ -14,10 +14,10 @@ ViconPeer::ViconPeer(QWidget* parent) : QWidget(parent)
 	ui_.setupUi(this);
 
 	// Set window title
-	setWindowTitle("Robot peer");
+	setWindowTitle("Vicon peer");
 
 	// Set object name
-	setObjectName("Robot peer");
+	setObjectName("Vicon peer");
 
 	// Button signal
 	connect(ui_.button_, SIGNAL(pressed()), this, SLOT(buttonPressed()));
@@ -48,8 +48,6 @@ ViconPeer::ViconPeer(QWidget* parent) : QWidget(parent)
 	{
 		ui_.markers_edit_->setEnabled(false);
 	}
-
-	//ui_.markers_edit_->setKeyboardTracking(false);
 }
 
 // Destructor
@@ -349,7 +347,9 @@ void ViconPeer::connectIfActiveHost(int ping_exit_code, QProcess::ExitStatus pin
 
 // Fires when client disconnects
 void ViconPeer::onClientDisconnect(int client_exit_code, QProcess::ExitStatus client_exit_status)
-{std::cout << "Exit code: " << client_exit_code << std::endl;
+{
+	//std::cout << "Exit code: " << client_exit_code << std::endl;
+	
 	// Disconnect -> kill client process
 	client_process_.kill();
 	client_process_.waitForFinished();
