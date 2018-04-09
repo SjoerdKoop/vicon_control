@@ -117,6 +117,18 @@ Since we only use one dimension, the *layout* variable is not relevant. A *float
  
 ## UDP: sensor data
 
+# Executables
+
+The software packets create several useful executables. Usage of these executables is described below:
+
+* Vicon workspace tools (vicon_tools)
+
+* Vision control tools (vision_control_tools)
+
+* Robot Workspace tools (robot_tools)
+
+* Robot control tools
+
 # To be added
 
 This repository is not yet complete. The following components are still in development and will be added in the future:
