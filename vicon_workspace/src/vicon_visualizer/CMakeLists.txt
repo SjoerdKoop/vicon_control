@@ -42,7 +42,6 @@ set (${PROJECT_NAME}_SRCS
 
 set(${PROJECT_NAME}_HDRS
 	include/${PROJECT_NAME}/vicon_visualizer.h
-	include/${PROJECT_NAME}/visualization.h
 )
 
 set(${PROJECT_NAME}_UIS
