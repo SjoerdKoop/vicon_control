@@ -122,20 +122,20 @@ Since we only use one dimension, the *layout* variable is not relevant. A *float
 The software packets create several useful command line tools for running with a GUI or debugging. Usage of these tools is described below:
 
 * Vicon workspace tools (vicon_tools): These tools are executables that connect to a Vicon datastream at a given IP address and port.
-	* rosrun dual <Vicon datastream IP address> <Vicon datastream port> <number of tracked markers>
-	* rosrun markers <Vicon datastream IP address> <Vicon datastream port> <number of tracked markers>
-	* rosrun objects <Vicon datastream IP address> <Vicon datastream port>
+	* rosrun dual &lt;Vicon datastream IP address&gt; &lt;Vicon datastream port&gt; &lt;number of tracked markers&gt;
+	* rosrun markers &lt;Vicon datastream IP address&gt; &lt;Vicon datastream port&gt; &lt;number of tracked markers&gt;
+	* rosrun objects &lt;Vicon datastream IP address&gt; &lt;Vicon datastream port&gt;
 * Vision control tools (vision_control_tools): These tools print object updates and send reference updates.
 	* rosrun vision_control_tools object_subscriber
 	* rosrun vision_control_tools reference_publisher
 * Robot Workspace tools (robot_tools): These tools consist of executables that communicate with or allows the user to send a set reference the robot at a given IP address and port and an executable that prints data updates.
-	* rosrun robot_tools communicate <robot IP address> <robot port>
+	* rosrun robot_tools communicate &lt;robot IP address&gt; &lt;robot port&gt;
 	* rosrun robot_tools data_subscriber
-	* rosrun robot_tools send_reference <robot IP address> <robot port>
+	* rosrun robot_tools send_reference &lt;robot IP address&gt; &lt;robot port&gt;
 * Robot control tools: These tools are to be run on the robot. They consist of a server of data updates and a listener to reference updates to/from a specific host at a given IP address and port and a tools that samples the shared memory with the PRU and prints the current data at an index.
-	* data_server <user IP address> <user port>
-	* sudo read_shared_memory <index> *This executable has to be run as a super user, since it involves opening a global memory map.*
-	* reference_client <user IP address> <user port>
+	* data_server &lt;user IP address&gt; &lt;user port&gt;
+	* sudo read_shared_memory &lt;index&gt; *(This executable has to be run as a super user, since it involves opening a global memory map.)*
+	* reference_client &lt;user IP address&gt; &lt;user port&gt;
 
 # To be added
 
