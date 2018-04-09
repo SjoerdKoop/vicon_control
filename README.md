@@ -51,6 +51,7 @@ Each workspace can be installed running the corresponding *installation* script:
 
 *Before the installation scripts, there is a dot followed by a space before the actual file. This scripts makes sure ROS discovers the packages in the corresponding workspace for future bash sessions (e.g. terminals). The dot ensures that this is also the case for the current terminal.*
 
+These scripts calls *catkin_make*. If *catkin_make* can be run (i.e. ROS has been properly installed), the scripts will source the package path to the user's *~/.bashrc*.
 
 ## Setting up the connection
 
@@ -77,22 +78,13 @@ iface <device> inet static              # Sets device to have a static IP addres
         dns-nameserver 8.8.4.4          # Set DNS nameserver 2
 ```
 
-## Vision control workspace installation
+## Vision control design
 
-The vision control workspace can be installed with:
-
-`. vicon_control/vision_control_workspace/installation`
-
-In this workspace are two packages.
-
-* *vision_control_tools*: Consists of required components and helpful tools. The executable *object_client* listens to the topic *object_update* and prints any incoming updates. The executable *reference_server* allows the user to send a reference over topic *reference_update*.
+<* *vision_control_tools*: Consists of required components and helpful tools. The executable *object_client* listens to the topic *object_update* and prints any incoming updates. The executable *reference_server* allows the user to send a reference over topic *reference_update*.
 * *vision_control*: Consists of an executable which activates a defined controller and an example controller.
 
 Controllers should inherit from *VisionController* and should override the *objectsToReference* function. An example implementation can be seen as the example controller.
-
-## Robot workspace installation
-
-## Setting up the robot
+>
 
 # Communication
 
