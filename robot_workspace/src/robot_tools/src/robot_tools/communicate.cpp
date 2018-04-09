@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 	else 
 	{
 		// Show fatal error
-		ROS_FATAL("Please specify correct arguments: rosrun robot_tools communicate <Robot IP address> <Robot port>");
+		ROS_FATAL("Please specify correct arguments: rosrun robot_tools communicate <robot IP address> <robot port>");
 
 		// Return failure status code
 		return EXIT_FAILURE;

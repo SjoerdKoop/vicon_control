@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
 	else 
 	{
 		// Show fatal error
-		ROS_FATAL("Please specify correct arguments: rosrun vicon objects <Vicon datastream IP address> <Vicon datastream port> <Number of tracked objects>");
+		ROS_FATAL("Please specify correct arguments: rosrun vicon_tools dual <Vicon datastream IP address> <Vicon datastream port> <number of tracked markers>");
 
 		// Return failure status code
 		return EXIT_FAILURE;
