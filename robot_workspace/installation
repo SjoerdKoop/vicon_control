@@ -1,28 +1,28 @@
 #!/bin/bash
 
-# Set script directory
-DIR=$(dirname "$(realpath "$BASH_SOURCE[0]")")
+# Check if catking_make exists (i.e. ROS is properly installed)
+type catkin_make > /dev/null
 
-### Package generation ###
-# Call catkin_make in the workspace
-
-catkin_make -C $DIR
-
-# If catkin_make was successful
+# If catkin_make has been found
 if [ $? -eq 0 ]; then
-	### Package discovery ###
+
+	# Set script directory
+	DIR=$(dirname "$(realpath "$BASH_SOURCE[0]")")
+
+	# Call catkin_make in the workspace
+	catkin_make -C $DIR
+
 	# Source workspace so that ROS finds the generated packages
 	# And make it persistent by adding it to ~/.bashrc of the user
-
 	echo "Sourcing generated packages so ROS finds them..."
 	SETUP_FILE="$DIR/devel/setup.bash"
 	COMMAND="source $SETUP_FILE"
 	eval "$COMMAND"
 	grep -qF -- "$COMMAND" ~/.bashrc || echo "$COMMAND" >> ~/.bashrc
 
-# If catkin_make was unsuccessful
+# If catkin_make was not found
 else
-	### Print error message ###
-	echo "Could not run \"catkin_make\", make sure ROS is properly installed."
+	# Print error message
+	echo "Could not find \"catkin_make\", make sure ROS is properly installed."
 fi
 

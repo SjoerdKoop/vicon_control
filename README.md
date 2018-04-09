@@ -65,7 +65,7 @@ Currently, the Vicon Tracker PC has an IP address of 192.168.10.1 and is sending
 
 ### Robot
 
-On the BeagleBoneBlack, connection configuration is done by editing the */etc/network/interfaces* file. A proper static IP address on the same subnet can be set by appending the settings below to the file. The placeholder &lt;device&gt; should be set to the communication device that connects to the user's network (can be checked with *ifconfig*). The value *x* should be set so that it is not the same IP address as the user PC or Vicon Tracker PC.
+On the BeagleBoneBlack, network configuration is done by editing the */etc/network/interfaces* file. A proper static IP address on the same subnet can be set by appending the settings below to the file. The placeholder &lt;device&gt; should be set to the communication device that connects to the user's network (can be checked with *ifconfig*). The value *x* should be set so that it is not the same IP address as the user PC or Vicon Tracker PC.
 
 ```
 ## Set static <device> ip address
@@ -78,13 +78,14 @@ iface <device> inet static              # Sets device to have a static IP addres
         dns-nameserver 8.8.4.4          # Set DNS nameserver 2
 ```
 
+# Usage
+
+For documentation on running nodes from a terminal, please refer to [Executables](https://github.com/SjoerdKoop/vicon_control#executables)
+
 ## Vision control design
 
-<* *vision_control_tools*: Consists of required components and helpful tools. The executable *object_client* listens to the topic *object_update* and prints any incoming updates. The executable *reference_server* allows the user to send a reference over topic *reference_update*.
-* *vision_control*: Consists of an executable which activates a defined controller and an example controller.
+Controllers should inherit from *VisionController* and should override the *objectsToReference* function. An example implementation can be seen as the example controller in the package *vision_control*.
 
-Controllers should inherit from *VisionController* and should override the *objectsToReference* function. An example implementation can be seen as the example controller.
->
 
 # Communication
 
@@ -130,7 +131,9 @@ float32[] data
 Since we only use one dimension, the *layout* variable is not relevant. A *float32* in ROS coincides with a *float* in *c++*, this is used instead of a double to effectively halve the magnitude of communication messages without losing relevant accuracy. Reference values should be added (*data.push_back(value)*) in the same order as they are to be read by the robot.
 
 ## UDP: reference
- 
+
+![Reference UDP message](/images/reference_udp_message.png)
+
 ## UDP: sensor data
 
 # Executables
@@ -138,9 +141,9 @@ Since we only use one dimension, the *layout* variable is not relevant. A *float
 The software packets create several useful command line tools for debugging or running without a GUI. Usage of these tools is described below:
 
 * Vicon workspace tools (vicon_tools): These tools are executables that connect to a Vicon datastream at a given IP address and port.
-	* `rosrun dual <Vicon datastream IP address> <Vicon datastream port> <number of tracked markers>`
-	* `rosrun markers <Vicon datastream IP address> <Vicon datastream port> <number of tracked markers>`
-	* `rosrun objects <Vicon datastream IP address> <Vicon datastream port>`
+	* `rosrun vicon_tools dual <Vicon datastream IP address> <Vicon datastream port> <number of tracked markers>`
+	* `rosrun vicon_tools markers <Vicon datastream IP address> <Vicon datastream port> <number of tracked markers>`
+	* `rosrun vicon_tools objects <Vicon datastream IP address> <Vicon datastream port>`
 * Vision control tools (vision_control_tools): These tools print object updates and send reference updates.
 	* `rosrun vision_control_tools object_subscriber`
 	* `rosrun vision_control_tools reference_publisher` 
