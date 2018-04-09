@@ -18,7 +18,7 @@ The recommend setup scheme is shown below:
 In this scheme, the components are set up in a modular fashion so that components can be changed without influencing the others.
 
 * The vicon software creates a client using the [Vicon datastream SDK](https://www.vicon.com/products/software/datastream-sdk) and generates an array of objects over the ROS topic "object_update". A replacement would only have to satisfy publishing the same data over the same topic.
-* The vision controller listens to the "object_update" topic and should generate a suitable reference from the detected objects. This reference should be an array of floats, sent over the ROS topic "reference_update".
+* The vision controller listens to the [*object_update*](https://github.com/SjoerdKoop/vicon_control#ros-object_update) topic and should generate a suitable reference from the detected objects. This reference should be an array of floats, sent over the ROS topic "reference_update".
 * The robot software creates a peer which listens to the "reference_update" topic and converts the message into and UDP message to be send. This peer also listens to the robot and visualizes sensor data.
 * The robot controller listens to the UDP reference message and should should control the plant accordingly. It also sends periodic data to the other end of the socket.
 
@@ -162,5 +162,4 @@ The software packets create several useful command line tools for debugging or r
 
 This repository is not yet complete. The following components are still in development and will be added in the future:
 
-* Workspace for robot GUI and command line tools to run on 
 * Sofware that is run on the BeagleBone Black
