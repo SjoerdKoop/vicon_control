@@ -6,14 +6,14 @@
 	<description>The vicon_gui package</description>
 	<maintainer email="s.j.m.koopmans@student.tue.nl">Sjoerd Koopmans</maintainer>
 	<license>BSD</license>
-	<!-- <url type="website">http://wiki.ros.org/vicon</url> -->
+	<url type="website">https://github.com/SjoerdKoop/vicon_control</url>
 
 	<!-- Catkin -->
 	<buildtool_depend>catkin</buildtool_depend>
 
 	<!-- Build dependencies -->
 	<build_depend>roscpp</build_depend>
-	<build_depend>roslint</build_depend>
+	<build_depend>rqt_gui</build_depend>
 	<build_depend>rqt_gui_cpp</build_depend>
 	<build_depend>logger</build_depend>
 	<build_depend>vicon_peer</build_depend>

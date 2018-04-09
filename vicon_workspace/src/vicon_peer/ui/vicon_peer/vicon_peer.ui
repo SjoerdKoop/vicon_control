@@ -49,6 +49,12 @@
 											<horstretch>0</horstretch>
 										</sizepolicy>
 									</property>
+									<property name="toolTip">
+										<string>Specify IP address of the Vicon datastream</string>
+									</property>
+									<property name="statusTip">
+										<string>Specify IP address of the Vicon datastream</string>
+									</property>
 									<property name="text">
 										<string>192.168.10.1</string>
 									</property>
@@ -78,6 +84,12 @@
 										<sizepolicy hsizetype="Minimum" vsizetype="Minimum">
 											<horstretch>0</horstretch>
 										</sizepolicy>
+									</property>
+									<property name="toolTip">
+										<string>Specify port of the Vicon datastream</string>
+									</property>
+									<property name="statusTip">
+										<string>Specify port of the Vicon datastream</string>
 									</property>
 									<property name="buttonSymbols">
 										<enum>NoButtons</enum>
@@ -121,6 +133,12 @@
 											<horstretch>0</horstretch>
 										</sizepolicy>
 									</property>
+									<property name="toolTip">
+										<string>Toggle tracking of defined objects</string>
+									</property>
+									<property name="statusTip">
+										<string>Toggle tracking of defined objects</string>
+									</property>
 									<property name="text">
 										<string>Objects</string>
 									</property>
@@ -132,6 +150,12 @@
 										<sizepolicy hsizetype="Minimum" vsizetype="Minimum">
 											<horstretch>0</horstretch>
 										</sizepolicy>
+									</property>
+									<property name="toolTip">
+										<string>Toggle tracking of markers</string>
+									</property>
+									<property name="statusTip">
+										<string>Toggle tracking of markers</string>
 									</property>
 									<property name="text">
 										<string>Markers</string>
@@ -174,6 +198,12 @@
 										<sizepolicy hsizetype="Minimum" vsizetype="Minimum">
 											<horstretch>0</horstretch>
 										</sizepolicy>
+									</property>
+									<property name="toolTip">
+										<string>Specifiy amount of markers to be tracked</string>
+									</property>
+									<property name="statusTip">
+										<string>Specifiy amount of markers to be tracked</string>
 									</property>
 									<property name="buttonSymbols">
 										<enum>NoButtons</enum>
@@ -219,11 +249,14 @@
 							<width>100</width>
 						</size>
 					</property>
+					<property name="toolTip">
+						<string>Toggles connection to the Vicon datastream</string>
+					</property>
+					<property name="statusTip">
+						<string>Toggles connection to the Vicon datastream</string>
+					</property>
 					<property name="text">
 						<string>Connect</string>
-					</property>
-					<property name="toolTip">
-						<string>Toggle connection</string>
 					</property>
 				</widget>
 			</item>

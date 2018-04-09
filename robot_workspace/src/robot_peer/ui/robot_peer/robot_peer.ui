@@ -43,6 +43,12 @@
 							<horstretch>0</horstretch>
 						</sizepolicy>
 					</property>
+					<property name="toolTip">
+						<string>Specify IP address of the robot</string>
+					</property>
+					<property name="statusTip">
+						<string>Specify IP address of the robot</string>
+					</property>
 					<property name="text">
 						<string>192.168.10.3</string>
 					</property>
@@ -67,6 +73,12 @@
                             <horstretch>0</horstretch>
                         </sizepolicy>
                     </property>
+					<property name="toolTip">
+						<string>Specify port of the robot</string>
+					</property>
+					<property name="statusTip">
+						<string>Specify port of the robot</string>
+					</property>
                     <property name="buttonSymbols">
                         <enum>NoButtons</enum>
                     </property>
@@ -109,8 +121,11 @@
                         <string>Connect</string>
                     </property>
                     <property name="toolTip">
-                        <string>Toggle connection</string>
-                    </property>
+						<string>Toggles connection to the robot</string>
+					</property>
+					<property name="statusTip">
+						<string>Toggles connection to the robot</string>
+					</property>
                 </widget>
             </item>
         </layout>

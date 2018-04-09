@@ -1,24 +1,22 @@
 // Declarations
 #include "vicon_gui/vicon_gui.h"
 
-// Qt
-#include <QStringList>
-#include <QVBoxLayout>
+
 
 // ROS
-#include <pluginlib/class_list_macros.h>
+#include <pluginlib/class_list_macros.h>	// PLUGINLIB_EXPORT_CLASS
 
 namespace vicon_gui
 {
 
-ViconGUI::ViconGUI()
-  : rqt_gui_cpp::Plugin()
-  , widget_(0)
+// Constructor
+ViconGUI::ViconGUI() : rqt_gui_cpp::Plugin(), widget_(0)
 {
   // Set object name
   setObjectName("GUI");
 }
 
+// Initializes the plugin
 void ViconGUI::initPlugin(qt_gui_cpp::PluginContext& context)
 {
   // Access standalone command line arguments
@@ -39,33 +37,6 @@ void ViconGUI::initPlugin(qt_gui_cpp::PluginContext& context)
   // Connect signals to slots
   connect(ui_.vicon_peer_, SIGNAL(log(const QString&)), ui_.vicon_logger_, SLOT(log(const QString&)));
 }
-
-void ViconGUI::shutdownPlugin()
-{
-  // unregister all publishers here
-}
-
-void ViconGUI::saveSettings(qt_gui_cpp::Settings& plugin_settings,
-    qt_gui_cpp::Settings& instance_settings) const
-{
-  // instance_settings.setValue(k, v)
-}
-
-void ViconGUI::restoreSettings(const qt_gui_cpp::Settings& plugin_settings,
-    const qt_gui_cpp::Settings& instance_settings)
-{
-  // v = instance_settings.value(k)
-}
-
-/*bool hasConfiguration() const
-{
-  return true;
-}
-
-void triggerConfiguration()
-{
-  // Usually used to open a dialog to offer the user a set of configuration
-}*/
 
 }  // namespace vicon_gui
 PLUGINLIB_EXPORT_CLASS(vicon_gui::ViconGUI, rqt_gui_cpp::Plugin)

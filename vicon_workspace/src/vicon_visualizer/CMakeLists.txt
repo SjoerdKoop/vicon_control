@@ -6,6 +6,7 @@ project(vicon_visualizer)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
 	roscpp
+	rqt_gui
 	rqt_gui_cpp
 	rviz
 	vicon_tools

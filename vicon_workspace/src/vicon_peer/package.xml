@@ -13,10 +13,12 @@
 
 	<!-- Build dependencies -->
 	<build_depend>roscpp</build_depend>
+	<build_depend>rqt_gui</build_depend>
 	<build_depend>rqt_gui_cpp</build_depend>
 
 	<!-- Run dependencies -->
 	<run_depend>roscpp</run_depend>
+	<run_depend>rqt_gui</run_depend>
 	<run_depend>rqt_gui_cpp</run_depend>
 	<run_depend>vicon_tools</run_depend>
 </package>

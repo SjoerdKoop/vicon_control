@@ -1,35 +1,33 @@
 #ifndef VICON_GUI_VICON_GUI_H
 #define VICON_GUI_VICON_GUI_H
 
-#include <rqt_gui_cpp/plugin.h>
-#include <vicon_gui/ui_vicon_gui.h>
+// rqt
+#include <rqt_gui_cpp/plugin.h>				// rqt_gui_cpp::Plugin
+
+// Vicon GUI
+#include <vicon_gui/ui_vicon_gui.h>			// Ui::ViconGUI
 
 // Qt
-#include <QWidget>
+#include <QWidget>							// QWidget
 
 namespace vicon_gui
 {
 
-class ViconGUI
-  : public rqt_gui_cpp::Plugin
+class ViconGUI : public rqt_gui_cpp::Plugin
 {
-  Q_OBJECT
-public:
-  ViconGUI();
-  virtual void initPlugin(qt_gui_cpp::PluginContext& context);
-  virtual void shutdownPlugin();
-  virtual void saveSettings(qt_gui_cpp::Settings& plugin_settings,
-      qt_gui_cpp::Settings& instance_settings) const;
-  virtual void restoreSettings(const qt_gui_cpp::Settings& plugin_settings,
-      const qt_gui_cpp::Settings& instance_settings);
+	Q_OBJECT
 
-  // Comment in to signal that the plugin has a way to configure it
-  // bool hasConfiguration() const;
-  // void triggerConfiguration();
-private:
+	public:
+		// Constructor
+		ViconGUI();
 
-  Ui::ViconGUI ui_;
-  QWidget* widget_;
-};
+		// Initializes the plugin
+		virtual void initPlugin(qt_gui_cpp::PluginContext& context);
+
+	private:
+		Ui::ViconGUI ui_;		// The UI
+		QWidget* widget_;		// The main widget
+	};
 }  // namespace vicon_gui
+
 #endif  // VICON_GUI_VICON_GUI_H

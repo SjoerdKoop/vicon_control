@@ -7,7 +7,8 @@ from catkin_pkg.python_setup import generate_distutils_setup
 setup_args = generate_distutils_setup(
     packages=['robot_gui'],
     package_dir={'': 'src'},
-    requires=['roscpp']
+    requires=['roscpp'],
+	scripts=['scripts/robot_gui']
 )
 
 setup(**setup_args)

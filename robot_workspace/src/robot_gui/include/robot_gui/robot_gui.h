@@ -1,35 +1,33 @@
 #ifndef ROBOT_GUI_ROBOT_GUI_H
 #define ROBOT_GUI_ROBOT_GUI_H
 
-#include <rqt_gui_cpp/plugin.h>
-#include <robot_gui/ui_robot_gui.h>
+// Robot GUI
+#include <robot_gui/ui_robot_gui.h>			// Ui::RobotGUI
+
+// rqt
+#include <rqt_gui_cpp/plugin.h>				// rqt_gui_cpp::Plugin
 
 // Qt
-#include <QWidget>
+#include <QWidget>							// QWidget
 
 namespace robot_gui
 {
 
-class RobotGUI
-  : public rqt_gui_cpp::Plugin
+class RobotGUI : public rqt_gui_cpp::Plugin
 {
-  Q_OBJECT
-public:
-  RobotGUI();
-  virtual void initPlugin(qt_gui_cpp::PluginContext& context);
-  virtual void shutdownPlugin();
-  virtual void saveSettings(qt_gui_cpp::Settings& plugin_settings,
-      qt_gui_cpp::Settings& instance_settings) const;
-  virtual void restoreSettings(const qt_gui_cpp::Settings& plugin_settings,
-      const qt_gui_cpp::Settings& instance_settings);
+	Q_OBJECT
 
-  // Comment in to signal that the plugin has a way to configure it
-  // bool hasConfiguration() const;
-  // void triggerConfiguration();
-private:
+	public:
+		// Constructor
+		RobotGUI();
 
-  Ui::RobotGUI ui_;
-  QWidget* widget_;
-};
-}  // namespace robot_gui
-#endif  // ROBOT_GUI_ROBOT_GUI_H
+		// Initializes the plugin
+		virtual void initPlugin(qt_gui_cpp::PluginContext& context);
+
+	private:
+		Ui::RobotGUI ui_;		// The UI
+		QWidget* widget_;		// The main widget
+	};
+} // namespace robot_gui
+
+#endif // ROBOT_GUI_ROBOT_GUI_H
