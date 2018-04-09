@@ -19,6 +19,16 @@ int main(int argc, char* argv[])
 	}
 	std::cout << "Subscriber connected!" <<std::endl;
 
+	while(ros::ok())
+	{
+		std_msgs::Float32MultiArray ref;
+		ref.data.push_back(1.5312);
+		ref.data.push_back(4.5312);
+		ref.data.push_back(-1001.5312);
+		pub.publish(ref);
+		usleep(1000000);
+	}
+
 	// Spin
 	ros::spinOnce();
 }

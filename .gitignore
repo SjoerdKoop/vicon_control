@@ -53,12 +53,12 @@ vicon_workspace/build/
 vicon_workspace/devel/
 vicon_workspace/install/
 
-# Vision control workspace files
-vision_control_workspace/.catkin_workspace
-vision_control_workspace/.vscode
-vision_control_workspace/build/
-vision_control_workspace/devel/
-vision_control_workspace/install/
+# Vision control files
+vision_control/.catkin_workspace
+vision_control/.vscode
+vision_control/build/
+vision_control/devel/
+vision_control/install/
 
 # Matlab files
 vicon_workspace/src/matlab_gen/
