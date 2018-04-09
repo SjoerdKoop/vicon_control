@@ -123,7 +123,7 @@ To communicate from the vision controller to the robot workspace, a standard *[F
 
 ```
 std_msgs/Float32MultiArray.msg
---------------------------------
+------------------------------
 MultiArrayLayout layout
 float32[] data
 ```
