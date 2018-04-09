@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>RobotGUI</class>
+    <widget class="QWidget">
+        <layout class="QVBoxLayout" name="main_layout">
+            <item>
+                <widget class="RobotPeer" name="robot_peer_" native="true">
+                </widget>
+            </item>
+        </layout>
+        </widget>
+        <customwidgets>
+        	<customwidget>
+                <class>RobotPeer</class>
+                <extends>QWidget</extends>
+                <header>robot_peer/robot_peer.h</header>
+            </customwidget>
+        </customwidgets>
+    <resources/>
+    <connections/>
+</ui>

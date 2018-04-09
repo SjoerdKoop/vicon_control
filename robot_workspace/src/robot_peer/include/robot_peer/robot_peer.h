@@ -4,25 +4,23 @@
 // Qt
 #include <QProcess>								// QProcess
 
-// Vicon peer
-#include "vicon_peer/ui_vicon_peer.h"			// UI::ViconPeer
+// Robot peer
+#include "robot_peer/ui_robot_peer.h"			// UI::RobotPeer
 
 
-class ViconPeer : public QWidget {
+class RobotPeer : public QWidget {
 	Q_OBJECT
 	
 	public:
 		// Constructor
-		ViconPeer(QWidget* parent);
+		RobotPeer(QWidget* parent);
 
 		// Destructor
-		~ViconPeer();
+		~RobotPeer();
 
 	private:
-
 		QProcess client_process_;			// Client process
-		QProcess ping_process_;				// Ping process
-		Ui::ViconPeer ui_;					// The UI
+		Ui::RobotPeer ui_;					// The UI
 		QWidget* widget_;					// The main widget
 
 		// Disables input
@@ -34,21 +32,14 @@ class ViconPeer : public QWidget {
 		// Updates button
 		void updateButton();
 
-		// Connects to Vicon
-		void connectToVicon();
+		// Connects to the robot
+		void connectToRobot();
 
-		// Disconnects from Vicon
-		void disconnectFromVicon();
+		// Disconnects from the robot
+		void disconnectFromRobot();
 
 		// Check whether the IP edit box has a valid IPv4 address
 		bool hasValidIPAddress();
-
-		// Checks whether host is active
-		void checkHost();
-		
-	signals:
-		// Signals logging of a message
-		void log(const QString& msg);
 
 	private slots:
 		/* Button slot */
@@ -81,14 +72,10 @@ class ViconPeer : public QWidget {
 		// Fires when port editing is finished
 		void portEditingFinished();
 
-		/* Process slots */
-		
-		// Starts client if host is active
-		void connectIfActiveHost(int ping_exit_code, QProcess::ExitStatus ping_exit_status);
+		/* Process slot */
 
 		// Fires when client disconnects
 		void onClientDisconnect(int client_exit_code, QProcess::ExitStatus client_exit_status);
-
 };
 
 #endif // VICON_PEER_VICON_PEER_H

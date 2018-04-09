@@ -46,6 +46,13 @@ qtcreator-*
 # Catkin custom files
 CATKIN_IGNORE
 
+# Robot workspace files
+robot_workspace/.catkin_workspace
+robot_workspace/.vscode/
+robot_workspace/build/
+robot_workspace/devel/
+robot_workspace/install/
+
 # Vicon workspace files
 vicon_workspace/.catkin_workspace
 vicon_workspace/.vscode/

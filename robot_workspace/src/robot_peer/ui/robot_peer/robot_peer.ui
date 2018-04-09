@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>RobotPeer</class>
+    <widget class="QWidget" name="robot_peer_">
+        <layout class="QHBoxLayout">
+            <property name="alignment">
+                <enum>Qt::AlignCenter</enum>
+            </property>
+			<item>
+				<widget class="QLabel">
+					<property name="sizePolicy">
+						<sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+							<horstretch>0</horstretch>
+						</sizepolicy>
+					</property>
+					<property name="text">
+						<string>Robot: </string>
+					</property>
+				</widget>
+			</item>
+            <item>
+                <widget class="QLabel">
+                    <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                            <horstretch>0</horstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>IP Address</string>
+                    </property>
+                </widget>
+            </item>
+            <item>
+                <widget class="QLineEdit" name="ip_edit_">
+					<property name="maximumSize">
+						<size>
+							<width>125</width>
+							<height>25</height>
+						</size>
+					</property>
+					<property name="sizePolicy">
+						<sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+							<horstretch>0</horstretch>
+						</sizepolicy>
+					</property>
+					<property name="text">
+						<string>192.168.10.3</string>
+					</property>
+				</widget>
+            </item>
+            <item>
+                <widget class="QLabel">
+                    <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                            <horstretch>0</horstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>Port</string>
+                    </property>
+                </widget>
+            </item>
+            <item>
+                <widget class="QSpinBox" name="port_edit_">
+                    <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                            <horstretch>0</horstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="buttonSymbols">
+                        <enum>NoButtons</enum>
+                    </property>
+                    <property name="minimum">
+                        <number>0</number>
+                    </property>
+                    <property name="maximum">
+                        <number>65535</number>
+                    </property>
+					<property name="value">
+						<number>50000</number>
+					</property>
+                </widget>
+            </item>
+			<item>
+				<spacer>
+					<property name="orientation">
+						<enum>Qt::Horizontal</enum>
+					</property>
+					<property name="sizeHint">
+						<size>
+							<width>50</width>
+						</size>
+					</property>
+				</spacer>
+			</item>
+            <item>
+                <widget class="QPushButton" name="button_">
+                    <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                            <horstretch>0</horstretch>
+                        </sizepolicy>
+                    </property>
+					<property name="minimumSize">
+						<size>
+							<width>100</width>
+						</size>
+					</property>
+                    <property name="text">
+                        <string>Connect</string>
+                    </property>
+                    <property name="toolTip">
+                        <string>Toggle connection</string>
+                    </property>
+                </widget>
+            </item>
+        </layout>
+    </widget> 
+    <resources/>
+    <connections/>
+</ui>

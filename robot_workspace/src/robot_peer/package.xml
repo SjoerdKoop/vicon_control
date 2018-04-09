@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+	<!-- Package information -->
+	<name>robot_peer</name>
+	<version>0.0.0</version>
+	<description>The robot_peer package</description>
+	<maintainer email="s.j.m.koopmans@student.tue.nl">Sjoerd Koopmans</maintainer>
+	<license>BSD</license>
+	<url type="website">https://github.com/SjoerdKoop/vicon_control</url>
+
+	<!-- Catkin -->
+	<buildtool_depend>catkin</buildtool_depend>
+
+	<!-- Build dependencies -->
+	<build_depend>roscpp</build_depend>
+	<build_depend>rqt_gui_cpp</build_depend>
+
+	<!-- Run dependencies -->
+	<run_depend>roscpp</run_depend>
+	<run_depend>rqt_gui_cpp</run_depend>
+</package>

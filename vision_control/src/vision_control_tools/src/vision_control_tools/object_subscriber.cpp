@@ -30,7 +30,7 @@ void onObjectUpdate(const vision_control_tools::ros_object_array::ConstPtr& msg)
 int main(int argc, char* argv[])
 {
 	// Initialize ROS
-	ros::init(argc, argv, "vision_contol_object_client");
+	ros::init(argc, argv, "vision_contol_object_subscriber");
 	ros::NodeHandle n;
 
 	// Initialize subscriber

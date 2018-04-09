@@ -83,6 +83,7 @@ void ViconPeer::buttonPressed()
 // Connects to the robot
 void ViconPeer::connectToVicon() 
 {
+	// Disconnect if already connected
 	if (client_process_.state() != QProcess::NotRunning) 
 	{
 		disconnectFromVicon();
@@ -119,17 +120,11 @@ void ViconPeer::disconnectFromVicon()
 	client_process_.kill();
 	client_process_.waitForFinished();
 
-	// Change button text
-	ui_.button_->setText("Connect");
-
 	// Enable input
 	enableInput();
 
-	// Disable button if needed
-	if (!hasValidIPAddress())
-	{
-		ui_.button_->setEnabled(false);
-	}
+	// Update button state
+	updateButton();
 }
 
 // Enables input
@@ -250,12 +245,8 @@ void ViconPeer::ipReturnPressed()
 // Fires when text has changed in the IP edit box
 void ViconPeer::ipTextChanged(const QString& newText)
 {
-	// If there is a no robot connected
-	if (!isViconConnected)
-	{
-		// Update button state
-		updateButton();
-	}
+	// Update button state
+	updateButton();
 }
 // Fires when markers editing is finished
 void ViconPeer::markersEditingFinished()
@@ -287,6 +278,7 @@ void ViconPeer::connectIfActiveHost(int ping_exit_code, QProcess::ExitStatus pin
 	if (ping_exit_code == 0) 
 	{
 		// Create argument list
+		// Start with package
 		QStringList args = QStringList() << "vicon_tools";
 
 		// Set appropriate arguments
@@ -294,18 +286,32 @@ void ViconPeer::connectIfActiveHost(int ping_exit_code, QProcess::ExitStatus pin
 		{
 			if (ui_.objects_check_->isChecked()) 
 			{
-				args << "dual" << ui_.ip_edit_->text() << QString::number(ui_.port_edit_->value()) << QString::number(ui_.markers_edit_->value());
+				// Append desired executable name
+				args << "dual";
 			}
 			else 
 			{
-				args << "markers" << ui_.ip_edit_->text() << QString::number(ui_.port_edit_->value()) << QString::number(ui_.markers_edit_->value());
+				// Append desired executable name
+				args << "markers";
 			}
+
+			// Append connection data
+			args << ui_.ip_edit_->text();
+			args << QString::number(ui_.port_edit_->value());
+
+			// Append amount of markers
+			args << QString::number(ui_.markers_edit_->value());
 		}
 		else 
 		{
 			if (ui_.objects_check_->isChecked()) 
 			{
-				args << "objects" << ui_.ip_edit_->text() << QString::number(ui_.port_edit_->value());
+				// Append desired executable name
+				args << "objects";
+
+				// Append connection data
+				args << ui_.ip_edit_->text();
+				args << QString::number(ui_.port_edit_->value());
 			}
 			else 
 			{
@@ -348,8 +354,6 @@ void ViconPeer::connectIfActiveHost(int ping_exit_code, QProcess::ExitStatus pin
 // Fires when client disconnects
 void ViconPeer::onClientDisconnect(int client_exit_code, QProcess::ExitStatus client_exit_status)
 {
-	//std::cout << "Exit code: " << client_exit_code << std::endl;
-	
 	// Disconnect -> kill client process
 	client_process_.kill();
 	client_process_.waitForFinished();
