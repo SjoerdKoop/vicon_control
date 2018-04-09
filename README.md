@@ -122,7 +122,7 @@ Since we only use one dimension, the *layout* variable is not relevant. A *float
 The software packets create several useful command line tools for debugging or running without a GUI. Usage of these tools is described below:
 
 * Vicon workspace tools (vicon_tools): These tools are executables that connect to a Vicon datastream at a given IP address and port.
-	* `rosrun dual &lt;Vicon datastream IP address&gt; &lt;Vicon datastream port&gt; &lt;number of tracked markers&gt;`
+	* `rosrun dual <Vicon datastream IP address> &lt;Vicon datastream port&gt; &lt;number of tracked markers&gt;`
 	* rosrun markers &lt;Vicon datastream IP address&gt; &lt;Vicon datastream port&gt; &lt;number of tracked markers&gt;
 	* rosrun objects &lt;Vicon datastream IP address&gt; &lt;Vicon datastream port&gt;
 * Vision control tools (vision_control_tools): These tools print object updates and send reference updates.
