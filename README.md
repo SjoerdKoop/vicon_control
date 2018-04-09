@@ -39,11 +39,9 @@ sudo apt-get dist-upgrade
 
 Since the applications are build on the ROS framework, it is required to install and setup ROS to be able to run them. To do so, please follow the instructions described in the [ROS Lunar installation guide](http://wiki.ros.org/lunar/Installation) for your operating system. Another ROS version might still be able to run the software, but is not supported.
 
-*Before the following installation scripts, there will be a dot followed by a space before the actual file. This scripts makes sure ROS discovers the packages in the corresponding workspace for future bash sessions (e.g. terminals). The dot ensures that this is also the case for the current terminal.*
-
 ## Installion of ROS workspaces
 
-Each workspace can be installed running the *installation* script in the specific workspaces:
+Each workspace can be installed running the corresponding *installation* script:
 
 ```
 . vicon_control/robot_workspace/installation
@@ -64,20 +62,7 @@ Currently, the Vicon Tracker PC has an IP address of 192.168.10.1 and is sending
 
 *When revising the settings, the GUI converted 255.255.254.0 to 23. This is normal and means that it is properly set up.*
 
-
 ### Robot
-
-## Vicon workspace installation
-
-The Vicon workspace can be installed with:
-
-`. vicon_control/vicon_workspace/installation`
-
-The next step is to properly set the connection to the Vicon Tracker PC. Currently, this PC has an IP address of 192.168.10.1 and is sending messages over port 801 on subnet (with netmask) 255.255.254.0. Consequently, the user PC has to have an IP address of 192.168.10.x (1 < x < 255) and must reside in the same subnet of 255.255.254.0. Example settings in the standard ubuntu desktop environment are shown below:
-
-![Connection Settings](/images/connection_settings.png)
-
-*When revising the settings, the GUI converted 255.255.254.0 to 23. This is completely normal and means that it is properly set up.*
 
 ## Vision control workspace installation
 
