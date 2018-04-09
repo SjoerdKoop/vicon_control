@@ -51,7 +51,7 @@ Each workspace can be installed running the *installation* script in the specifi
 . vicon_control/vision_control/installation 
 ```
 
-*Before the installation scripts, there is a dot followed by a space before the actual file. This scripts makes sure ROS discovers the packages in the corresponding workspace for future bash sessions (e.g. terminals). The dot ensures that this is also the case for the current terminal.
+*Before the installation scripts, there is a dot followed by a space before the actual file. This scripts makes sure ROS discovers the packages in the corresponding workspace for future bash sessions (e.g. terminals). The dot ensures that this is also the case for the current terminal.*
 
 
 ## Setting up the connection
