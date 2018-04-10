@@ -142,13 +142,15 @@ Communication of sensor data to the user is done over the same UDP socket. The m
 
 ![Sensor Data UDP message](/images/sensor_data_udp_message.png)
 
+Since a string can have variable length, a consensus has to be made between the server and the client. Currently, the consensus is that the name string is 16 bytes long.
+
 # Executables
 
 The software packets create several useful command line tools for debugging or running without a GUI. Usage of these tools is described below:
 
 * Vicon workspace tools (vicon_tools): These tools are executables that connect to a Vicon datastream at a given IP address and port.
-	* `rosrun vicon_tools dual <Vicon datastream IP address> <Vicon datastream port> <number of tracked markers>`
-	* `rosrun vicon_tools markers <Vicon datastream IP address> <Vicon datastream port> <number of tracked markers>`
+	* `rosrun vicon_tools dual <Vicon datastream IP address> <Vicon datastream port> <number of markers>`
+	* `rosrun vicon_tools markers <Vicon datastream IP address> <Vicon datastream port> <number of markers>`
 	* `rosrun vicon_tools objects <Vicon datastream IP address> <Vicon datastream port>`
 * Vision control tools (vision_control_tools): These tools print object updates and send reference updates.
 	* `rosrun vision_control_tools object_subscriber`
@@ -159,7 +161,8 @@ The software packets create several useful command line tools for debugging or r
 	* `rosrun robot_tools send_reference <robot IP address> <robot port>`
 * Robot control tools: These tools are to be run on the robot. They consist of a server of data updates and a listener to reference updates from a specific host at a given IP address and port and a tool that samples the shared memory with the PRU and prints the current data at an index.
 	* `data_server <user IP address> <user port>`
-	* `sudo read_shared_memory <index>` *(This executable has to be run as a super user, since it involves opening a global memory map.)*
+	* `sudo read_shared_memory <index>` 
+	  *(This executable has to be run as a super user, since it involves opening a global memory map.)*
 	* `reference_client <user IP address> <user port>`
 
 # To be added
