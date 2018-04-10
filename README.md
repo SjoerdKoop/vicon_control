@@ -161,8 +161,7 @@ The software packets create several useful command line tools for debugging or r
 	* `rosrun robot_tools send_reference <robot IP address> <robot port>`
 * Robot control tools: These tools are to be run on the robot. They consist of a server of data updates and a listener to reference updates from a specific host at a given IP address and port and a tool that samples the shared memory with the PRU and prints the current data at an index.
 	* `data_server <user IP address> <user port>`
-	* `sudo read_shared_memory <index>` 
-	  *(This executable has to be run as a super user, since it involves opening a global memory map.)*
+	* `sudo read_shared_memory <index>`  *(This executable has to be run as a super user, since it involves opening a global memory map.)*
 	* `reference_client <user IP address> <user port>`
 
 # To be added
