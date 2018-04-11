@@ -20,14 +20,14 @@ void resetIEP() {
 	CT_IEP.TMR_GLB_CFG = 0x11;
 }
 
-// Reads from the IRP counter
+// Reads from the IEP counter
 int readIEP() {
 	// Return current count
 	return CT_IEP.TMR_CNT;
 }
 
 // Main function
-int main(void) {
+int main() {
 	// Enable OCP
 	CT_CFG.SYSCFG_bit.STANDBY_INIT = 0;
 

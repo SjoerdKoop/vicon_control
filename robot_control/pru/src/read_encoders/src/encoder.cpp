@@ -9,7 +9,7 @@ Encoder::Encoder(int pin_A, int pin_B, int memory_location)
 	mask_B_ = 0x0001 << pin_B;
 
 	// Set output memory location and initialize to 0
-	output_memory_ = (int*) SHARED_MEMORY + memory_location * sizeof(int);
+	output_memory_ = (int*) (SHARED_MEMORY + memory_location * sizeof(int));
 	*output_memory_ = 0;
 
 	// Set state

@@ -20,3 +20,7 @@ target_link_libraries(reference_client components tools)
 ## Create read_shared_memory executable
 add_executable(read_shared_memory src/read_shared_memory.cpp)
 target_link_libraries(read_shared_memory components tools)
+
+## Create write_shared_memory executable
+add_executable(write_shared_memory src/write_shared_memory.cpp)
+target_link_libraries(write_shared_memory components tools)

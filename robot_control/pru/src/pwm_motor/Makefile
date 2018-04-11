@@ -2,7 +2,7 @@
 INCLUDE_DIRS = include
 
 # Source files: add all your source files
-SOURCE_FILES = src/pwm_motor.cpp
+SOURCE_FILES = src/pwm_motor.cpp src/pwm.cpp
 
 # Set firmware name, will be found in FIRMWARE_PATH
 FIRMWARE_NAME = pwm_motor
