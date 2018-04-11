@@ -1,0 +1,39 @@
+#!/bin/bash
+
+### Firmware ###
+# Set the firmware names for the PRU's
+# The strings should exactly match the file name
+# Make sure the file exists in /lib/firmware/, else returns errors
+PRU0FW="read_encoders"
+PRU1FW="pwm_motor"
+
+# If one of the defined files does not exist
+if ! [ -f /lib/firmware/$PRU0FW ] || ! [ -f /lib/firmware/$PRU1FW ]; then
+	# Print error message
+	echo "Error: Make sure" $PRU0FW "and" $PRU1FW "exist in /lib/firmware"
+else
+	### Paths ###
+	# These are the PRU paths for debian 4.9
+	# DO NOT EDIT UNLESS YOU KNOW WHAT YOU ARE DOING
+	PRU0=/sys/class/remoteproc/remoteproc1
+	PRU1=/sys/class/remoteproc/remoteproc2
+
+	### PRU's ###
+	# Stops the PRU's, loads the defined firmware on them and starts them again
+
+	# Try to stop PRU's
+	# Suppress error if they are already stopped
+	echo "stop" >> $PRU0/state 2> /dev/null
+	echo "stop" >> $PRU1/state 2> /dev/null
+
+	# Sleep for a second
+	sleep 1
+
+	# Set firmware
+	echo $PRU0FW > $PRU0/firmware
+	echo $PRU1FW > $PRU1/firmware
+
+	# Starts the PRU's
+	echo "start" > $PRU0/state
+	echo "start" > $PRU1/state
+fi

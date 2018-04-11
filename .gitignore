@@ -67,5 +67,14 @@ vision_control/build/
 vision_control/devel/
 vision_control/install/
 
+# Robot control files
+robot_control/.vscode
+robot_control/control/bin/
+robot_control/control/build/
+robot_control/control/install/
+robot_control/control/lib
+robot_control/pru/compiler/
+robot_control/pru/firmware/
+
 # Matlab files
 vicon_workspace/src/matlab_gen/

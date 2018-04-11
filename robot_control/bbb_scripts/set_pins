@@ -1,0 +1,24 @@
+#!/bin/bash
+
+### Path ###
+# This is the GPIO path for debian 4.9
+# DO NOT EDIT UNLESS YOU KNOW WHAT YOU ARE DOING
+GPIO=/sys/class/gpio
+
+### Pins ###
+# Get pin info with: "config-pin -i P<header>_<pin>"
+
+# Configure mode of motor pins
+config-pin P8_41 gpio
+config-pin P8_43 gpio
+config-pin P8_45 pruout
+
+# Configure mode of encoder pins
+config-pin P9_29 pruin
+config-pin P9_31 pruin
+
+# Set direction of GPIO pins
+# Use the Kernel GPIO id
+# Either "in" or "out", anything else will return errors
+echo "out" > $GPIO/gpio74/direction
+echo "out" > $GPIO/gpio72/direction
