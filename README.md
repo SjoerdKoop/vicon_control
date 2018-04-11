@@ -41,7 +41,7 @@ Since the applications are build on the ROS framework, it is required to install
 
 ## Installion of ROS workspaces
 
-Each workspace can be installed running the corresponding *installation* script:
+Each workspace can be installed by running the corresponding *installation* script:
 
 ```
 . vicon_control/robot_workspace/installation
