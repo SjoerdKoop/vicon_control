@@ -15,7 +15,7 @@ To achieve modularity of each package, several open source files have been added
 
 ## Target systems
 
-The four component have been designed for ROS Lunar running on Ubuntu 16.04. The *robot_control* package generates binaries and firmware to be use on a [BeagleBone Black](https://beagleboard.org/black)
+The four components have been designed for ROS Lunar running on Ubuntu 16.04. The *robot_control* package has scripts and generates binaries and firmware to be used on a [BeagleBone Black](https://beagleboard.org/black)
 
 ## Overview
 
