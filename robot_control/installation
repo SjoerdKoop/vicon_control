@@ -16,3 +16,6 @@ echo "Exporting PRU_ICSS..."
 COMMAND="export PRU_ICSS=$DIR/pru-icss"
 eval "$COMMAND"
 grep -qF -- "$COMMAND" ~/.bashrc || echo "$COMMAND" >> ~/.bashrc
+
+# Invoke make
+make --no-print-directory -C $DIR

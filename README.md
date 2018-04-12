@@ -34,7 +34,7 @@ This results in the cascaded control loop as shown below:
 
 ![Control Loop](/images/control_loop.png)
 
-# Installation
+# Setup
 
 Good practice is to always keep your system up to date before installing any software:
 
@@ -53,19 +53,22 @@ To cross compile ARM binaries on Ubuntu 16.04, the appropriate toolchains have t
 sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 ```
 
-## Installion of ROS workspaces
+## Installion
 
-Each workspace can be installed by running the corresponding *installation* script:
+Each component can be installed by running the corresponding *installation* script:
 
 ```
+. vicon_control/robot_control/installation
 . vicon_control/robot_workspace/installation
 . vicon_control/vicon_workspace/installation 
 . vicon_control/vision_control/installation 
 ```
 
-*Before the installation scripts, there is a dot followed by a space before the actual file. This scripts makes sure ROS discovers the packages in the corresponding workspace for future bash sessions (e.g. terminals). The dot ensures that this is also the case for the current terminal.*
+*Before the installation scripts, there is a dot followed by a space before the actual file. This ensures that the settings also apply for the current terminal.*
 
-These scripts calls *catkin_make*. If *catkin_make* can be run (i.e. ROS has been properly installed), the scripts will source the package path to the user's *~/.bashrc*.
+The installation script of *robot_control* exports environment variables defining the location of the PRU files.
+
+The other scripts calls *catkin_make*. If *catkin_make* can be run (i.e. ROS has been properly installed), the scripts will source the package path to the user's *~/.bashrc*.
 
 ## Setting up the connection
 
