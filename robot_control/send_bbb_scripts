@@ -1,3 +1,0 @@
-#!/bin/bash
-
-scp bbb_scripts/* jurp@192.168.7.2:/home/jurp

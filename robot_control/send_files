@@ -1,0 +1,2 @@
+#!/bin/bash
+rsync -r bbb_scripts/* bin firmware jurp@192.168.7.2:/home/jurp
