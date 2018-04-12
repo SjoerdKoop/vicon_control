@@ -53,7 +53,7 @@ To cross compile ARM binaries on Ubuntu 16.04, the appropriate toolchains have t
 sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 ```
 
-## Installion
+## Installation
 
 Each component can be installed by running the corresponding *installation* script:
 
@@ -66,9 +66,9 @@ Each component can be installed by running the corresponding *installation* scri
 
 *Before the installation scripts, there is a dot followed by a space before the actual file. This ensures that the settings also apply for the current terminal.*
 
-The installation script of *robot_control* exports environment variables defining the location of the PRU files.
+The installation script of *robot_control* exports environment variables defining the location of the PRU files and calls make.
 
-The other scripts calls *catkin_make*. If *catkin_make* can be run (i.e. ROS has been properly installed), the scripts will source the package path to the user's *~/.bashrc*.
+The other scripts call *catkin_make*. If *catkin_make* can be run (i.e. ROS has been properly installed), the scripts will source the package path to the user's *~/.bashrc*.
 
 ## Setting up the connection
 
