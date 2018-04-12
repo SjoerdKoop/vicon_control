@@ -47,7 +47,7 @@ sudo apt-get dist-upgrade
 
 Since the applications are build on the ROS framework, it is required to install and setup ROS to be able to run them. To do so, please follow the instructions described in the [ROS Lunar installation guide](http://wiki.ros.org/lunar/Installation) for your operating system. Another ROS version might still be able to run the software, but is not supported.
 
-To cross compile ARM binaries on Ubuntu 16.04, the appropriate toolchains have to be installed. The toolchains for C and C++ can be install with:
+To cross compile ARM binaries on Ubuntu 16.04, the appropriate toolchains have to be installed. The toolchains for C and C++ can be installed with:
 
 ```
 sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
@@ -178,9 +178,5 @@ The software packets create several useful command line tools for debugging or r
 	* `sudo read_shared_memory <index>`\
 	  *(This executable has to be run as a super user, since it involves opening a global memory map.)*
 	* `reference_client <user IP address> <user port>`
-
-# To be added
-
-This repository is not yet complete. The following components are still in development and will be added in the future:
-
-* Sofware that is run on the BeagleBone Black
+	* `sudo write_shared_memory <index> <value>`\
+          *(This executable has to be run as a super user, since it involves opening a global memory map.)*
