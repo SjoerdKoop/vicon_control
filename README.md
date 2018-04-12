@@ -47,6 +47,10 @@ sudo apt-get dist-upgrade
 
 Since the applications are build on the ROS framework, it is required to install and setup ROS to be able to run them. To do so, please follow the instructions described in the [ROS Lunar installation guide](http://wiki.ros.org/lunar/Installation) for your operating system. Another ROS version might still be able to run the software, but is not supported.
 
+To cross compile ARM binaries on Ubuntu 16.04, the appropriate toolchains have to be installed. The toolchains for C and C++ can be install with:
+
+`sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf`
+
 ## Installion of ROS workspaces
 
 Each workspace can be installed by running the corresponding *installation* script:
