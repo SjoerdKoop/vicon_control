@@ -49,7 +49,9 @@ Since the applications are build on the ROS framework, it is required to install
 
 To cross compile ARM binaries on Ubuntu 16.04, the appropriate toolchains have to be installed. The toolchains for C and C++ can be install with:
 
-`sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf`
+```
+sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
+```
 
 ## Installion of ROS workspaces
 
