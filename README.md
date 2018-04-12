@@ -86,13 +86,13 @@ On the BeagleBoneBlack, network configuration is done by editing the */etc/netwo
 
 ```
 ## Set static <device> ip address
-auto <device>                           # Enables device on startup
-iface <device> inet static              # Sets device to have a static IP address
-        address 192.168.10.x            # Set static IP address
-        netmask 255.255.254.0           # Set netmask
-        gateway 192.168.10.254          # Set gateway
-        dns-nameservers 8.8.8.8         # Set DNS nameserver 1
-        dns-nameserver 8.8.4.4          # Set DNS nameserver 2
+auto <device>
+	iface <device> inet static
+        address 192.168.10.x
+        netmask 255.255.254.0
+        gateway 192.168.10.254
+        dns-nameservers 8.8.8.8
+        dns-nameserver 8.8.4.4
 ```
 
 # Usage
