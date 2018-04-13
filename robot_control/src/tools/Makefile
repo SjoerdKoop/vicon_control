@@ -26,10 +26,10 @@ WRITE_SHARED_MEMORY_SRCS = src/write_shared_memory.cpp
 # Library files: add library files of targets
 # For include libfile1, use -lfile1
 # <NAME>_LIBS = -lfile1 -lfile2 ...
-DATA_SERVER_LIBS = -lpeer -ltools
-READ_SHARED_MEMORY_LIBS = -lpru -ltools
-REFERENCE_CLIENT_LIBS = -lpeer -ltools
-WRITE_SHARED_MEMORY_LIBS = -lpru -ltools
+DATA_SERVER_LIBS = -lcomponents -ltools
+READ_SHARED_MEMORY_LIBS = -lcomponents -ltools
+REFERENCE_CLIENT_LIBS = -lcomponents -ltools
+WRITE_SHARED_MEMORY_LIBS = -lcomponents -ltools
 
 # Default target
 default: create clean
@@ -46,7 +46,7 @@ create:
 	@ # $(CXX) $(FLAGS) $(<name>_SRCS) $(<name>_LIBS) -o $(BIN_PATH)/<name>
 
 	@ # For libraries to LIB_PATH:
-	@ # $(CXX) -c $(FLAGS) $(<name>_SRCS) -o <name>.o
+	@ # $(CXX) -c $(FLAGS) $(<name>_SRCS) $(<name>_LIBS) -o <name>.o
 	@ # $(AR) crf $(LIB_PATH)/lib<name>.a -o <name>.o
 
 	@ # Create tools library
@@ -54,8 +54,8 @@ create:
 	@ $(AR) crf $(LIB_PATH)/libtools.a -o tools.o
 
 	@ # Create data_server binary
-	@ $(CXX) $(FLAGS) $(DATA_SERVER_SRCS) $(REFERENCE_CLIENT_LIBS)\
-		-o $(BIN_PATH)/reference_client
+	@ $(CXX) $(FLAGS) $(DATA_SERVER_SRCS) $(DATA_SERVER_LIBS)\
+		-o $(BIN_PATH)/data_server
 
 	@ # Create read_shared_memory binary
 	@ $(CXX) $(FLAGS) $(READ_SHARED_MEMORY_SRCS) $(READ_SHARED_MEMORY_LIBS)\

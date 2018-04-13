@@ -1,6 +1,9 @@
 #ifndef TOOLS_TOOLS_H
 #define TOOLS_TOOLS_H
 
+// System
+#include <vector>		// std::vector
+
 // Checks whether argument is a valid IP address
 bool isValidIp(char* ip);
 
@@ -11,6 +14,6 @@ bool isValidPort(char* port);
 bool isValidPositiveInteger(char* arg);
 
 // Converts socket message to reference
-float* messageToReference(char* msg);
+std::vector<float> messageToReference(char* msg);
 
 #endif // TOOLS_TOOLS_H

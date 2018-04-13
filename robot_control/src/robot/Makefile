@@ -13,12 +13,14 @@ FLAGS = -std=c++11 $(INCLUDE_DIRS:%=-I%) -L$(LIB_PATH)
 ################################################################################
 
 # Include directories, add all directories of used header files
-INCLUDE_DIRS = include 
+INCLUDE_DIRS = include ../components/include ../tools/include
 
 # Source files: add source files of targets
 # <NAME>_SRCS = src/<src1>.cpp src/<src2>.cpp ...
-PEER_SRCS = src/peer.cpp
-PRU_SRCS= src/pru.cpp
+ACTUATOR_SRCS = src/actuator.cpp
+CONTROLLER_SRCS = src/controller.cpp
+ROBOT_SRCS = src/robot.cpp
+SENSOR_SRCS = src/sensor.cpp
 
 # Library files: add library files of targets
 # For include libfile1, use -lfile1
@@ -42,11 +44,13 @@ create:
 	@ # $(CXX) -c $(FLAGS) $(<name>_SRCS) -o <name>.o
 	@ # $(AR) crf $(LIB_PATH)/lib<name>.a -o <name>.o
 
-	@ # Create components library
-	@ $(CXX) -c $(FLAGS) $(PEER_SRCS) -o peer.o
-	@ $(CXX) -c $(FLAGS) $(PRU_SRCS) -o pru.o
-	@ $(AR) crf $(LIB_PATH)/libcomponents.a -o peer.o pru.o
-
+	@ # Create robot library
+	@ $(CXX) -c $(FLAGS) $(ACTUATOR_SRCS) -o actuator.o
+	@ $(CXX) -c $(FLAGS) $(CONTROLLER_SRCS) -o controller.o
+	@ $(CXX) -c $(FLAGS) $(ROBOT_SRCS) -o robot.o
+	@ $(CXX) -c $(FLAGS) $(SENSOR_SRCS) -o sensor.o
+	@ $(AR) crf $(LIB_PATH)/librobot.a -o actuator.o controller.o robot.o sensor.o
+	
 # Clean target
 clean:
 	@ # Remove all .o files

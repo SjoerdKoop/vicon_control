@@ -76,7 +76,7 @@ void DataClient::run(Peer* peer)
 	{
 		// Wait for message from robot
 		msg = peer->receiveMessage();
-
+		std::cout << "Received message!" << std::endl;
 		if (msg != INVALID_MESSAGE)
 		{
 			// Convert received message to ROS message

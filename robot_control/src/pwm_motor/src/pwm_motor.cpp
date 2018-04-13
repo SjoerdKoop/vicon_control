@@ -9,7 +9,7 @@
 #include "resource_table_empty.h"		// Empty resource table
 
 // PWM motor
-#include "pwm.h"
+#include "pru_pwm.h"					// PRUPWM
 
 // Resets the IEP counter
 void resetIEP() {
@@ -35,7 +35,7 @@ int main() {
 	int cycles;
 
 	// Create PWM with pin 0 and link memory location 1 to this PWM
-	PWM* pwm0 = new PWM(0, 1);
+	PRUPWM* pwm0 = new PRUPWM(0, 1);
 
 	// Loop infinitely
 	while(1) {

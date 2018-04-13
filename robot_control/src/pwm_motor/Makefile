@@ -22,12 +22,9 @@ ICSS_INCLUDE = $(PRU_ICSS)/include
 PRU_LINKER_COMMAND_FILE = $(PRU_ICSS)/AM335x_PRU.cmd
 
 # Set compiler flags
-PRU_INCLUDE_FLAGS = -I$(CXX_INCLUDE) -I$(ICSS_INCLUDE) -i$(CXX_LIB)
+PRU_INCLUDE_FLAGS = -I$(ICSS_INCLUDE) -I$(CXX_INCLUDE) -i$(CXX_LIB)
 LINK_FLAGS = -z -l $(PRU_LINKER_COMMAND_FILE)
 FLAGS = -q -O4 -mf5 $(INCLUDE_DIRS:%=-I%) $(PRU_INCLUDE_FLAGS) $(LINK_FLAGS)
-
-# Set linker flags
-
 ################################################################################
 
 # Include directories, add all directories of used header files
@@ -35,7 +32,7 @@ INCLUDE_DIRS = include
 
 # Source files: add source files of targets
 # <NAME>_SRCS = src/<src1>.cpp src/<src2>.cpp ...
-PWM_MOTOR_SRCS= src/pwm_motor.cpp src/pwm.cpp
+PWM_MOTOR_SRCS= src/pwm_motor.cpp src/pru_pwm.cpp
 
 # Library files: add library files of targets
 # For include libfile1, use -lfile1

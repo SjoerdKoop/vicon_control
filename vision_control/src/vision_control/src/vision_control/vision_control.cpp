@@ -25,9 +25,6 @@ int main(int argc, char* argv[])
 	// Invoke spin. This makes the program halt while receiving callbacks from subscribers
 	// In this case, the subscriber to object_update in VisionControl
 	ros::spin();
-	
-	// When the program has to end for some reason, terminate namespace for a clean exit
-	Vision::terminate();
 
 	// Return standard exit code
 	return EXIT_SUCCESS;

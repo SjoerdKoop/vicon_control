@@ -35,7 +35,7 @@ bool checkArguments(int argc, char* argv[]) {
 // Main function
 int main(int argc, char* argv[])
 {
-	// Checks whether provided arguments are correct
+	// Check whether provided arguments are correct
 	if (checkArguments(argc, argv))
 	{
 		// Create peer

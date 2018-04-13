@@ -11,12 +11,12 @@
 // PRU register __R30 for GPO
 volatile register unsigned int __R30;
 
-// Class defining a Pulse Width Modulator
-class PWM
+// Class defining a Pulse Width Modulator for the PRU
+class PRUPWM
 {
 	public:
 		// Constructor
-		PWM(int pin, int memory_location);
+		PRUPWM(int pin, int memory_location);
 
 		// Updates the output signal of the PWM
 		void update(int cycles);

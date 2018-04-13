@@ -1,8 +1,8 @@
 // Declarations
-#include "encoder.h"
+#include "pru_encoder.h"
 
 // Constructor
-Encoder::Encoder(int pin_A, int pin_B, int memory_location)
+PRUEncoder::PRUEncoder(int pin_A, int pin_B, int memory_location)
 {
 	// Set masks
 	mask_A_ = 0x0001 << pin_A;
@@ -17,7 +17,7 @@ Encoder::Encoder(int pin_A, int pin_B, int memory_location)
 }
 
 // Updates the encoder
-void Encoder::update()
+void PRUEncoder::update()
 {
 	// Get new state
 	EncoderState new_state = getState();
@@ -27,7 +27,7 @@ void Encoder::update()
 }
 
 // Gets the encoder's new state
-EncoderState Encoder::getState()
+EncoderState PRUEncoder::getState()
 {
 	// Read pins
 	int A = (__R31 & mask_A_);
@@ -59,7 +59,7 @@ EncoderState Encoder::getState()
 }
 
 // Updates the encoder's count
-void Encoder::updateCount(EncoderState new_state)
+void PRUEncoder::updateCount(EncoderState new_state)
 {
 	int change = 0;			// Holds the change in counts
 

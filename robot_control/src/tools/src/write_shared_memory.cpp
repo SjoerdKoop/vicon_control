@@ -34,6 +34,7 @@ bool checkArguments(int argc, char* argv[])
 // Main function
 int main(int argc, char* argv[])
 {
+	// Check whether provided arguments are correct
 	if (checkArguments(argc, argv))
 	{
 		// Create PRU objects

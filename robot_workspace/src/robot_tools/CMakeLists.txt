@@ -54,4 +54,4 @@ target_link_libraries(data_subscriber ${catkin_LIBRARIES})
 
 # Send reference program
 add_executable(send_reference src/${PROJECT_NAME}/send_reference.cpp)
-target_link_libraries(send_reference ${catkin_LIBRARIES} tools)
+target_link_libraries(send_reference ${catkin_LIBRARIES} peer tools)

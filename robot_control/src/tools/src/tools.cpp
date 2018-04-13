@@ -62,7 +62,7 @@ bool isValidPositiveInteger(char* arg)
 }
 
 // Converts socket message to reference
-float* messageToReference(char* msg)
+std::vector<float> messageToReference(char* msg)
 {
 	int n_var;							// Amount of reference variables
 	int n_var_size = sizeof(n_var);		// Length of variable that holds the amount of variables in bytes
@@ -71,18 +71,22 @@ float* messageToReference(char* msg)
 	// Get the number of reference variables
 	memcpy(&n_var, &msg[0], n_var_size);
 
-	float ref[n_var];					// Constructed reference array
+	std::vector<float> ref;				// Constructed reference array
+	
+	// Reserve memory
+	ref.reserve(n_var);
+
+	float var;							// Current variable
 
 	// For each reference variable
 	for (int i = 0; i < n_var; i++)
 	{
-		// Append variable to message
-		memcpy(&ref[i], &msg[n_var_size + i * var_size], var_size);
+		// Get variable from message
+		memcpy(&var, &msg[n_var_size + i * var_size], var_size);
+
+		// Add variable to vector
+		ref.push_back(var);
 	}
 
-	for (int i = 0; i < n_var; i++)
-	{
-		std::cout << ref[i] << " ";
-	}
-	std::cout << std::endl;
+	return ref;
 }

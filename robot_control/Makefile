@@ -2,9 +2,7 @@
 FLAGS = --no-print-directory -C
 
 default: .FORCE
-	@ # Makes projects with: 
-
-	@ # Make binaries
+	@ # Make ARM software
 	@ echo "--- Making ARM software ---"
 
 	@ # Make components
@@ -15,11 +13,19 @@ default: .FORCE
 	@ echo "Making tools"
 	@ $(MAKE) $(FLAGS) src/tools
 
+	@ # Make robot
+	@ echo "Making robot"
+	@ $(MAKE) $(FLAGS) src/robot
+
+	@ # Make proto1
+	@ echo "Making proto1"
+	@ $(MAKE) $(FLAGS) src/proto1
+
 	@ # Add additional binaries to make here
 	@ # echo "Making <name>"
 	@ # $(MAKE) $(FLAGS) src/<project_directory>
 
-	@ # Make firmware
+	@ # Make PRU firmware
 	@ echo "--- Making PRU firmware ---"
 
 	@ # Make pwm_motor

@@ -30,6 +30,12 @@ PRU::PRU() {
         sharedMemory = pru + PRU_SHARED_MEMORY / 4; 
 }
 
+// Gets the reference for the variable at index
+int* PRU::getReference(int index)
+{
+	return &sharedMemory[index];
+}
+
 // Gets variable at index
 int PRU::getVariable(int index) {
 	return sharedMemory[index];

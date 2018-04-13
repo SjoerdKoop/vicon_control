@@ -8,7 +8,7 @@
 #include "resource_table_empty.h"		// Empty resource table
 
 // Read encoders
-#include "encoder.h"
+#include "pru_encoder.h"				// PRUEncoder
 
 // Main function
 int main() {
@@ -16,7 +16,7 @@ int main() {
 	CT_CFG.SYSCFG_bit.STANDBY_INIT = 0;
 
 	// Create encoder with pins 0 and 1 and link memory location 0 to this encoder
-	Encoder* encoder0 = new Encoder(0, 1, 0);
+	PRUEncoder* encoder0 = new PRUEncoder(0, 1, 0);
 
 	// Loop infinitely
 	while(1) {

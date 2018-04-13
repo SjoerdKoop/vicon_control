@@ -1,8 +1,8 @@
 // Delcarations
-#include "pwm.h"
+#include "pru_pwm.h"
 
 // Constructor
-PWM::PWM(int pin, int memory_location)
+PRUPWM::PRUPWM(int pin, int memory_location)
 {
 	// Set pin
 	pin_ = pin;
@@ -15,12 +15,12 @@ PWM::PWM(int pin, int memory_location)
 }
 
 // Updates the output signal of the PWM
-void PWM::update(int cycles)
+void PRUPWM::update(int cycles)
 {
 	// Updates the number of cycles the PWM should be high
 	cycles_high_ = *input_memory_ / 100.0f * DEFAULT_PERIOD;
 
-	// If the PWM should still give a high signal
+	// If the PWM should still give a herigh signal
 	if (cycles < cycles_high_)
 	{
 		// Set corresponding bit to 1

@@ -17,11 +17,12 @@ enum EncoderState
 	q4
 };
 
-class Encoder
+// Class defining an encoder for the PRU
+class PRUEncoder
 {
 	public:
 		//Constructor
-		Encoder(int pin_A, int pin_B, int memory_location);
+		PRUEncoder(int pin_A, int pin_B, int memory_location);
 		
 		// Updates the encoder
 		void update();
