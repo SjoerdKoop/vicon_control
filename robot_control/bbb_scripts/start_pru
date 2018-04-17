@@ -4,8 +4,8 @@
 # Set the firmware names for the PRU's
 # The strings should exactly match the file name
 # Make sure the file exists in /lib/firmware/, else returns errors
-PRU0FW="read_encoders"
-PRU1FW="pwm_motor"
+PRU0FW="pwm_motor"
+PRU1FW="read_encoders"
 
 # If one of the defined files does not exist
 if ! [ -f /lib/firmware/$PRU0FW ] || ! [ -f /lib/firmware/$PRU1FW ]; then

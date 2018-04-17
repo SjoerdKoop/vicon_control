@@ -55,10 +55,10 @@ namespace Robot
 	}
 
 	// Adds a motor
-	void addMotor(std::string name, int input_location, int ccw_pin, int cw_pin, float max_speed)
+	void addMotor(std::string name, int input_location, int ccw_pin, int cw_pin, float max_speed, bool invert)
 	{
 		// Create motor
-		Motor* motor = new Motor(pru->getReference(input_location), ccw_pin, cw_pin, max_speed);
+		Motor* motor = new Motor(pru->getReference(input_location), ccw_pin, cw_pin, max_speed, invert);
 
 		// Add encoder
 		actuators.emplace(std::make_pair(name, motor));
@@ -168,6 +168,8 @@ namespace Robot
 				// Extract name and value
 				name = pair.first;
 				value = pair.second->getValue();
+
+				std::cout << "Value: " << value << std::endl;
 
 				// Copy name to the message
 				memcpy(&msg[index], &name[0], MAX_VAR_NAME_LENGTH * sizeof(char));

@@ -42,22 +42,19 @@ int main(int argc, char* argv[])
 		Robot::init(argv[1], std::stoi(argv[2]));
 
 		// Add actuators
-		Robot::addMotor("motor0", 1, 72, 74, MAX_SPEED);
+		Robot::addMotor("motor0", 1, 49, 15, MAX_SPEED, true);
 
 		// Add encoders
 		Robot::addEncoder("encoder0", 0, DISTANCE_PER_COUNT, true);
 
 		// Create controllers
-		Proto1Controller* controller = new Proto1Controller(25.0f);
+		Proto1Controller* controller = new Proto1Controller(5.0f, 0.0f);
 
 		// Add Controllers
 		Robot::addController(controller, "motor0", "encoder0");
 
 		// Runs the robot
 		Robot::run();
-
-		// Sample sensors
-		//Robot::sampleSensors();
 	}
 	else 
 	{

@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 	ros::init(argc, argv, "vision_control");
 
 	// Create your controller
-	ExampleController* controller = new ExampleController(10, "marker0", "robot");
+	ExampleController* controller = new ExampleController(1, "marker0", "robot");
 
 	// Initialize VisionControl namespace with your controller
 	Vision::init(controller);

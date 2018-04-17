@@ -23,7 +23,7 @@ class Motor : public Actuator
 {
 	public:
 		// Constructor
-		Motor(int* input_location, int ccw_pin, int cw_pin, float max_speed);
+		Motor(int* input_location, int ccw_pin, int cw_pin, float max_speed, bool invert);
 
 		// Destructor
 		~Motor();
@@ -34,6 +34,7 @@ class Motor : public Actuator
 	private:
 		FILE* ccw_file;				// Counter clockwise pin file
 		FILE* cw_file;				// Clockwise pin file
+		bool invert_;				// Whether motor value should be inverted
 		float maximum_speed_;		// Maximum speed
 
 		// Set the motor to turn clockwise	
@@ -41,6 +42,9 @@ class Motor : public Actuator
 
 		// Set the motor to turn counter clockwise
 		void setCounterClockwise();
+
+		// Stops the motor
+		void stop();
 };
 
 #endif // ACTUATOR_H

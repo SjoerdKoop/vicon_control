@@ -31,7 +31,7 @@ namespace Robot
 	void addEncoder(std::string name, int output_location, float dist_per_count, bool invert);
 
 	// Adds a motor
-	void addMotor(std::string name, int input_location, int ccw_pin, int cw_pin, float max_speed);
+	void addMotor(std::string name, int input_location, int ccw_pin, int cw_pin, float max_speed, bool invert);
 
 	// Adds a proportional controller
 	void addController(Controller* controller, std::string actuator_name, std::string sensor_name);

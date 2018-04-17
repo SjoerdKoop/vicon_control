@@ -1,6 +1,8 @@
 // Declarations
 #include "vision_control/example_controller.h"
 
+#include "ros/ros.h"
+
 // Constructor
 // Initialize controller parameters here
 ExampleController::ExampleController(int P, std::string object_name, std::string robot_name)
@@ -48,6 +50,7 @@ std_msgs::Float32MultiArray ExampleController::objectsToReference(const vision_c
 	{
 		// Create reference
 		ref.data.push_back(P_ * (obj->objects[object_id].z - obj->objects[robot_id].z));
+		ROS_INFO("Ref: ", ref.data[0]);
 	}
 	else
 	{
