@@ -15,6 +15,8 @@ To achieve modularity of each package, several open source files have been added
 
 ## Target systems
 
+The four components have been designed for ROS Lunar running on Ubuntu 16.04. The *robot_control* package has scripts and generates binaries and firmware to be used on a [BeagleBone Black](https://beagleboard.org/black)
+
 # Contents
 * [Overview](https://github.com/SjoerdKoop/vicon_control#overview)
 * [Setup](https://github.com/SjoerdKoop/vicon_control#setup)
@@ -25,10 +27,13 @@ To achieve modularity of each package, several open source files have been added
 	* [Robot control design](https://github.com/SjoerdKoop/vicon_control#robot-control-design)
 	* [Vision control design](https://github.com/SjoerdKoop/vicon_control#vision-control-design)
 * [Communication](https://github.com/SjoerdKoop/vicon_control#communication)
+	* [ROS: data_update](https://github.com/SjoerdKoop/vicon_control#ros-data_update)
+	* [ROS: object_update](https://github.com/SjoerdKoop/vicon_control#ros-object_update)
+	* [ROS: reference_update](https://github.com/SjoerdKoop/vicon_control#ros-reference_update)
+	* [UDP: reference](https://github.com/SjoerdKoop/vicon_control#reference)
+	* [UDP: sensor data](https://github.com/SjoerdKoop/vicon_control#udp-sensor-data)
 * [Executables](https://github.com/SjoerdKoop/vicon_control#executables)
 * [Troubleshooting](https://github.com/SjoerdKoop/vicon_control#troubleshooting)
-
-The four components have been designed for ROS Lunar running on Ubuntu 16.04. The *robot_control* package has scripts and generates binaries and firmware to be used on a [BeagleBone Black](https://beagleboard.org/black)
 
 # Overview
 
@@ -60,7 +65,7 @@ sudo apt-get dist-upgrade
 
 Since the applications are build on the ROS framework, it is required to install and setup ROS to be able to run them. To do so, please follow the instructions described in the [ROS Lunar installation guide](http://wiki.ros.org/lunar/Installation) for your operating system. Another ROS version might still be able to run the software, but is not supported.
 
-To cross compile ARM binaries on Ubuntu 16.04, the appropriate toolchains have to be installed. The toolchains for C and C++ can be installed with:
+To cross compile ARM binaries on Ubuntu 16.04, the appropriate toolchains have to be installed. This is only required when the robot control package is being used. The toolchains for C and C++ can be installed with:
 
 ```
 sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
