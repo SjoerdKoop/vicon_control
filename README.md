@@ -326,6 +326,13 @@ The following executables are helpful tools to assist in debugging:
 
 When it is not possible to run the Lunar distribution, it is worth a try to attempt to run the software with other distributions. I have heard it also worked with Kinetic.
 
+**System X is not able to connect or not getting data from system Y**
+
+* Check the hardware, make sure the cables are properly connected
+* Make sure the IP address is set to the system you want to connect to
+* Make sure the ports of both systems are equal
+* Check the descriptions in [Setting up the connection](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection)
+
 **I would like to change the functionality, how can I modify and run the code?**
 
 Feel free to change any file. Updates in ROS workspaces can be applied by running *catkin_make* in the workspace. Updates tot the *robot_control* package can be applied by running make in *vicon_control/robot_control*.
@@ -353,10 +360,3 @@ This means that the mode is not available for the pin. If it involves a PRU pin,
 When using an USB connection, the BeagleBone Block creates two connections (192.168.6.2 and 192.168.7.2). Make sure that you **are not** using the [Vicon configuration](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection) for this specific connection.
 
 When using an ethernet connection connected to the main switch of the Vicon system, make sure that you **are** using the [Vicon configuration](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection) for this specific connection.
-
-**System X is not able to connect or not getting data from system Y**
-
-* Check the hardware, make sure the cables are properly connected
-* Make sure the IP address is set to the system you want to connect to
-* Make sure the ports of both systems are equal
-* Check the descriptions in [Setting up the connection](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection)
