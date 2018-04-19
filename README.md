@@ -118,7 +118,33 @@ auto <device>
 
 ## BeagleBone Black specific settings
 
+Sampling of encoders has to be done with a relatively high sample rate. Software running on the CPU of the BeagleBone Black will not be able keep up with the rate of change of output signals of attached encoders as their speed increases. Since the BeagleBone Black has two Programmable Realtime Units (PRU's), a good solution would be to use these for computing the values of the encoders. These PRU's run specific firmware at a clock speed of 200 MHz. Computing the next state of an encoder takes 39-42 cycles, which corresponds to a ~5MHz computation frequency.
+
+However, since most PRU pins coincide with pins of the video subsystem (as can be seen in the images below), the video subsystem has to be disabled at boot-time. This can be done by uncommenting *disable_uboot_overlay_video=1* in  */boot/uEnv.txt*. The PRU subsystem is disabled by default. It als has to be enabled in */boot/uEnv.txt*:
+
+```
+/boot/uEnv.txt
+--------------
+.
+disable_uboot_overlay_video=1
+.
+uboot_overlay_pru=/lib/firmware/AM335X-PRU-RPROC-4-9-TI-00A0.dtbo
+.
+```
+
+Make sure the PRU firmware exists in */lib/firmware* and that the version coincides with your kernel version (check with *uname -r*). Reboot to apply the changes.
+
 <img src="http://beagleboard.org/static/images/cape-headers.png" width="440"> <img src="http://beagleboard.org/static/images/cape-headers-pru.png" width="440">
+
+Maximizing available resources (without disabling the onboard memory), PRU1 will be able to read from 6 encoders on pins 0 to 11 with a computation frequency of 833 kHz. Where the A and B pins of each encoder are being used.
+
+To achieve modularity, PRU0 is used to create PWM signals for motors attached to the encoder using 6 of the PRU0 pins. The PRU only generates the PWM signal for each motor, directional signals are given from the controller running on the main CPU.
+
+Using this setup, all tasks are seperated:
+
+* PRU1 handles the sensing
+* PRU0 handles the actuating
+* CPU runs the controller
 
 # Usage
 
