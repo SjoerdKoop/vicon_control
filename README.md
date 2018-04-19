@@ -150,6 +150,8 @@ Using this setup, all tasks are separated:
 
 ### Setting the pins
 
+The operating system can access the pin using the General Purpose Input/Output (GPIO) subsystem. This allows software running on the CPU to read/write the values and set the direction (input or output) of the pins. Changing the mode a specific pin can be achieved using *config-pin &le;header&gt_&le;pin number&gt; &le;mode&gt;*
+
 # Usage
 
 For documentation on running single nodes from a terminal, please refer to [Executables](https://github.com/SjoerdKoop/vicon_control#executables).
