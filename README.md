@@ -287,8 +287,11 @@ Since a string can have variable length, a consensus has to be made between the 
 
 # Executables
 
-The software packets create several useful command line programs for debugging or running without a GUI or without launch files. The following executables define the functionality of the subsystems:
+The software packets create several useful command line programs for debugging or running without a GUI or without launch files.
 
+### Main executables
+
+The following executables define the functionality of the subsystems:
 
 * Vicon workspace tools (vicon_tools): These executables connect to a Vicon datastream at a given IP address and port.
 	* `rosrun vicon_tools dual <Vicon datastream IP address> <Vicon datastream port> <number of markers>`
@@ -298,6 +301,8 @@ The software packets create several useful command line programs for debugging o
 	* `rosrun vision_control vision_control`
 * Robot Workspace tools (robot_tools):  This executable connects to a robot at a given IP address and port.
 	* `rosrun robot_tools communicate <robot IP address> <robot port>`
+
+### Tools
 
 The following executables are helpful tools to assist in debugging:
 
