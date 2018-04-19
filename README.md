@@ -346,7 +346,7 @@ Run the script with *sudo*
 
 **PX_YY pinmux file not found when setting pin mode**
 
-This means that the mode is not available for the pin. If it involves a PRU pin, check [Setting the pins](https://github.com/SjoerdKoop/vicon_control#setting-the-pins).
+This means that the mode is not available for the pin. If it involves a PRU pin, check [Using the PRU](https://github.com/SjoerdKoop/vicon_control#using-the-pru).
 
 **I cannot SSH into my BeagleBone Black**
 
@@ -359,4 +359,4 @@ When using an ethernet connection connected to the main switch of the Vicon syst
 * Check the hardware, make sure the cables are properly connected
 * Make sure the IP address is set to the system you want to connect to
 * Make sure the ports of both systems are equal
-* Check the descriptions in [Using the PRU](https://github.com/SjoerdKoop/vicon_control#using-the-pru)
+* Check the descriptions in [Setting up the connection](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection)
