@@ -152,7 +152,7 @@ Using this setup, all tasks are separated:
 
 The operating system can access the pin using the General Purpose Input/Output (GPIO) subsystem. This allows software running on the CPU to read/write the values and set the direction (input or output) of the pins. Changing the direction of a specific pin can be achieved using `echo <direction> /sys/class/gpio/gpio_<Kernel ID>/direction`. Changing the mode a specific pin can be achieved using `config-pin <header>_<pin number> <mode>`. Information of a pin can be retreived with `config-pin -i <header>_<pin_number>`. 
 
-Changing the pins is not persistent, rebooting will change them back to their default setting. Therefore, good practice is to save your configuration as a script. Doing that, reboots would only require you to run the script. Since the pin files are owned by root, **it is required to run your script with sudo**.
+Changing the pins is not persistent, rebooting will change them back to their default setting. Therefore, good practice is to save your configuration as a script. Doing that, reboots would only require you to run the script. Since the pin files are owned by root, **it is required to run the script with sudo**.
 
 # Usage
 
@@ -359,4 +359,4 @@ When using an ethernet connection connected to the main switch of the Vicon syst
 * Check the hardware, make sure the cables are properly connected
 * Make sure the IP address is set to the system you want to connect to
 * Make sure the ports of both systems are equal
-* Check the descriptions in [Setting up the connection](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection)
+* Check the descriptions in [Using the PRU](https://github.com/SjoerdKoop/vicon_control#using-the-pru)
