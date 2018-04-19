@@ -24,6 +24,7 @@ The four components have been designed for ROS Lunar running on Ubuntu 16.04. Th
 	* [Installation](https://github.com/SjoerdKoop/vicon_control#installation)
 	* [Setting up the connection](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection)
 * [Usage](https://github.com/SjoerdKoop/vicon_control#usage)
+	* [ROS workspaces](https://github.com/SjoerdKoop/vicon_control#ros-workspaces)
 	* [Robot control design](https://github.com/SjoerdKoop/vicon_control#robot-control-design)
 	* [Vision control design](https://github.com/SjoerdKoop/vicon_control#vision-control-design)
 * [Communication](https://github.com/SjoerdKoop/vicon_control#communication)
@@ -116,6 +117,8 @@ auto <device>
 # Usage
 
 For documentation on running single nodes from a terminal, please refer to [Executables](https://github.com/SjoerdKoop/vicon_control#executables).
+
+## ROS workspaces
 
 The Robot GUI, Vicon GUI and vision controller can be run simultaneously by invoking *start*. This is the recommended method to use if all three nodes are required.
 
