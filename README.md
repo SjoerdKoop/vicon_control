@@ -340,9 +340,13 @@ Data association is achieved by linking the marker to it's closest neighbour wit
 
 Run the command with *sudo*
 
-**I cannot write to the pinmux file when using the *robot_control/set_pins* script**
+**Cannot write pinmux file when using the *robot_control/set_pins* script**
 
 Run the script with *sudo*
+
+**PX_YY pinmux file not found when setting pin mode**
+
+This means that the mode is not available for the pin. If it involves a PRU pin, check [Setting the pins](https://github.com/SjoerdKoop/vicon_control#setting-the-pins).
 
 **I cannot SSH into my BeagleBone Black**
 
