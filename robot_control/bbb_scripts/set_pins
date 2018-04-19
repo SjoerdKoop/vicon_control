@@ -8,17 +8,27 @@ GPIO=/sys/class/gpio
 ### Pins ###
 # Get pin info with: "config-pin -i P<header>_<pin>"
 
+# Configure mode of encoder pins
+config-pin P8_45 pruin
+config-pin P8_46 pruin
+
 # Configure mode of motor pins
 config-pin P9_23 gpio
 config-pin P9_24 gpio
 config-pin P9_31 pruout
 
-# Configure mode of encoder pins
-config-pin P8_45 pruin
-config-pin P8_46 pruin
+# Configure mode of Hall sensor pins
+config-pin P8_7 gpio
+config-pin P8_8 gpio
 
 # Set direction of GPIO pins
 # Use the Kernel GPIO id
 # Either "in" or "out", anything else will return errors
-echo "out" > $GPIO/gpio49/direction
+
+# Motor
 echo "out" > $GPIO/gpio15/direction
+echo "out" > $GPIO/gpio49/direction
+
+# Hall sensors
+echo "in" > $GPIO/gpio66/direction
+echo "in" > $GPIO/gpio67/direction

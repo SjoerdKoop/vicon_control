@@ -54,6 +54,17 @@ namespace Robot
 		sensors.emplace(std::make_pair(name, encoder));
 	}
 
+
+	// Adds a Hall sensor
+	void addHallSensor(std::string name, int output_pin)
+	{
+		// Create Hall sesnsor
+		Hall* hall = new Hall(output_pin);
+
+		// Add hall sensor
+		sensors.emplace(std::make_pair(name, hall));
+	}
+
 	// Adds a motor
 	void addMotor(std::string name, int input_location, int ccw_pin, int cw_pin, float max_speed, bool invert)
 	{
@@ -169,7 +180,7 @@ namespace Robot
 				name = pair.first;
 				value = pair.second->getValue();
 
-				std::cout << "Value: " << value << std::endl;
+				//std::cout << "Sensor " << name <<  "\tValue: " << value << std::endl;
 
 				// Copy name to the message
 				memcpy(&msg[index], &name[0], MAX_VAR_NAME_LENGTH * sizeof(char));
@@ -189,6 +200,28 @@ namespace Robot
 
 			// Wait for 0.1 seconds
 			usleep(SENSOR_SAMPLE_RATE);
+		}
+	}
+
+	// Set limits of an actuator
+	void setActuatorLimits(std::string name, std::string lower_name, std::string upper_name)
+	{
+		// Get relevant actuator and sensors
+		Actuator* actuator = actuators.find(name)->second;
+		Sensor* lower = sensors.find(lower_name)->second;
+		Sensor* upper = sensors.find(upper_name)->second;
+
+		// If at least one is undefined
+		if (actuator == 0 || lower == 0 || upper == 0)
+		{
+			// Print error message
+			std::cout << "Error could not set limits of " << name << " (" << lower << ", " << upper << ")" << std::endl;
+		}
+		// If they are defined
+		else
+		{
+			// Set limits of given actuator
+			actuator->setLimits(lower, upper);
 		}
 	}
 }

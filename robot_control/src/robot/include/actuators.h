@@ -1,5 +1,8 @@
-#ifndef ACTUATOR_H
-#define ACTUATOR_H
+#ifndef ROBOT_CONTROL_ACTUATORS_H
+#define ROBOT_CONTROL_ACTUATORS_H
+
+// Robot control
+#include "sensors.h"	// Sensor
 
 // System
 #include <cstdio>		// FILE
@@ -11,11 +14,17 @@ class Actuator
 		// Constructor
 		Actuator(int* input_location);
 	
+		// Set the actuator's limits using sensors
+		void setLimits(Sensor* lower, Sensor* upper);
+
 		// Sets the value of the input
 		virtual void setValue(float value) = 0;
 
 	protected:
+		Sensor* lower_;			// Sensor for lower limit
+		bool has_limits_;		// Whether actuator has limits
 		int* input_;			// Actuator input
+		Sensor* upper_;			// Sensors for upper limit
 };
 
 // Class defining a motor
@@ -32,8 +41,8 @@ class Motor : public Actuator
 		void setValue(float value) override;
 
 	private:
-		FILE* ccw_file;				// Counter clockwise pin file
-		FILE* cw_file;				// Clockwise pin file
+		FILE* ccw_file_;			// Counter clockwise pin file
+		FILE* cw_file_;				// Clockwise pin file
 		bool invert_;				// Whether motor value should be inverted
 		float maximum_speed_;		// Maximum speed
 
@@ -43,8 +52,11 @@ class Motor : public Actuator
 		// Set the motor to turn counter clockwise
 		void setCounterClockwise();
 
+		// Sets the motor speed
+		void setSpeed(float speed);
+
 		// Stops the motor
 		void stop();
 };
 
-#endif // ACTUATOR_H
+#endif // ROBOT_CONTROL_ACTUATORS_H

@@ -6,9 +6,9 @@
 #include "pru.h"		// PRU
 
 // Robot
-#include "actuator.h"	// Actuator
+#include "actuators.h"	// Actuator
 #include "controller.h"	// Controller
-#include "sensor.h"		// Sensor
+#include "sensors.h"	// Sensor
 
 // System
 #include <map>			// std::map
@@ -30,6 +30,9 @@ namespace Robot
 	// Adds an encoder
 	void addEncoder(std::string name, int output_location, float dist_per_count, bool invert);
 
+	// Adds a Hall sensor
+	void addHallSensor(std::string name, int input_location);
+
 	// Adds a motor
 	void addMotor(std::string name, int input_location, int ccw_pin, int cw_pin, float max_speed, bool invert);
 
@@ -50,6 +53,10 @@ namespace Robot
 
 	// Samples the sensors and sends them over the UDP socket
 	void sampleSensors();
+
+	// Set limits of an actuator
+	void setActuatorLimits(std::string name, std::string lower_name, std::string upper_name);
+
 }
 
 #endif

@@ -1,5 +1,5 @@
 // Declarations
-#include "actuator.h"
+#include "actuators.h"
 
 // System
 #include <string>			// std::string
@@ -12,6 +12,20 @@ Actuator::Actuator(int* input_location)
 {
 	// Set output memory location
 	input_ = input_location;
+
+	// Initialize with no limits
+	has_limits_ = false;
+}
+
+// Set the actuator's limits using sensors
+void Actuator::setLimits(Sensor* lower, Sensor* upper)
+{
+	// Store pointers to sensors
+	lower_ = lower;
+	upper_ = upper;
+
+	// Notify limits have been set
+	has_limits_ = true;
 }
 
 // Constructor
@@ -44,8 +58,8 @@ Motor::Motor(int* input_location, int ccw_pin, int cw_pin, float max_speed, bool
 	fclose(export_file);
 
 	// Open pin value files at begin of the files
-	cw_file = fopen(cw_string.c_str(), "w");
-	ccw_file = fopen(ccw_string.c_str(), "w");
+	cw_file_ = fopen(cw_string.c_str(), "w");
+	ccw_file_ = fopen(ccw_string.c_str(), "w");
 
 	// Set maximum speed
 	maximum_speed_ = max_speed;
@@ -58,44 +72,46 @@ Motor::Motor(int* input_location, int ccw_pin, int cw_pin, float max_speed, bool
 Motor::~Motor()
 {
 	// Close pin files
-	fclose(ccw_file);
-	fclose(cw_file);
+	fclose(ccw_file_);
+	fclose(cw_file_);
 }
 
 // Set the motor to turn clockwise	
 void Motor::setClockwise()
 {
 	// Disable counter clockwise input
-	fprintf(ccw_file, "%d", 0);
-	fflush(ccw_file);
+	fprintf(ccw_file_, "%d", 0);
+	fflush(ccw_file_);
 
 	// Enable clockwise input
-	fprintf(cw_file, "%d", 1);
-	fflush(cw_file);
+	fprintf(cw_file_, "%d", 1);
+	fflush(cw_file_);
 }
 
 // Set the motor to turn counter clockwise
 void Motor::setCounterClockwise()
 {
 	// Disable clockwise input
-	fprintf(cw_file, "%d", 0);
-	fflush(cw_file);
+	fprintf(cw_file_, "%d", 0);
+	fflush(cw_file_);
 
 	// Enable counter clockwise input
-	fprintf(ccw_file, "%d", 1);
-	fflush(ccw_file);
+	fprintf(ccw_file_, "%d", 1);
+	fflush(ccw_file_);
 }
 
-// Stops the motor
-void Motor::stop()
+// Sets the motor speed
+void Motor::setSpeed(float speed)
 {
-	// Disable clockwise input
-	fprintf(cw_file, "%d", 0);
-	fflush(cw_file);
-
-	// Disable counter clockwise input
-	fprintf(ccw_file, "%d", 0);
-	fflush(ccw_file);
+	// Clamp speed if neccesary
+	if (speed > maximum_speed_)
+	{
+		speed = maximum_speed_;
+	}
+	
+	// Escon 50/5 controller requires a duty cycle between 10% and 90%
+	// Therefore duty cycle (in %)  =  dc_min + (dc_max - dc_min) * speed / speed_max
+	*input_ = (float)(10.0f + 80.0f * speed / maximum_speed_);
 }
 
 // Sets the speed
@@ -118,27 +134,56 @@ void Motor::setValue(float value)
 	// If speed is positive
 	else if (value > 0)
 	{
-		// Set motor to turn clockwise
-		setClockwise();
+		// If upper limit has been reached
+		if (upper_->getValue() == 0)
+		{
+			std::cout << "Upper limit reached!" << std::endl;
+			// Stop motor
+			stop();
+		}
+		// If the motor is free to move up
+		else
+		{
+			// Set motor to turn clockwise
+			setClockwise();
 
+			// Set speed
+			setSpeed(value);
+		}
 	}
 	// If speed is negative
 	else
 	{	
-		// Set motor to turn counter clockwise	
-		setCounterClockwise();
+		// If lower limit has been reached
+		if (lower_->getValue() == 0)
+		{
+			std::cout << "Lower limit reached!" << std::endl;
+			// Stop motor
+			stop();
+		}
+		// If the motor is free to move down
+		else
+		{
+			// Set motor to turn counter clockwise	
+			setCounterClockwise();
 		
-		// Change polarity of speed
-		value = - value;
+			// Set positive speed
+			setSpeed(-value);
+		}
 	}
+}
 
-	// Clamp speed if neccesary
-	if (value > maximum_speed_)
-	{
-		value = maximum_speed_;
-	}
-	
-	// Escon 50/5 controller requires a duty cycle between 10% and 90%
-	// Therefore duty cycle (in %)  =  dc_min + (dc_max - dc_min) * speed / speed_max
-	*input_ = (float)(10.0f + 80.0f * value / maximum_speed_);
+// Stops the motor
+void Motor::stop()
+{
+	// Disable clockwise input
+	fprintf(cw_file_, "%d", 0);
+	fflush(cw_file_);
+
+	// Disable counter clockwise input
+	fprintf(ccw_file_, "%d", 0);
+	fflush(ccw_file_);
+
+	// Set Speed to 0
+	setSpeed(0);
 }

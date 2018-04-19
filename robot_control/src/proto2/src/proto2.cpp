@@ -1,18 +1,16 @@
 // Robot control
 #include "robot.h"
-#include "sensors.h"
 #include "tools.h"
-#include "pru.h"
 
-#include "proto1_controller.h"
+#include "proto2_controller.h"
 
 // System
 #include <iostream>					// std::cout, std::endl
 #include <unistd.h>
 
 // Physical parameters
-#define DISTANCE_PER_COUNT 0.000003		// 6 mm lead / (500 CPR * 4 quadrants)
-#define MAX_SPEED 1.2					// 12000 RPM * 6 mm = 1.2 m/s
+#define DISTANCE_PER_COUNT 0.00000686274	// (7 cm diameter * pi) / (5.1 gear ratio * 500 CPR * 4 quadrants)
+#define MAX_SPEED 3						// 12000 RPM * 7 cm diameter * pi / 5.1 gear ratio = 1.2 m/s
 
 // Checks whether provided arguments are correct
 bool checkArguments(int argc, char* argv[]) {
@@ -43,28 +41,33 @@ int main(int argc, char* argv[])
 		Robot::init(argv[1], std::stoi(argv[2]));
 
 		// Add actuators
-		Robot::addMotor("motor0", 1, 49, 15, MAX_SPEED, true);
+		Robot::addMotor("motor0", 1, 49, 15, MAX_SPEED, false);
 
 		// Add encoders
 		Robot::addEncoder("encoder0", 0, DISTANCE_PER_COUNT, true);
 
+		// Add hall sensors
+		Robot::addHallSensor("hall0", 66);
+		Robot::addHallSensor("hall1", 67);
+
+		// Set motor limits
+		Robot::setActuatorLimits("motor0", "hall0", "hall1");
+
 		// Create controllers
-		Proto1Controller* controller = new Proto1Controller(5.0f, 0.0f);
+		Proto2Controller* controller = new Proto2Controller(2.5f);
 
 		// Add Controllers
 		Robot::addController(controller, "motor0", "encoder0");
 
 		// Runs the robot
-		//Robot::run();
+		Robot::run();
 
-		Robot::addHallSensor("hall0", 66);
-
-		Robot::sampleSensors();
+		//Robot::sampleSensors();
 	}
 	else 
 	{
 		// Show fatal error
-		std::cout << "Please specify correct arguments: proto1 <user IP address> <user PC port>" << std::endl;
+		std::cout << "Please specify correct arguments: proto2 <user IP address> <user PC port>" << std::endl;
 
 		// Return failure status code
 		return EXIT_FAILURE;

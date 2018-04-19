@@ -2,8 +2,8 @@
 #define CONTROLLER_H
 
 // Robot control
-#include "actuator.h"	// Actuator
-#include "sensor.h"		// Sensor
+#include "actuators.h"	// Actuator
+#include "sensors.h"	// Sensor
 
 // System
 #include <vector>		// std::vector
