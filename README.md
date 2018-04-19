@@ -253,3 +253,22 @@ The following executables are helpful tools to assist in debugging:
           *(This executable has to be run as a super user, since it involves opening a global memory map.)*
 
 # Troubleshooting
+
+**I cannot run ROS Lunar, only other versions of ROS.**
+
+When it is not possible to run the Lunar distribution, it is worth a try to attempt to run the software with other distributions. I have heard it also worked with Kinetic.
+
+**I would like to change the functionality, how can I modify and run the code?**
+
+Feel free to change any file. Updates in ROS workspaces can be applied by running *catkin_make* in the workspace. Updates tot the *robot_control* package can be applied by running make in *vicon_control/robot_control*.
+
+**Marker detection seems unstable and unusable, how can I change this?**
+
+Current marker detection is simple and designed for low latency. It involves a simple first order motion estimation model: $x_{k + 1} = x_k + (x_k - x_{k - 1}) \Delta T$. Data association is achieved by linking the marker to it's closest neighbour within a threshold, as detected by the Vicon tracker system. To replace/improve this algorithm, replace the *ViconClient::getMarkers()* function in *vicon_control/vicon_workspace/src/vicon_tools/src/vicon_trools/clients.cpp*.
+
+**System X is not able to connect or not getting data from system Y**
+
+* Check the hardware, make sure the cables are properly connected
+* Make sure the IP address is set to the system you want to connect to
+* Make sure the ports of both systems are equal
+* Check the descriptions in [Setting up the connection](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection)

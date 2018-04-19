@@ -61,8 +61,6 @@ int main(int argc, char* argv[])
 
 		// Runs the robot
 		Robot::run();
-
-		//Robot::sampleSensors();
 	}
 	else 
 	{

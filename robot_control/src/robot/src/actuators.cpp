@@ -137,7 +137,6 @@ void Motor::setValue(float value)
 		// If upper limit has been reached
 		if (upper_->getValue() == 0)
 		{
-			std::cout << "Upper limit reached!" << std::endl;
 			// Stop motor
 			stop();
 		}
@@ -157,7 +156,6 @@ void Motor::setValue(float value)
 		// If lower limit has been reached
 		if (lower_->getValue() == 0)
 		{
-			std::cout << "Lower limit reached!" << std::endl;
 			// Stop motor
 			stop();
 		}
