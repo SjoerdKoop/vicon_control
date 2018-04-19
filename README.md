@@ -15,9 +15,22 @@ To achieve modularity of each package, several open source files have been added
 
 ## Target systems
 
+# Contents
+* [Overview](https://github.com/SjoerdKoop/vicon_control#overview)
+* [Setup](https://github.com/SjoerdKoop/vicon_control#setup)
+	* [Prerquisites](https://github.com/SjoerdKoop/vicon_control#prerequisites)
+	* [Installation](https://github.com/SjoerdKoop/vicon_control#installation)
+	* [Setting up the connection](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection)
+* [Usage](https://github.com/SjoerdKoop/vicon_control#usage)
+	* [Robot control design](https://github.com/SjoerdKoop/vicon_control#robot-control-design)
+	* [Vision control design](https://github.com/SjoerdKoop/vicon_control#vision-control-design)
+* [Communication](https://github.com/SjoerdKoop/vicon_control#communication)
+* [Executables](https://github.com/SjoerdKoop/vicon_control#executables)
+* [Troubleshooting](https://github.com/SjoerdKoop/vicon_control#troubleshooting)
+
 The four components have been designed for ROS Lunar running on Ubuntu 16.04. The *robot_control* package has scripts and generates binaries and firmware to be used on a [BeagleBone Black](https://beagleboard.org/black)
 
-## Overview
+# Overview
 
 The recommend setup scheme is shown below:
 
@@ -119,6 +132,8 @@ Furthermore, the *robot_gui* and *vicon_gui* plugins can be manually added to a 
 rqt -ht -s robot_gui
 rqt -ht -s vicon_gui
 ```
+
+## Robot control design
 
 ## Vision control design
 
@@ -231,3 +246,5 @@ The following executables are helpful tools to assist in debugging:
 	* `reference_client <user IP address> <user port>`
 	* `sudo write_shared_memory <index> <value>`\
           *(This executable has to be run as a super user, since it involves opening a global memory map.)*
+
+# Troubleshooting
