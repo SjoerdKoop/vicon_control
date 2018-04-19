@@ -150,7 +150,7 @@ Using this setup, all tasks are separated:
 
 ### Setting the pins
 
-The operating system can access the pin using the General Purpose Input/Output (GPIO) subsystem. This allows software running on the CPU to read/write the values and set the direction (input or output) of the pins. Changing the mode a specific pin can be achieved using *config-pin &lt;header&gt;_&lt;pin number&gt; &lt;mode&gt;*
+The operating system can access the pin using the General Purpose Input/Output (GPIO) subsystem. This allows software running on the CPU to read/write the values and set the direction (input or output) of the pins. Changing the mode a specific pin can be achieved using `config-pin <header>_<pin number> <mode>`
 
 # Usage
 
