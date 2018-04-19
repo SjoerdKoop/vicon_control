@@ -138,7 +138,7 @@ Make sure the PRU firmware exists and that the version coincides with your kerne
 
 <img src="http://beagleboard.org/static/images/cape-headers.png" width="440"> <img src="http://beagleboard.org/static/images/cape-headers-pru.png" width="440">
 
-Maximizing available resources (without disabling the onboard memory), PRU1 will be able to read from 6 encoders on pins 0 to 11 with a computation frequency of 833 kHz. Where the A and B pins of each encoder are being used.
+Maximizing available resources (without disabling the onboard memory), PRU1 will be able to read from 6 encoders on pins 0 to 11 with a computation frequency of ~833 kHz. Where the A and B pins of each encoder are being used.
 
 To achieve modularity, PRU0 is used to create PWM signals for motors attached to the encoder using 6 of the PRU0 pins. The PRU only generates the PWM signal for each motor, directional signals are given from the controller running on the main CPU.
 
