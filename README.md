@@ -336,6 +336,20 @@ Current marker detection is simple and designed for low latency. It involves a s
 
 Data association is achieved by linking the marker to it's closest neighbour within a threshold, as detected by the Vicon tracker system. To replace/improve this algorithm, replace the *ViconClient::getMarkers()* function in *vicon_control/vicon_workspace/src/vicon_tools/src/vicon_trools/clients.cpp*.
 
+**Permission denied when invoking a command**
+
+Run the command with *sudo*
+
+**I cannot write to the pinmux file when using the *robot_control/set_pins* script**
+
+Run the script with *sudo*
+
+**I cannot SSH into my BeagleBone Black**
+
+When using an USB connection, the BeagleBone Block creates two connections (192.168.6.2 and 192.168.7.2). Make sure that you **are not** using the [Vicon configuration](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection) for this specific connection.
+
+When using an ethernet connection connected to the main switch of the Vicon system, make sure that you **are** using the [Vicon configuration](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection) for this specific connection.
+
 **System X is not able to connect or not getting data from system Y**
 
 * Check the hardware, make sure the cables are properly connected
