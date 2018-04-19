@@ -26,6 +26,9 @@ int main(int argc, char* argv[])
 	// In this case, the subscriber to object_update in VisionControl
 	ros::spin();
 
+	// Terminate VisionControl namespace
+	Vision::terminate();
+
 	// Return standard exit code
 	return EXIT_SUCCESS;
 }
