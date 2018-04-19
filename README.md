@@ -195,6 +195,12 @@ On the BeagleBone Black, execute the following steps:
 * `sudo ./copy_firmware`: Copies the PRU firmware to the system's firmware library. This has to be done whenever there is new or updated firmware
 * `sudo ./start_pru`: (Re)starts the PRU's. This has to be done whenever the PRU's have to be started or reset.
 
+Finally, the controller can be run with:
+
+```
+sudo bin/<your_program_name> <argument0> <argument1> ...
+```
+
 ## Robot control design
 
 ## Vision control design
