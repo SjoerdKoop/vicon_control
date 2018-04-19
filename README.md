@@ -191,9 +191,9 @@ The firmware to run on the PRU's is defined in *robot_control/start_pru*. **Chan
 
 On the BeagleBone Black, execute the following steps:
 
-* `sudo ./set_pins`: Sets the pins with the *set_pins* script in your user's home directory. This has to be done on each startup and when this file is edited
+* `sudo ./set_pins`: Sets the mode of the pins. This has to be done on each startup and when this file is edited
 * `sudo ./copy_firmware`: Copies the PRU firmware to the system's firmware library. This has to be done whenever there is new or updated firmware
-* `sudo ./start_pru`: Starts the PRU's, resetting values. This has to be done whenever the PRU's have to be started or reset.
+* `sudo ./start_pru`: (Re)starts the PRU's. This has to be done whenever the PRU's have to be started or reset.
 
 ## Robot control design
 
