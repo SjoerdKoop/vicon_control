@@ -30,7 +30,7 @@ The four components have been designed for ROS Lunar running on Ubuntu 16.04. Th
 	* [ROS: data_update](https://github.com/SjoerdKoop/vicon_control#ros-data_update)
 	* [ROS: object_update](https://github.com/SjoerdKoop/vicon_control#ros-object_update)
 	* [ROS: reference_update](https://github.com/SjoerdKoop/vicon_control#ros-reference_update)
-	* [UDP: reference](https://github.com/SjoerdKoop/vicon_control#reference)
+	* [UDP: reference](https://github.com/SjoerdKoop/vicon_control#udp-reference)
 	* [UDP: sensor data](https://github.com/SjoerdKoop/vicon_control#udp-sensor-data)
 * [Executables](https://github.com/SjoerdKoop/vicon_control#executables)
 * [Troubleshooting](https://github.com/SjoerdKoop/vicon_control#troubleshooting)
