@@ -118,7 +118,8 @@ auto <device>
 
 ## BeagleBone Black specific settings
 
-<img src="http://beagleboard.org/static/images/cape-headers.png" width="400"> <img src="http://beagleboard.org/static/images/cape-headers-pru.png" width="400">
+<img src="http://beagleboard.org/static/images/cape-headers.png" width="425"> <img src="http://beagleboard.org/static/images/cape-headers-pru.png" width="425">
+
 # Usage
 
 For documentation on running single nodes from a terminal, please refer to [Executables](https://github.com/SjoerdKoop/vicon_control#executables).
