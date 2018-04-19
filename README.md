@@ -126,7 +126,7 @@ Controllers should inherit from *VisionController* and should override the *obje
 
 # Communication
 
-As shown in the general scheme, communication is an integral part connecting all the subsystems. Communication from the cameras to the Vicon Tracker, and from the Vicon Tracker to the user pc is predefined by Vicon. Therefore, four additional communication instances between nodes are defined. Additionally, *[visualization_msgs/Marker](http://docs.ros.org/api/visualization_msgs/html/msg/Marker.html)* messages are send over the topic *marker_update* in the Vicon GUI to generate markers in the rviz screen. Finally, *[robot_tools/data_update_array](https://github.com/SjoerdKoop/vicon_control#ros-data_update)* messages are send over the topic *data_update* in the robot GUI. The latter might be useful to use when the vision controller should respond to sensor data.
+As shown in the general scheme, communication is an integral part connecting all the subsystems. Communication from the cameras to the Vicon Tracker, and from the Vicon Tracker to the user pc is predefined by Vicon. Therefore, four additional communication instances between nodes are defined. Additionally, *[visualization_msgs/Marker](http://docs.ros.org/api/visualization_msgs/html/msg/Marker.html)* messages are send over the topic *marker_update* in the Vicon GUI to generate markers in the rviz screen. Finally, *robot_tools/data_update_array* messages are send over the topic *[data_update](https://github.com/SjoerdKoop/vicon_control#ros-data_update)* in the robot GUI. The latter might be useful to use when the vision controller should respond to sensor data.
 
 ## ROS: data_update
 
