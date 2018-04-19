@@ -118,7 +118,7 @@ auto <device>
 
 ## BeagleBone Black specific settings
 
-![BeagleBone Black normal pin modes](http://beagleboard.org/static/images/cape-headers.png) ![BeagleBone Black PRU pins](http://beagleboard.org/static/images/cape-headers-pru.png)
+![BeagleBone Black normal pin modes](http://beagleboard.org/static/images/cape-headers.png | width=100) ![BeagleBone Black PRU pins](http://beagleboard.org/static/images/cape-headers-pru.png | width=100)
 
 # Usage
 
