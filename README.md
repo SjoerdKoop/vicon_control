@@ -185,7 +185,7 @@ rqt -ht -s vicon_gui
 
 After installing the *robot_control* package, directories *robot_control/bin* and *robot_control/firmware* are populated with programs. These programs, together with the scripts defined in *robot_control/bbb_scripts* can be send to the robot using *robot_control/send_files*. **Replace the IP address and "jurp" with your BeagleBoneBlack user if needed.**
 
-The firmware to run on the PRU's is defined in *robot_control/bbb_scripts/start_pru*. **Change *PRU0FW* and *PRU1FW* if needed.**
+The firmware of the PRU's is defined in *robot_control/bbb_scripts/start_pru*. **Change *PRU0FW* and *PRU1FW* if needed.**
 
 ### On the BeagleBone Black
 
