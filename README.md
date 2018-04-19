@@ -23,7 +23,7 @@ The four components have been designed for ROS Lunar running on Ubuntu 16.04. Th
 	* [Prerquisites](https://github.com/SjoerdKoop/vicon_control#prerequisites)
 	* [Installation](https://github.com/SjoerdKoop/vicon_control#installation)
 	* [Setting up the connection](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection)
-	* [BeagleBone Black specific settings](ttps://github.com/SjoerdKoop/vicon_control#beaglebone-black-specific-settings)
+	* [BeagleBone Black specific settings](https://github.com/SjoerdKoop/vicon_control#beaglebone-black-specific-settings)
 * [Usage](https://github.com/SjoerdKoop/vicon_control#usage)
 	* [ROS workspaces](https://github.com/SjoerdKoop/vicon_control#ros-workspaces)
 	* [Robot control](https://github.com/SjoerdKoop/vicon_control#robot-control)
