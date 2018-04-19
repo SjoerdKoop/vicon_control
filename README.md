@@ -103,7 +103,7 @@ Currently, the Vicon Tracker PC has an IP address of 192.168.10.1 and is sending
 
 ### Robot
 
-On the BeagleBoneBlack, network configuration is done by editing the */etc/network/interfaces* file. A proper static IP address on the same subnet can be set by appending the settings below to the file. The placeholder &lt;device&gt; should be set to the communication device that connects to the user's network (can be checked with *ifconfig*). The value *x* should be set so that it is not the same IP address as the user PC or Vicon Tracker PC.
+On the BeagleBoneBlack, network configuration is done by editing the */etc/network/interfaces* file. A proper static IP address on the same subnet can be set by appending the settings below to the file. The placeholder &lt;device&gt; should be set to the communication device that connects to the user's network (can be checked with *ifconfig*). The value *x* should be set so that it is not the same IP address as the user PC or Vicon Tracker PC. Any other embedded systems should have similar methods to change these settings.
 
 ```
 ## Set static <device> ip address
@@ -118,7 +118,7 @@ auto <device>
 
 ## BeagleBone Black specific settings
 
-
+![BeagleBone Black normal pin modes](http://beagleboard.org/static/images/cape-headers.png) ![BeagleBone Black PRU pins](http://beagleboard.org/static/images/cape-headers-pru.png)
 
 # Usage
 
