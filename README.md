@@ -97,7 +97,28 @@ auto <device>
 
 # Usage
 
-For documentation on running nodes from a terminal, please refer to [Executables](https://github.com/SjoerdKoop/vicon_control#executables)
+For documentation on running single nodes from a terminal, please refer to [Executables](https://github.com/SjoerdKoop/vicon_control#executables).
+
+The Robot GUI, Vicon GUI and the vision controller can be run simultaneously by invoking *start*. This is the recommended method to use if all three nodes are required.
+
+```
+vicon_control/start
+```
+
+This script calls roslauch and includes the launch files from their corresponding packages. These launch files can also be run seperately, which is the recommended method when not all nodes are required:
+
+```
+roslaunch robot_gui robot_gui.launch
+roslaunch vicon_gui vicon_gui.launch
+roslaunch vision_control vision_control.launch
+```
+
+Furthermore, the *robot_gui* and *vicon_gui* plugins can be manually added to a rqt window by running `rqt` (they are located under *Plugins/Visualization*) or as a standalone window with:
+
+```
+rqt -ht -s robot_gui
+rqt -ht -s vicon_gui
+```
 
 ## Vision control design
 
@@ -163,17 +184,24 @@ Since a string can have variable length, a consensus has to be made between the 
 
 # Executables
 
-The software packets create several useful command line tools for debugging or running without a GUI. Usage of these tools is described below:
+The software packets create several useful command line programs for debugging or running without a GUI or without launch files. The following executables define the functionality of the subsystems:
 
-* Vicon workspace tools (vicon_tools): These tools are executables that connect to a Vicon datastream at a given IP address and port.
+
+* Vicon workspace tools (vicon_tools): These executables connect to a Vicon datastream at a given IP address and port.
 	* `rosrun vicon_tools dual <Vicon datastream IP address> <Vicon datastream port> <number of markers>`
 	* `rosrun vicon_tools markers <Vicon datastream IP address> <Vicon datastream port> <number of markers>`
 	* `rosrun vicon_tools objects <Vicon datastream IP address> <Vicon datastream port>`
+* Vision Control: Runs the vision controller
+	* `rosrun vision_control vision_control`
+* Robot Workspace tools (robot_tools):  This executable connects to a robot at a given IP address and port.
+	* `rosrun robot_tools communicate <robot IP address> <robot port>`
+
+The following executables are helpful tools to assist in debugging:
+
 * Vision control tools (vision_control_tools): These tools print object updates and send reference updates.
 	* `rosrun vision_control_tools object_subscriber`
 	* `rosrun vision_control_tools reference_publisher` 
-* Robot Workspace tools (robot_tools): These tools consist of executables that communicate with or allows the user to send a set reference the robot at a given IP address and port and an executable that prints data updates.
-	* `rosrun robot_tools communicate <robot IP address> <robot port>`
+* Robot Workspace tools (robot_tools): These tools allow the user to send a set reference the robot at a given IP address and port and print data updates.
 	* `rosrun robot_tools data_subscriber`
 	* `rosrun robot_tools send_reference <robot IP address> <robot port>`
 * Robot control tools: These tools are to be run on the robot. They consist of a server of data updates and a listener to reference updates from a specific host at a given IP address and port and a tool that samples the shared memory with the PRU and prints the current data at an index.
