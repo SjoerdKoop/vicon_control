@@ -152,7 +152,7 @@ Using this setup, all tasks are separated:
 
 The operating system can access the pin using the General Purpose Input/Output (GPIO) subsystem. This allows software running on the CPU to read/write the values and set the direction (input or output) of the pins. Changing the direction of a specific pin can be achieved using `echo <direction> /sys/class/gpio/gpio_<Kernel ID>/direction`. Changing the mode a specific pin can be achieved using `config-pin <header>_<pin number> <mode>`. Information of a pin can be retreived with `config-pin -i <header>_<pin_number>`. 
 
-Changing the pins is not persitent, rebooting will change them back to their default setting. Therefore, good practice is to save your configuration as a script. Doing that, reboots would only require you to run the script. Since the pin files are owned by root, **running your command with sudo is required**.
+Changing the pins is not persistent, rebooting will change them back to their default setting. Therefore, good practice is to save your configuration as a script. Doing that, reboots would only require you to run the script. Since the pin files are owned by root, **it is required to run your script with sudo**.
 
 # Usage
 
@@ -182,6 +182,18 @@ rqt -ht -s vicon_gui
 ```
 
 ## Robot control
+
+After installing the *robot_control* package, directories *robot_control/bin* and *robot_control/firmware* are populated with programs. These programs, together with the scripts defined in *robot_control/bbb_scripts* can be send to the robot using *robot_control/send_files*. **Replace the IP address and "jurp" with your BeagleBoneBlack user if needed.**
+
+The firmware to run on the PRU's is defined in *robot_control/start_pru*. Change *PRU0FW* and *PRU1FW* if needed.
+
+### On the BeagleBone Black
+
+On the BeagleBone Black, execute the following steps:
+
+* `sudo ./set_pins`: Sets the pins with the *set_pins* script in your user's home directory. This has to be done on each startup and when this file is edited
+* `sudo ./copy_firmware`: Copies the PRU firmware to the system's firmware library. This has to be done whenever there is new or updated firmware
+* `sudo ./start_pru`: Starts the PRU's, resetting values. This has to be done whenever the PRU's have to be started or reset.
 
 ## Robot control design
 
