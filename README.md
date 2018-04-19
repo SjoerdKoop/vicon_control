@@ -264,7 +264,7 @@ Feel free to change any file. Updates in ROS workspaces can be applied by runnin
 
 **Marker detection seems unstable and unusable, how can I change this?**
 
-Current marker detection is simple and designed for low latency. It involves a simple first order motion estimation model: $x_{k + 1} = x_k + (x_k - x_{k - 1}) \Delta T$. (x_%7Bk+%2B+1%7D+%3D+x_k+%2B+%28x_k+-+x_%7Bk+-+1%7D%29+%5CDelta+T%0D%0A) Data association is achieved by linking the marker to it's closest neighbour within a threshold, as detected by the Vicon tracker system. To replace/improve this algorithm, replace the *ViconClient::getMarkers()* function in *vicon_control/vicon_workspace/src/vicon_tools/src/vicon_trools/clients.cpp*.
+Current marker detection is simple and designed for low latency. It involves a simple first order motion estimation model: [Prediction Formula](http://latex.codecogs.com/svg.latex?x_%7Bk%2B1%7D%3Dx_k%2B%28x_k-x_%7Bk-1%7D%29%5CDelta%5C+t). Data association is achieved by linking the marker to it's closest neighbour within a threshold, as detected by the Vicon tracker system. To replace/improve this algorithm, replace the *ViconClient::getMarkers()* function in *vicon_control/vicon_workspace/src/vicon_tools/src/vicon_trools/clients.cpp*.
 
 **System X is not able to connect or not getting data from system Y**
 
