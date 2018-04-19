@@ -1,0 +1,4 @@
+<launch>
+	<!-- Vicon GUI -->
+	<node name="vicon_gui" type="rqt_gui" pkg="rqt_gui" args="-f -ht -l -s vicon_gui"/>
+</launch>

@@ -7,7 +7,7 @@ add_compile_options(-std=c++11)
 
 
 ## Find catkin macros and libraries
-find_package(catkin REQUIRED COMPONENTS roscpp vision_control_tools)
+find_package(catkin REQUIRED COMPONENTS roscpp roslaunch vision_control_tools)
 
 
 ## Specify additional locations of header files

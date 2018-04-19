@@ -10,6 +10,7 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
 	robot_peer
 	roscpp
+	roslaunch
 	rqt_gui
 	rqt_gui_cpp
 )

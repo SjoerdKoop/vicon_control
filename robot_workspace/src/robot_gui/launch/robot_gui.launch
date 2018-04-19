@@ -1,0 +1,4 @@
+<launch>
+	<!-- Robot GUI -->
+	<node name="robot_gui" type="rqt_gui" pkg="rqt_gui" args="-f -ht -l -s robot_gui"/>
+</launch>

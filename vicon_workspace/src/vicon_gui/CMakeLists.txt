@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
 	vicon_peer
 	vicon_visualizer
 	roscpp
+	roslaunch
 	rqt_gui
 	rqt_gui_cpp
 )

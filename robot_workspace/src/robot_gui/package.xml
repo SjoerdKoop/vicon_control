@@ -13,6 +13,7 @@
 
 	<!-- Build dependencies -->
 	<build_depend>roscpp</build_depend>
+	<build_depend>roslaunch</build_depend>
 	<build_depend>rqt_gui</build_depend>
 	<build_depend>rqt_gui_cpp</build_depend>
 	<build_depend>robot_peer</build_depend>

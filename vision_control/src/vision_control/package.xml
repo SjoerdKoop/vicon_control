@@ -13,6 +13,7 @@
 
 	<!-- Build dependencies -->
 	<build_depend>roscpp</build_depend>
+	<build_depend>roslaunch</build_depend>
 	<build_depend>vision_control_tools</build_depend>
 	<build_export_depend>vision_control_tools</build_export_depend>
 

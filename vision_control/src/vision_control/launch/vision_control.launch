@@ -1,0 +1,4 @@
+<launch>
+	<!-- Vision Controller -->
+	<node name="vision_control" type="vision_control" pkg="vision_control"/>
+</launch>
