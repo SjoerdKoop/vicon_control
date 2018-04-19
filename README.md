@@ -99,13 +99,13 @@ auto <device>
 
 For documentation on running single nodes from a terminal, please refer to [Executables](https://github.com/SjoerdKoop/vicon_control#executables).
 
-The Robot GUI, Vicon GUI and the vision controller can be run simultaneously by invoking *start*. This is the recommended method to use if all three nodes are required.
+The Robot GUI, Vicon GUI and vision controller can be run simultaneously by invoking *start*. This is the recommended method to use if all three nodes are required.
 
 ```
 vicon_control/start
 ```
 
-This script calls roslauch and includes the launch files from their corresponding packages. These launch files can also be run seperately, which is the recommended method when not all nodes are required:
+This script calls *roslauch* and includes the launch files from their corresponding packages. These launch files can also be run seperately, which is the recommended method when not all nodes are required:
 
 ```
 roslaunch robot_gui robot_gui.launch
@@ -124,14 +124,34 @@ rqt -ht -s vicon_gui
 
 Controllers should inherit from *VisionController* and should override the *objectsToReference* function. An example implementation can be seen as the example controller in the package *vision_control*.
 
-
 # Communication
 
-As shown in the general scheme, communication is an integral part connecting all the subsystems. Communication from the cameras to the Vicon Tracker, and from the Vicon Tracker to the user pc is predefined by Vicon. Therefore, four additional communication instances are defined.
+As shown in the general scheme, communication is an integral part connecting all the subsystems. Communication from the cameras to the Vicon Tracker, and from the Vicon Tracker to the user pc is predefined by Vicon. Therefore, four additional communication instances between nodes are defined. Additionally, *[visualization_msgs/Marker](http://docs.ros.org/api/visualization_msgs/html/msg/Marker.html)* messages are send over the topic *marker_update* in the Vicon GUI to generate markers in the rviz screen. Finally, *robot_tools/data_update_array* messages are send over the topic *data_update* in the robot GUI. The latter might be useful to use when the vision controller should respond to sensor data.
+
+## ROS: data_update
+
+To communicate from the robot peer to the data vsiualization, a *data_update_array* message is send over the topic *data_update*. This message consist of and array of *data_update*:
+
+```
+robot_tools/data_update_array.msg
+---------------------------------
+data_update[] updates
+```
+
+Where a *data_update* is defined by a name and a value:
+
+```
+robot_tools/data_update.msg 
+---------------------------
+string name
+float32 value
+```
+
+The name will be the name given to the sensor on the robot.
 
 ## ROS: object_update
 
-To communicate from the Vicon workspace to the vision controller, a *ros_object_array* message is send over topic *object_update*. This message consist of and array of *ros_object*:
+To communicate from the Vicon workspace to the vision controller, a *ros_object_array* message is send over the topic *object_update*. This message consist of and array of *ros_object*:
 
 ```
 vicon_tools/ros_object_array.msg
