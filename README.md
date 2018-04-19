@@ -326,6 +326,12 @@ The following executables are helpful tools to assist in debugging:
 
 When it is not possible to run the Lunar distribution, it is worth a try to attempt to run the software with other distributions. I have heard it also worked with Kinetic.
 
+**I cannot SSH into my BeagleBone Black**
+
+When using an USB connection, the BeagleBone Block creates two connections (192.168.6.2 and 192.168.7.2). Make sure that you **are not** using the [Vicon configuration](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection) for this specific connection.
+
+When using an ethernet connection connected to the main switch of the Vicon system, make sure that you **are** using the [Vicon configuration](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection) for this specific connection.
+
 **System X is not able to connect or not getting data from system Y**
 
 * Check the hardware, make sure the cables are properly connected
@@ -354,9 +360,3 @@ Run the script with *sudo*
 **PX_YY pinmux file not found when setting pin mode**
 
 This means that the mode is not available for the pin. If it involves a PRU pin, check [Using the PRU](https://github.com/SjoerdKoop/vicon_control#using-the-pru).
-
-**I cannot SSH into my BeagleBone Black**
-
-When using an USB connection, the BeagleBone Block creates two connections (192.168.6.2 and 192.168.7.2). Make sure that you **are not** using the [Vicon configuration](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection) for this specific connection.
-
-When using an ethernet connection connected to the main switch of the Vicon system, make sure that you **are** using the [Vicon configuration](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection) for this specific connection.
