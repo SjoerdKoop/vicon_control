@@ -23,8 +23,10 @@ The four components have been designed for ROS Lunar running on Ubuntu 16.04. Th
 	* [Prerquisites](https://github.com/SjoerdKoop/vicon_control#prerequisites)
 	* [Installation](https://github.com/SjoerdKoop/vicon_control#installation)
 	* [Setting up the connection](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection)
+	* [BeagleBone Black specific settings](ttps://github.com/SjoerdKoop/vicon_control#beaglebone-black-specific-settings)
 * [Usage](https://github.com/SjoerdKoop/vicon_control#usage)
 	* [ROS workspaces](https://github.com/SjoerdKoop/vicon_control#ros-workspaces)
+	* [Robot control](https://github.com/SjoerdKoop/vicon_control#robot-control)
 	* [Robot control design](https://github.com/SjoerdKoop/vicon_control#robot-control-design)
 	* [Vision control design](https://github.com/SjoerdKoop/vicon_control#vision-control-design)
 * [Communication](https://github.com/SjoerdKoop/vicon_control#communication)
@@ -114,6 +116,10 @@ auto <device>
         dns-nameserver 8.8.4.4
 ```
 
+## BeagleBone Black specific settings
+
+
+
 # Usage
 
 For documentation on running single nodes from a terminal, please refer to [Executables](https://github.com/SjoerdKoop/vicon_control#executables).
@@ -140,6 +146,8 @@ Furthermore, the *robot_gui* and *vicon_gui* plugins can be manually added to a 
 rqt -ht -s robot_gui
 rqt -ht -s vicon_gui
 ```
+
+## Robot control
 
 ## Robot control design
 
