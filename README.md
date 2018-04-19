@@ -118,7 +118,7 @@ auto <device>
 
 ## BeagleBone Black specific settings
 
-<img src="http://beagleboard.org/static/images/cape-headers.png" width="445"> <img src="http://beagleboard.org/static/images/cape-headers-pru.png" width="445">
+<img src="http://beagleboard.org/static/images/cape-headers.png" width="440"> <img src="http://beagleboard.org/static/images/cape-headers-pru.png" width="440">
 
 # Usage
 
