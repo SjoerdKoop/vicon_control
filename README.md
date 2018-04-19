@@ -127,11 +127,11 @@ Since most PRU pins coincide with pins of the video subsystem (as can be seen in
 ```
 /boot/uEnv.txt
 --------------
-.
+...
 disable_uboot_overlay_video=1
-.
+...
 uboot_overlay_pru=/lib/firmware/AM335X-PRU-RPROC-4-9-TI-00A0.dtbo
-.
+...
 ```
 
 Make sure the PRU firmware exists and that the version coincides with your kernel version (check with *uname -r*). Reboot to apply the changes.
