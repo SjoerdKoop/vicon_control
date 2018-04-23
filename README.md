@@ -220,7 +220,7 @@ sudo bin/<program_name> <argument0> <argument1> ...
 
 ## Vision control design
 
-Controllers should inherit from *VisionController* and should override the *objectsToReference* function. An example implementation can be seen as the example controller in the package *vision_control*. Afterwards create an instance of your controller in the main file and initialize with your controller. In summary:
+Controllers should inherit from *VisionController* and should override the *objectsToReference* function. An example implementation can be seen as the example controller in the package *vision_control*. Afterwards create an instance of your controller in the main file and initialize with your controller. Finally the source file has to be added to the executable in the *CMakeLists.txt*. In summary:
 
 * Create &lt;your_controller&gt;.h in *vision_control/src/vision_control/include/vision_control* and &lt;your_controller&gt;.cpp in *vision_control/src/vision_control/src/vision_control*
 * In header file:
@@ -230,9 +230,9 @@ Controllers should inherit from *VisionController* and should override the *obje
 * Define functionality of your controller in *objectsToReference* in your controller's source file.
 * In the main source file (*vision_control.cpp*):
 	* Include the header file for your controller
-	* Create an instance of your controller with *new* and supply parameters for your controller
-	* Initialize the *Vision* namespace with your controller (call *Vision::init(&lt;your_controller_variable&gt;))
-
+	* Create an instance of your controller with *new* and supply parameters for your controller (example can be removed)
+	* Initialize the *Vision* namespace with your controller (call *Vision::init(&lt;your_controller_variable&gt;)*)
+* In the *CmakeLists.txt*, add your controller's source file to the *add_executable(vision_control)* command (example can be removed)
 
 # Communication
 
