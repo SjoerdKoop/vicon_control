@@ -378,4 +378,4 @@ This means that the mode is not available for the pin. If it involves a PRU pin,
 
 **My markers are always at the origin**
 
-Make sure to **turn off* tracking(*Track* button should not be green) for each object that is enabled in the Vicon Tracker.
+Make sure to **turn off** tracking (*Track* button should not be green) for each object that is enabled in the Vicon Tracker.
