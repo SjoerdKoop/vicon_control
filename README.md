@@ -218,9 +218,27 @@ sudo bin/<program_name> <argument0> <argument1> ...
 
 ## Robot control design
 
+Robot controllers should inherit from *RobotController* and should override the *control* function. An example implementation of a robot can be seen in *robot_control/src/example_robot*. Actuators, sensors and controllers are added in the main file *example_robot.cpp*. Finally the *Makefile* has be be set up. In summary:
+
+* Create &lt;your_robot&gt;.h in *robot_control/src/&lt;your_robot&gt;/include/* and &lt;your_robot&gt;.cpp in *robot_control/src/&lt;your_robot&gt;/src/*
+* In the controller header file:
+	* Include the header file for *RobotController*
+	* Inherit from *RobotController*
+	* Override the *control* function
+* Define functionality of your controller in *control* in your controller's source file.
+* In the main source file (*example_robot.cpp*):
+	* Include the header file for your controller
+	* Add actuators and sensors with set parameters (name, pins, memory location, etc)
+	* Create an instance of your controller with *new* and supply parameters for your controller (remove example)
+	* Add your controller (call *Robot::addController(&lt;your_controller_variable&gt;, &lt;actuator_name&gt;, &lt;sensor_name&gt;)*)
+* In the *Makefile*, add the source and header files and create a make target for your executable. See example *Makefile* for details
+* In the base *Makefile* (*robot_control/Makefile*), add an entry for your robot if it should build when invoking make in the base directory (not required)
+
+The software is designed so that one controller, controls one actuator-sensor pair. Separate controllers for multiple pairs can be created and added using the same method. Additional actuators and sensors should be defined in the *actuators.cpp/actuators.h* and *sensors.cpp/sensors.h* in *robot_control/src/components* respectively. Make sure to remake the *components* project afterwards. Adding these new actuators and sensors can be achieved by adding functions to the *Robot* namespace defined in *robot.cpp/robot.h* in *robot_control/src/robot*.
+
 ## Vision control design
 
-Controllers should inherit from *VisionController* and should override the *objectsToReference* function. An example implementation can be seen as the example controller in the package *vision_control*. Afterwards create an instance of your controller in the main file and initialize with your controller. Finally the source file has to be added to the executable in the *CMakeLists.txt*. In summary:
+Vision controllers should inherit from *VisionController* and should override the *objectsToReference* function. An example implementation can be seen as the example controller in the package *vision_control*. Afterwards create an instance of your controller in the main file and initialize with your controller. Finally the source file has to be added to the executable in the *CMakeLists.txt*. In summary:
 
 * Create &lt;your_controller&gt;.h in *vision_control/src/vision_control/include/vision_control* and &lt;your_controller&gt;.cpp in *vision_control/src/vision_control/src/vision_control*
 * In header file:
