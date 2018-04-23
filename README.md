@@ -230,9 +230,9 @@ Controllers should inherit from *VisionController* and should override the *obje
 * Define functionality of your controller in *objectsToReference* in your controller's source file.
 * In the main source file (*vision_control.cpp*):
 	* Include the header file for your controller
-	* Create an instance of your controller with *new* and supply parameters for your controller (example can be removed)
+	* Create an instance of your controller with *new* and supply parameters for your controller (remove example)
 	* Initialize the *Vision* namespace with your controller (call *Vision::init(&lt;your_controller_variable&gt;)*)
-* In the *CmakeLists.txt*, add your controller's source file to the *add_executable(vision_control)* command (example can be removed)
+* In the *CmakeLists.txt*, add your controller's source file to the *add_executable(vision_control)* command (remove example)
 
 # Communication
 
