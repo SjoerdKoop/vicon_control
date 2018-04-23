@@ -2,9 +2,10 @@
 #include "robot.h"
 
 // System
-#include <cstring>				// memcpy
-#include <iostream>				// std::cout, std::endl
-#include <unistd.h>				// usleep
+#include <cstring>			// memcpy
+#include <iostream>			// std::cout, std::endl
+#include <thread>			// std::thread
+#include <unistd.h>			// usleep
 
 // Tools
 #include "tools.h"				// messageToReference
@@ -75,8 +76,8 @@ namespace Robot
 		actuators.emplace(std::make_pair(name, motor));
 	}
 
-	// Adds a proportional controller
-	void addController(Controller* controller, std::string actuator_name, std::string sensor_name)
+	// Adds a controller
+	void addController(RobotController* controller, std::string actuator_name, std::string sensor_name)
 	{
 		// Set actuator and sensor and of the controller
 		controller->setActuator(actuators[actuator_name]);
@@ -135,7 +136,7 @@ namespace Robot
 		while (true)
 		{
 			// For each controller
-			for (Controller* controller : controllers)
+			for (RobotController* controller : controllers)
 			{	
 				// Run controller
 				controller->control(reference);

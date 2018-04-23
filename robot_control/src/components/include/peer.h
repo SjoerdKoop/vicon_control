@@ -1,5 +1,5 @@
-#ifndef PEER_H
-#define PEER_H
+#ifndef ROBOT_CONTROLPEER_H
+#define ROBOT_CONTROLPEER_H
 
 // System
 #include <arpa/inet.h>		// INADDR_ANY, sockaddr_in, socklen_t
@@ -10,6 +10,7 @@
 // Return value of receiveMessage function when message is invalid
 #define INVALID_MESSAGE 0x00
 
+// Class defining a peer
 class Peer {
 	public:
 		// Constructor
@@ -30,4 +31,4 @@ class Peer {
 		char* robotIP;						// Valid IP of the robot
 };
 
-#endif
+#endif // ROBOT_CONTROLPEER_H

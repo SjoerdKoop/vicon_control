@@ -1,6 +1,9 @@
 // Declarations
 #include "sensors.h"
 
+// System
+#include <string>		// std::string
+
 // Path of the GPIO devices
 #define GPIO_PATH "/sys/class/gpio"
 

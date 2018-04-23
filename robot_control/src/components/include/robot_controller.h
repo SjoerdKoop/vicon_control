@@ -1,5 +1,5 @@
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
+#ifndef ROBOT_CONTROL_ROBOT_CONTROLLER_H
+#define ROBOT_CONTROL_ROBOT_CONTROLLER_H
 
 // Robot control
 #include "actuators.h"	// Actuator
@@ -9,7 +9,7 @@
 #include <vector>		// std::vector
 
 // Class defining a controller
-class Controller
+class RobotController
 {
 	public:
 		// Control action
@@ -26,4 +26,4 @@ class Controller
 		Sensor* sensor_;		// Sensor
 };
 
-#endif // CONTROLLER_H
+#endif // ROBOT_CONTROL_ROBOT_CONTROLLER_H

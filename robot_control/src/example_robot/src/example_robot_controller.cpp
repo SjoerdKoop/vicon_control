@@ -1,18 +1,18 @@
 // Declarations
-#include "proto2_controller.h"
+#include "example_robot_controller.h"
 
 // Error threshold
 #define THRESHOLD 0.001
 
 // Constructor
-Proto2Controller::Proto2Controller(float p)
+ExampleRobotController::ExampleRobotController(float p)
 {
 	// Set propotional gain
 	p_ = p;
 }
 
 // Control action
-void Proto2Controller::control(std::vector<float> reference)
+void ExampleRobotController::control(std::vector<float> reference)
 {
 	float ref = reference[0];				// Position reference
 	float pos = sensor_->getValue();		// Position

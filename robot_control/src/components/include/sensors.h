@@ -2,10 +2,7 @@
 #define ROBOT_CONTROL_SENSORS_H
 
 // System
-#include <cstdio>		// FILE
-#include <iostream>
-#include <fstream>
-#include <string>
+#include <fstream>		// std::ifstream
 
 // Class defining a sensor
 class Sensor

@@ -6,19 +6,18 @@
 #include "pru.h"		// PRU
 
 // Robot
-#include "actuators.h"	// Actuator
-#include "controller.h"	// Controller
-#include "sensors.h"	// Sensor
+#include "actuators.h"			// Actuator
+#include "robot_controller.h"	// RobotController
+#include "sensors.h"			// Sensor
 
 // System
 #include <map>			// std::map
-#include <thread>		// std::thread
 #include <vector>		// std::vector
 
 namespace Robot
 {
 	static std::map<std::string, Actuator*> actuators;		// Actuators of the robot
-	static std::vector<Controller*> controllers;			// Controllers of the robot
+	static std::vector<RobotController*> controllers;		// Controllers of the robot
 	static Peer* peer;										// Peer
 	static PRU* pru;										// Intepretation of the PRU's
 	static std::vector<float> reference;					// Reference
@@ -36,8 +35,8 @@ namespace Robot
 	// Adds a motor
 	void addMotor(std::string name, int input_location, int ccw_pin, int cw_pin, float max_speed, bool invert);
 
-	// Adds a proportional controller
-	void addController(Controller* controller, std::string actuator_name, std::string sensor_name);
+	// Adds a controller
+	void addController(RobotController* controller, std::string actuator_name, std::string sensor_name);
 
 	// Main function of the receive thread
 	void mainReceive();

@@ -1,17 +1,15 @@
 // Declarations
-#include "controller.h"
-
-#include <iostream>
+#include "robot_controller.h"
 
 // Sets the actuator
-void Controller::setActuator(Actuator* actuator)
+void RobotController::setActuator(Actuator* actuator)
 {
 	// Set actuator
 	actuator_ = actuator;
 }
 
 // Sets the sensor
-void Controller::setSensor(Sensor* sensor)
+void RobotController::setSensor(Sensor* sensor)
 {
 	// Set sensor
 	sensor_ = sensor;

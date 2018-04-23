@@ -17,12 +17,12 @@ INCLUDE_DIRS = include ../components/include ../robot/include ../tools/include
 
 # Source files: add source files of targets
 # <NAME>_SRCS = src/<src1>.cpp src/<src2>.cpp ...
-PROTO1_SRCS = src/proto1.cpp src/proto1_controller.cpp
+EXAMPLE_SRCS = src/example_robot.cpp src/example_robot_controller.cpp
 
 # Library files: add library files of targets
 # For include libfile1, use -lfile1
 # <NAME>_LIBS = -lfile1 -lfile2 ...
-PROTO1_LIBS = -lrobot -ltools -lcomponents -lpthread
+EXAMPLE_LIBS = -lrobot -ltools -lcomponents -lpthread
 
 # Default target
 default: create clean
@@ -42,8 +42,8 @@ create:
 	@ # $(CXX) -c $(FLAGS) $(<name>_SRCS) -o <name>.o
 	@ # $(AR) crf $(LIB_PATH)/lib<name>.a -o <name>.o
 
-	@ # Create proto1 binary
-	@ $(CXX) $(FLAGS) $(PROTO1_SRCS) $(PROTO1_LIBS) -o $(BIN_PATH)/proto1
+	@ # Create example_robot binary
+	@ $(CXX) $(FLAGS) $(EXAMPLE_SRCS) $(EXAMPLE_LIBS) -o $(BIN_PATH)/example_robot
 
 # Clean target
 clean:

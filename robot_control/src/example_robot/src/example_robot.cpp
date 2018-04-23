@@ -1,18 +1,18 @@
-// Robot control
-#include "robot.h"
-#include "sensors.h"
-#include "tools.h"
-#include "pru.h"
+// Example robot
+#include "example_robot_controller.h"	// ExampleRobotController (your controller)
 
-#include "proto1_controller.h"
+// Robot control
+#include "robot.h"						// Robot::*	(always include)
+
+// Robot control tools
+#include "tools.h"						// isValidIp, isValidPort (include to check arguments)
 
 // System
-#include <iostream>					// std::cout, std::endl
-#include <unistd.h>
+#include <iostream>						// std::cout, std::endl	(include for user feedback)
 
 // Physical parameters
-#define DISTANCE_PER_COUNT 0.000003		// 6 mm lead / (500 CPR * 4 quadrants)
-#define MAX_SPEED 1.2					// 12000 RPM * 6 mm = 1.2 m/s
+#define DISTANCE_PER_COUNT 0.000003		// [m]
+#define MAX_SPEED 1.2					// [m/s]
 
 // Checks whether provided arguments are correct
 bool checkArguments(int argc, char* argv[]) {
@@ -49,22 +49,18 @@ int main(int argc, char* argv[])
 		Robot::addEncoder("encoder0", 0, DISTANCE_PER_COUNT, true);
 
 		// Create controllers
-		Proto1Controller* controller = new Proto1Controller(5.0f);
+		ExampleRobotController* controller = new ExampleRobotController(5.0f);
 
 		// Add Controllers
 		Robot::addController(controller, "motor0", "encoder0");
 
 		// Runs the robot
-		//Robot::run();
-
-		Robot::addHallSensor("hall0", 66);
-
-		Robot::sampleSensors();
+		Robot::run();
 	}
 	else 
 	{
 		// Show fatal error
-		std::cout << "Please specify correct arguments: proto1 <user IP address> <user PC port>" << std::endl;
+		std::cout << "Please specify correct arguments: example_robot <user IP address> <user PC port>" << std::endl;
 
 		// Return failure status code
 		return EXIT_FAILURE;

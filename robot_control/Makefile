@@ -17,6 +17,10 @@ default: .FORCE
 	@ echo "Making robot"
 	@ $(MAKE) $(FLAGS) src/robot
 
+	@ # Make example_robot
+	@ echo "Making example_robot"
+	@ $(MAKE) $(FLAGS) src/example_robot
+
 	@ # Make proto1
 	@ echo "Making proto1"
 	@ $(MAKE) $(FLAGS) src/proto1

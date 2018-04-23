@@ -17,10 +17,7 @@ INCLUDE_DIRS = include ../components/include ../tools/include
 
 # Source files: add source files of targets
 # <NAME>_SRCS = src/<src1>.cpp src/<src2>.cpp ...
-ACTUATOR_SRCS = src/actuators.cpp
-CONTROLLER_SRCS = src/controller.cpp
 ROBOT_SRCS = src/robot.cpp
-SENSOR_SRCS = src/sensors.cpp
 
 # Library files: add library files of targets
 # For include libfile1, use -lfile1
@@ -45,11 +42,8 @@ create:
 	@ # $(AR) crf $(LIB_PATH)/lib<name>.a -o <name>.o
 
 	@ # Create robot library
-	@ $(CXX) -c $(FLAGS) $(ACTUATOR_SRCS) -o actuators.o
-	@ $(CXX) -c $(FLAGS) $(CONTROLLER_SRCS) -o controller.o
 	@ $(CXX) -c $(FLAGS) $(ROBOT_SRCS) -o robot.o
-	@ $(CXX) -c $(FLAGS) $(SENSOR_SRCS) -o sensors.o
-	@ $(AR) crf $(LIB_PATH)/librobot.a -o actuators.o controller.o robot.o sensors.o
+	@ $(AR) crf $(LIB_PATH)/librobot.a -o robot.o
 	
 # Clean target
 clean:

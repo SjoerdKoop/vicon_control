@@ -2,10 +2,10 @@
 #define PROTO2_CONTROLLER_H
 
 // Robot
-#include "controller.h"
+#include "robot_controller.h"
 
 // Class defining the controller for prototype 1
-class Proto2Controller : public Controller
+class Proto2Controller : public RobotController
 {
 	public:
 		// Constructor

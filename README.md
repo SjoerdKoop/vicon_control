@@ -79,7 +79,7 @@ Currently, *PlotJuggler* requires installation of the ROS type introspection pac
 sudo apt-get install ros-lunar-ros-type-introspection
 ```
 
-Since *PlotJuggler* is third party software, dependencies may change over type. Always check the ROS installation instructions on the [*PlotJuggler* github](https://github.com/facontidavide/PlotJuggler).
+Since *PlotJuggler* is third party software, dependencies may change over time. Always check the ROS installation instructions on the [*PlotJuggler* github](https://github.com/facontidavide/PlotJuggler).
 
 ### Robot control
 
@@ -165,7 +165,7 @@ Using this setup, all tasks are separated:
 
 ### Setting the pins
 
-The operating system can access the pin using the General Purpose Input/Output (GPIO) subsystem. This allows software running on the CPU to read/write the values and set the direction (input or output) of the pins. Changing the direction of a specific pin can be achieved using `echo <direction> /sys/class/gpio/gpio_<Kernel ID>/direction`. Changing the mode a specific pin can be achieved using `config-pin <header>_<pin number> <mode>`. Information of a pin can be retreived with `config-pin -i <header>_<pin_number>`. 
+The operating system can access the pin using the General Purpose Input/Output (GPIO) subsystem. This allows software running on the CPU to read/write the values and set the direction (input or output) of the pins. Changing the direction of a specific pin can be achieved using `echo <direction> /sys/class/gpio/gpio<Kernel ID>/direction`. Changing the mode a specific pin can be achieved using `config-pin <header>_<pin number> <mode>`. Information of a pin can be retreived with `config-pin -i <header>_<pin_number>`. 
 
 Changing the pins is not persistent, rebooting will change them back to their default setting. Therefore, good practice is to save your configuration as a script. Doing that, reboots would only require you to run the script. Since the pin files are owned by root, **it is required to run the script with sudo**.
 

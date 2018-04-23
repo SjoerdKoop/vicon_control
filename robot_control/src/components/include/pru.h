@@ -1,6 +1,7 @@
-#ifndef PRU_H
-#define PRU_H
+#ifndef ROBOT_CONTROL_PRU_H
+#define ROBOT_CONTROL_PRU_H
 
+// Class defining the PRU subsystem
 class PRU {
 	public:
 		// Constructor
@@ -19,4 +20,4 @@ class PRU {
 		int* sharedMemory;
 };
 
-#endif
+#endif // ROBOT_CONTROL_PRU_H
