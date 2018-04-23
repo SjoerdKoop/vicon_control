@@ -220,7 +220,19 @@ sudo bin/<program_name> <argument0> <argument1> ...
 
 ## Vision control design
 
-Controllers should inherit from *VisionController* and should override the *objectsToReference* function. An example implementation can be seen as the example controller in the package *vision_control*.
+Controllers should inherit from *VisionController* and should override the *objectsToReference* function. An example implementation can be seen as the example controller in the package *vision_control*. Afterwards create an instance of your controller in the main file and initialize with your controller. In summary:
+
+* Create &lt;your_controller&gt;.h in *vision_control/src/vision_control/include/vision_control* and &lt;your_controller&gt;.cpp in *vision_control/src/vision_control/src/vision_control*
+* In header file:
+	* Include the header file for *VisionController*
+	* Inherit from *VisionController*
+	* Overrirde the *objectsToReference* function
+* Define functionality of your controller in *objectsToReference* in your controller's source file.
+* In the main source file (*vision_control.cpp*):
+	* Include the header file for your controller
+	* Create an instance of your controller with *new* and supply parameters for your controller
+	* Initialize the *Vision* namespace with your controller (call *Vision::init(&lt;your_controller_variable&gt;))
+
 
 # Communication
 
