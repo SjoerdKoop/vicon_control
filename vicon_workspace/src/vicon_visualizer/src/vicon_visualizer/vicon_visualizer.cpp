@@ -104,6 +104,9 @@ void ViconVisualizer::pauseButtonPressed()
 // Fires when the reset button is pressed
 void ViconVisualizer::resetButtonPressed()
 {
+	// Clear stored ID map
+	Visualization::id_map.clear();
+
 	// Reset markers
 	markers_->reset();
 }
