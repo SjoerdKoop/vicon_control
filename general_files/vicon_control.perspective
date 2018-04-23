@@ -1,0 +1,84 @@
+{
+  "keys": {},
+  "groups": {
+    "pluginmanager": {
+      "keys": {
+        "running-plugins": {
+          "type": "repr",
+          "repr": "{u'vicon_gui/ViconGUI': [1], u'robot_gui/RobotGUI': [1]}"
+        }
+      },
+      "groups": {
+        "plugin__vicon_gui__ViconGUI__1": {
+          "keys": {},
+          "groups": {
+            "dock_widget__widget": {
+              "keys": {
+                "dockable": {
+                  "type": "repr",
+                  "repr": "True"
+                },
+                "parent": {
+                  "type": "repr",
+                  "repr": "None"
+                },
+                "dock_widget_title": {
+                  "type": "repr",
+                  "repr": "u'Vicon GUI'"
+                }
+              },
+              "groups": {}
+            }
+          }
+        },
+        "plugin__robot_gui__RobotGUI__1": {
+          "keys": {},
+          "groups": {
+            "dock_widget__widget": {
+              "keys": {
+                "dockable": {
+                  "type": "repr",
+                  "repr": "True"
+                },
+                "parent": {
+                  "type": "repr",
+                  "repr": "None"
+                },
+                "dock_widget_title": {
+                  "type": "repr",
+                  "repr": "u'Robot GUI'"
+                }
+              },
+              "groups": {}
+            }
+          }
+        }
+      }
+    },
+    "mainwindow": {
+      "keys": {
+        "geometry": {
+          "type": "repr(QByteArray.hex)",
+          "repr(QByteArray.hex)": "QtCore.QByteArray('01d9d0cb000200000000042600000071000006f9000003a0000004260000008d000006f9000003a000000001000000000780')",
+          "pretty-print": "     & q     &           "
+        },
+        "state": {
+          "type": "repr(QByteArray.hex)",
+          "repr(QByteArray.hex)": "QtCore.QByteArray('000000ff00000000fd0000000100000003000002d4000002fefc0100000001fc00000000000002d40000024800fffffffc0200000002fb0000003c007600690063006f006e005f006700750069005f005f005600690063006f006e004700550049005f005f0031005f005f00770069006400670065007401000000000000026f0000017100fffffffb0000003c0072006f0062006f0074005f006700750069005f005f0052006f0062006f0074004700550049005f005f0031005f005f0077006900640067006500740100000275000000890000005400ffffff000002d20000000000000004000000040000000800000008fc00000001000000030000000100000036004d0069006e0069006d0069007a006500640044006f0063006b00570069006400670065007400730054006f006f006c0062006100720000000000ffffffff0000000000000000')",
+          "pretty-print": "                     H                                         o q                                    u   T                                                          "
+        }
+      },
+      "groups": {
+        "toolbar_areas": {
+          "keys": {
+            "MinimizedDockWidgetsToolbar": {
+              "type": "repr",
+              "repr": "8"
+            }
+          },
+          "groups": {}
+        }
+      }
+    }
+  }
+}

@@ -5,11 +5,15 @@
 #include "ros/ros.h"							// ros::*
 #include "visualization_msgs/Marker.h"			// visualization_msgs::Marker
 
+// System
+#include <map>									// std::map
+#include <string>								// std::string
+
 // Vicon tools
-#include "vicon_tools/remove_objects.h"			// vicon_tools::remove_objects
 #include "vicon_tools/ros_object_array.h"		// vicon_tools::ros_object_array
 
 namespace Visualization {
+	static std::map<std::string, int> id_map;		// Mapping of name to ID
 	static ros::Publisher marker_pub;				// Publisher to marker_update
 	static int shape_;								// The shape used for visualization
 	static int scale_x_;							// Scale in the X dimension
@@ -22,11 +26,8 @@ namespace Visualization {
 	// Creates a marker
 	visualization_msgs::Marker createMarker(const vicon_tools::ros_object object, int id);
 
-	// Creates a marker that removes it from the visualizer
-	visualization_msgs::Marker createRemovalMarker(std::string name);
-
-	// Handle for when a remove message has arrived
-	void onObjectRemove(const vicon_tools::remove_objects::ConstPtr& msg);
+	// Gets the ID of the object
+	int getObjectID(std::string name);
 
 	// Handle for when an update message has arrived
 	void onObjectUpdate(const vicon_tools::ros_object_array::ConstPtr& msg);

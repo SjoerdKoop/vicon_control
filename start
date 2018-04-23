@@ -1,1 +1,5 @@
-roslaunch launch_all.launch --screen
+# Set script directory
+DIR=$(dirname "$(realpath "$BASH_SOURCE[0]")")
+
+# Call roslaunch with $DIR/general_files/launch_all.launch
+roslaunch $DIR/general_files/launch_all.launch --screen

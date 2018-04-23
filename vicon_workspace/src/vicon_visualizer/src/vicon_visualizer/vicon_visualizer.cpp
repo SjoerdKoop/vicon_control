@@ -9,7 +9,6 @@
 #include <math.h>									// M_PI
 
 // Vicon tools
-#include "vicon_tools/remove_objects.h"				// vicon_tools::remove_objects
 #include "vicon_tools/ros_object_array.h"			// vicon_tools::ros_object_array
 
 // Vicon visualizer
@@ -36,8 +35,6 @@ ViconVisualizer::ViconVisualizer(QWidget* parent) : QWidget(parent)
 	// Set up subscribers
 	ros::NodeHandle n;
 	object_sub_ = n.subscribe<vicon_tools::ros_object_array>("object_update", 1, Visualization::onObjectUpdate);
-	remove_sub_ = n.subscribe<vicon_tools::remove_objects>("object_remove", 1, Visualization::onObjectRemove);
-
 
 	// Create RViz visualization manager
 	rviz::VisualizationManager* vis_man = new rviz::VisualizationManager(ui_.panel_);
@@ -80,7 +77,6 @@ ViconVisualizer::~ViconVisualizer()
 {
 	// Shutdown subscribers
 	object_sub_.shutdown();
-	remove_sub_.shutdown();
 
 	// Terminate Visualization namespace
 	Visualization::terminate();

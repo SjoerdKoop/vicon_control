@@ -44,36 +44,28 @@ visualization_msgs::Marker Visualization::createMarker(const vicon_tools::ros_ob
 	return marker;
 }
 
-// Creates a marker that removes it from the visualizer
-visualization_msgs::Marker Visualization::createRemovalMarker(std::string name)
+// Gets the ID of the object
+int Visualization::getObjectID(std::string name)
 {
-	visualization_msgs::Marker marker;			// Marker object
-
-/*	// Set id
-	marker.id = id;
-
-	// Set up removal
-	marker.header.frame_id = "/object_frame";			// Attach to general object_frame	
-	marker.ns = "objects";								// Marker lives in the objects namespace
-	marker.action = visualization_msgs::Marker::DELETE;
-*/
-	return marker;
-}
-
-// Handle for when a remove message has arrived
-void Visualization::onObjectRemove(const vicon_tools::remove_objects::ConstPtr& msg)
-{
-	visualization_msgs::Marker marker;			// Holds marker to remove
-
-	// For each ID
-	for (int i = 0; i < msg->names.size(); i++)
+	// Iterate over all known pairs
+	for (const auto& pair : id_map)
 	{
-		// Create marker
-		marker = createRemovalMarker(msg->names[i]);
-
-		// Publish ball marker
-		marker_pub.publish(marker);
+		// If it is the pair of the objects
+		if (pair.first == name)
+		{
+			// Return ID
+			return pair.second;
+		}
 	}
+
+	// If the object is not know yet, generate a new ID
+	int id = id_map.size();
+	
+	// Add a pair to the map
+	id_map.emplace(std::make_pair(name, id));
+
+	// Return new ID
+	return id;
 }
 
 // Handle for when an update message has arrived
@@ -82,10 +74,10 @@ void Visualization::onObjectUpdate(const vicon_tools::ros_object_array::ConstPtr
 	visualization_msgs::Marker marker;			// Holds marker to send
 
 	// For each object
-	for (int i = 0; i < msg->objects.size(); i++)
+	for (vicon_tools::ros_object object : msg->objects)
 	{
 		// Create marker
-		marker = createMarker(msg->objects[i], i);
+		marker = createMarker(object, getObjectID(object.name));
 
 		// Publish ball marker
 		marker_pub.publish(marker);

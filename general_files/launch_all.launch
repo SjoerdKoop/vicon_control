@@ -1,0 +1,10 @@
+<launch>
+	<!-- Combined Robot and Vicon GUI -->
+	<node name="vicon_control_gui" pkg="rqt_gui" type="rqt_gui" args="-ht --perspective-file $(dirname)/vicon_control.perspective"/>
+	
+	<!-- Plot Juggler -->
+	<node name="plot_juggler" pkg="plotjuggler" type="PlotJuggler"/>
+
+	<!-- Include Vision Control -->
+	<include file="$(find vision_control)/launch/vision_control.launch"/>
+</launch>

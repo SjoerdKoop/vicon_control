@@ -4,8 +4,7 @@
     <widget class="QWidget">
         <layout class="QVBoxLayout" name="main_layout">
             <item>
-                <widget class="RobotPeer" name="robot_peer_" native="true">
-                </widget>
+                <widget class="RobotPeer" name="robot_peer_" native="true"/>
             </item>
         </layout>
         </widget>

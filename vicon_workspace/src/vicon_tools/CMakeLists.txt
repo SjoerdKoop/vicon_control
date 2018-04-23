@@ -12,7 +12,6 @@ find_package(catkin REQUIRED COMPONENTS roscpp message_generation)
 
 ## Add and generate messages
 add_message_files(FILES
-	remove_objects.msg
 	ros_object.msg
 	ros_object_array.msg
 )
