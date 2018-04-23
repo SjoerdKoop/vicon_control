@@ -245,7 +245,7 @@ string name
 float32 value
 ```
 
-The name will be the name given to the sensor on the robot. *PlotJuggler* is not able to link names to values. The index of the values will coincide with the way sensors are added in the *robot_control* software running on the robot (e.g. first sensor added jhas index 0, second sensor added has index 1, ...).
+The name will be the name given to the sensor on the robot. *PlotJuggler* is not able to link names to values. The index of the values will coincide with the way sensors are added in the *robot_control* software running on the robot (e.g. first sensor added has index 0, second sensor added has index 1, etc). Nevertheless, names might still be useful for other visualization software or robustness in a more advanced vision controller.
 
 ## ROS: object_update
 
