@@ -14,6 +14,9 @@ ExampleRobotController::ExampleRobotController(float p)
 // Control action
 void ExampleRobotController::control(std::vector<float> reference)
 {
+	/* Example: Move actuator to setpoint with standard P action */
+	/* Setpoint assumed to be the first variable (reference[0]) */
+
 	float ref = reference[0];				// Position reference
 	float pos = sensor_->getValue();		// Position
 	float error = ref - pos;				// Position error
@@ -28,5 +31,7 @@ void ExampleRobotController::control(std::vector<float> reference)
 	{
 		// Set 0
 		actuator_->setValue(0);
-	}	
+	}
+
+	/* Example end */
 }
