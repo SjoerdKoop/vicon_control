@@ -21,7 +21,7 @@ The four components have been designed for ROS Lunar running on Ubuntu 16.04. Th
 # Contents
 * [Overview](https://github.com/SjoerdKoop/vicon_control#overview)
 * [Setup](https://github.com/SjoerdKoop/vicon_control#setup)
-	* [Prerquisites](https://github.com/SjoerdKoop/vicon_control#prerequisites)
+	* [Prerequisites](https://github.com/SjoerdKoop/vicon_control#prerequisites)
 	* [Installation](https://github.com/SjoerdKoop/vicon_control#installation)
 	* [Setting up the connection](https://github.com/SjoerdKoop/vicon_control#setting-up-the-connection)
 	* [BeagleBone Black specific settings](https://github.com/SjoerdKoop/vicon_control#beaglebone-black-specific-settings)
@@ -375,3 +375,7 @@ Run the script with *sudo*
 **PX_YY pinmux file not found when setting pin mode**
 
 This means that the mode is not available for the pin. If it involves a PRU pin, check [Using the PRU](https://github.com/SjoerdKoop/vicon_control#using-the-pru).
+
+**My markers are always at the origin**
+
+Make sure to **turn off* tracking(*Track* button should not be green) for each object that is enabled in the Vicon Tracker.
