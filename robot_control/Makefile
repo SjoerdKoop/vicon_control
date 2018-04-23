@@ -21,14 +21,6 @@ default: .FORCE
 	@ echo "Making example_robot"
 	@ $(MAKE) $(FLAGS) src/example_robot
 
-	@ # Make proto1
-	@ echo "Making proto1"
-	@ $(MAKE) $(FLAGS) src/proto1
-
-	@ # Make proto2
-	@ echo "Making proto2"
-	@ $(MAKE) $(FLAGS) src/proto2
-
 	@ # Add additional binaries to make here
 	@ # echo "Making <name>"
 	@ # $(MAKE) $(FLAGS) src/<project_directory>
