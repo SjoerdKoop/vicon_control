@@ -234,7 +234,7 @@ Robot controllers should inherit from *RobotController* and should override the 
 * In the *Makefile*, add the source and header files and create a make target for your executable. See example *Makefile*
 * In the base *Makefile* (*robot_control/Makefile*), add an entry for your robot if it should build when invoking make in the base directory (not required)
 
-The software is designed so that one controller, controls one actuator-sensor pair. Separate controllers for multiple pairs can be created and added using the same method. Additional actuators and sensors should be defined in the *actuators.cpp/actuators.h* and *sensors.cpp/sensors.h* in *robot_control/src/components* respectively. Make sure to remake the *components* project afterwards. Adding these new actuators and sensors can be achieved by adding functions to the *Robot* namespace defined in *robot.cpp/robot.h* in *robot_control/src/robot*.
+The software is designed so that one controller controls one actuator-sensor pair. Separate controllers for multiple pairs can be created and added using the same method. Additional actuators and sensors should be defined in the *actuators.cpp/actuators.h* and *sensors.cpp/sensors.h* in *robot_control/src/components* respectively. Make sure to remake the *components* project afterwards. Adding these new actuators and sensors can be achieved by adding functions to the *Robot* namespace defined in *robot.cpp/robot.h* in *robot_control/src/robot*.
 
 ## Vision control design
 
