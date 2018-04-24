@@ -123,6 +123,7 @@ namespace Robot
 	// Runs the robot
 	void run()
 	{
+		// Wait for reference
 		std::cout << "Waiting for an initial reference...";
 		receiveReference();
 		std::cout << "received!" << std::endl;
