@@ -220,7 +220,8 @@ sudo bin/<program_name> <argument0> <argument1> ...
 
 Robot controllers should inherit from *RobotController* and should override the *control* function. An example implementation of a robot can be seen in *robot_control/src/example_robot*. Actuators, sensors and controllers are added in the main file *example_robot.cpp*. Finally the *Makefile* has be be set up. In summary:
 
-* Create &lt;your_robot&gt;.h in *robot_control/src/&lt;your_robot&gt;/include/* and &lt;your_robot&gt;.cpp in *robot_control/src/&lt;your_robot&gt;/src/*
+* Create the main source file &lt;your_robot&gt;.cpp in *robot_control/src/&lt;your_robot&gt;/src/*
+* Create &lt;your_robot_controller&gt;.h in *robot_control/src/&lt;your_robot&gt;/include/* and &lt;your_robot_controller&gt;.cpp in *robot_control/src/&lt;your_robot&gt;/src/*
 * In the controller header file:
 	* Include the header file for *RobotController*
 	* Inherit from *RobotController*
@@ -390,7 +391,7 @@ Feel free to change any file. Updates in ROS workspaces can be applied by runnin
 
 **Marker detection seems unstable and unusable, how can I change this?**
 
-Current marker detection is simple and designed for low latency. It involves a simple first order motion estimation model: ![Prediction Formula](http://latex.codecogs.com/svg.latex?x_%7Bk%2B1%7D%3Dx_k%2B%28x_k-x_%7Bk-1%7D%29%5CDelta%5C+t).
+Current marker detection is simple and designed for low latency. It involves a simple first order motion estimation model: ![Prediction Formula](http://latex.codecogs.com/svg.latex?x_{k%2B1}%3Dx_k%2Bv\Delta\+t).
 
 Data association is achieved by linking the marker to it's closest neighbour within a threshold, as detected by the Vicon tracker system. To replace/improve this algorithm, replace the *ViconClient::getMarkers()* function in *vicon_control/vicon_workspace/src/vicon_tools/src/vicon_trools/clients.cpp*.
 
