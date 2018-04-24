@@ -7,7 +7,7 @@ type catkin_make > /dev/null
 if [ $? -eq 0 ]; then
 
 	# Set script directory
-	DIR=$(dirname "$(realpath "$BASH_SOURCE[0]")")
+	DIR=$(dirname "$(readlink -f "$BASH_SOURCE")")
 
 	# Call catkin_make in the workspace
 	catkin_make -C $DIR

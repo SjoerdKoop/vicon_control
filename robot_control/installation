@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set script directory
-DIR=$(dirname "$(realpath "$BASH_SOURCE[0]")")
+DIR=$(dirname "$(readlink -f "$BASH_SOURCE")")
 
 # Export PRU_CGT so the makefiles know where the PRU compiler is located
 # And make it persistent by adding it to ~/.bashrc of the user
