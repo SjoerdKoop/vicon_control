@@ -218,21 +218,20 @@ sudo bin/<program_name> <argument0> <argument1> ...
 
 ## Robot control design
 
-Robot controllers should inherit from *RobotController* and should override the *control* function. An example implementation of a robot can be seen in *robot_control/src/example_robot*. Actuators, sensors and controllers are added in the main file *example_robot.cpp*. Finally the *Makefile* has be be set up. In summary:
+Robot controllers should inherit from *RobotController* and should override the *control* function. An example implementation of a robot can be seen in *robot_control/src/example_robot*. Actuators, sensors and controllers are added in the main source file of your project. Finally the *Makefile* has be be set up. In summary:
 
-* Create the main source file &lt;your_robot&gt;.cpp in *robot_control/src/&lt;your_robot&gt;/src/*
-* Create &lt;your_robot_controller&gt;.h in *robot_control/src/&lt;your_robot&gt;/include/* and &lt;your_robot_controller&gt;.cpp in *robot_control/src/&lt;your_robot&gt;/src/*
+* Copy *robot_control/src/example robot* and give the project directory and files reasonable names
 * In the controller header file:
 	* Include the header file for *RobotController*
 	* Inherit from *RobotController*
 	* Override the *control* function
 * Define functionality of your controller in *control* in your controller's source file.
-* In the main source file (*example_robot.cpp*):
+* In the main source file (*<&lt;your_robot&gt;.cpp*):
 	* Include the header file for your controller
 	* Add actuators and sensors with set parameters (name, pins, memory location, etc)
 	* Create an instance of your controller with *new* and supply parameters for your controller (remove example)
 	* Add your controller (call *Robot::addController(&lt;your_controller_variable&gt;, &lt;actuator_name&gt;, &lt;sensor_name&gt;)*)
-* In the *Makefile*, add the source and header files and create a make target for your executable. See example *Makefile*
+* Changed variables in the *Makefile*.
 * In the base *Makefile* (*robot_control/Makefile*), add an entry for your robot if it should build when invoking make in the base directory (not required)
 
 The software is designed so that one controller controls one actuator-sensor pair. Separate controllers for multiple pairs can be created and added using the same method. Additional actuators and sensors should be defined in the *actuators.cpp/actuators.h* and *sensors.cpp/sensors.h* in *robot_control/src/components* respectively. Make sure to remake the *components* project afterwards. Adding these new actuators and sensors can be achieved by adding functions to the *Robot* namespace defined in *robot.cpp/robot.h* in *robot_control/src/robot*.
