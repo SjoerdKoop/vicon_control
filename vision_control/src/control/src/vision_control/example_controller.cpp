@@ -54,7 +54,7 @@ std_msgs::Float32MultiArray ExampleController::objectsToReference(const vision_c
 	else
 	{
 		// Set reference to 0
-		ref.data.push_back(0);
+		ref.data.push_back (0);
 	}
 
 	/* Example end */
