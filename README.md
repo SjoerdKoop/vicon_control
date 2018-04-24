@@ -412,4 +412,4 @@ Make sure to **turn off** tracking (*Track* button should **not** be green) for 
 
 **PlotJuggler will not build**
 
-See if there is any support available concerning your issue. If it cannot be helped, remove it from the repository. It is merely a package for visualizer real-time data and can be interchanged with other software.
+See if there is any support available concerning your issue. If it cannot be helped, remove it from the repository. It is merely a package for visualizing real-time data and can be replaced with other software if needed.
