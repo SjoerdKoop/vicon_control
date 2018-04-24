@@ -220,7 +220,7 @@ sudo bin/<program_name> <argument0> <argument1> ...
 
 Robot controllers should inherit from *RobotController* and should override the *control* function. An example implementation of a robot can be seen in *robot_control/src/example_robot*. Actuators, sensors and controllers are added in the main source file of your project. Finally the *Makefile* has be be set up. In summary:
 
-* Copy *robot_control/src/example robot* and give the project directory and files reasonable names
+* Copy *robot_control/src/example_robot* and give the project directory and files reasonable names
 * In the controller header file:
 	* Include the header file for *RobotController*
 	* Inherit from *RobotController*
