@@ -226,7 +226,7 @@ Robot controllers should inherit from *RobotController* and should override the 
 	* Inherit from *RobotController*
 	* Override the *control* function
 * Define functionality of your controller in *control* in your controller's source file.
-* In the main source file (*<&lt;your_robot&gt;.cpp*):
+* In the main source file (*&lt;your_robot&gt;.cpp*):
 	* Include the header file for your controller
 	* Add actuators and sensors with set parameters (name, pins, memory location, etc)
 	* Create an instance of your controller with *new* and supply parameters for your controller (remove example)
