@@ -102,7 +102,7 @@ Each component can be installed by running the corresponding *installation* scri
 
 *Before the installation scripts, there is a dot followed by a space before the actual file. This ensures that the settings also apply for the current terminal.*
 
-The installation script of *robot_control* exports environment variables defining the location of the PRU files and calls *make*.
+The installation script of *robot_control* exports environment variables defining the location of the PRU files, adds these exports to the user's *~/.bashrc* and calls *make*.
 
 The other scripts call *catkin_make*. If *catkin_make* can be run (i.e. ROS has been properly installed), the scripts will source the package path to the user's *~/.bashrc*.
 
@@ -409,3 +409,7 @@ This means that the mode is not available for the pin. If it involves a PRU pin,
 **My markers are always at the origin**
 
 Make sure to **turn off** tracking (*Track* button should **not** be green) for each object that is enabled in the Vicon Tracker.
+
+**PlotJuggler will not build**
+
+See if there is any support available concerning your issue. If it cannot be helped, remove it from the repository. It is merely a package for visualizer real-time data and can be interchanged with other software.
