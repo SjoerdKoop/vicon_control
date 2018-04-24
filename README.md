@@ -118,7 +118,7 @@ Currently, the Vicon Tracker PC has an IP address of 192.168.10.1 and is sending
 
 ### Robot
 
-On the BeagleBoneBlack, network configuration is done by editing the */etc/network/interfaces* file. A proper static IP address on the same subnet can be set by appending the settings below to the file. The placeholder &lt;device&gt; should be set to the communication device that connects to the user's network (can be checked with *ifconfig*). The value *x* should be set so that it is not the same IP address as the user PC or Vicon Tracker PC. Any other embedded systems should have similar methods to change these settings.
+On the BeagleBone Black, network configuration is done by editing the */etc/network/interfaces* file. A proper static IP address on the same subnet can be set by appending the settings below to the file. The placeholder &lt;device&gt; should be set to the communication device that connects to the user's network (can be checked with *ifconfig*). The value *x* should be set so that it is not the same IP address as the user PC or Vicon Tracker PC. Any other embedded systems should have similar methods to change these settings.
 
 ```
 ## Set static <device> ip address
@@ -181,7 +181,7 @@ The Robot GUI, Vicon GUI and vision controller can be run simultaneously by invo
 vicon_control/start
 ```
 
-This script calls *roslaunch* and includes the launch files from their corresponding packages. These launch files can also be run separately, which is the recommended method when not all nodes are required:
+This script calls *roslaunch* with the *general_files/launch_all.launch* file. Launch files of the components can also be run separately, which is the recommended method when not all nodes are required:
 
 ```
 roslaunch robot_gui robot_gui.launch
