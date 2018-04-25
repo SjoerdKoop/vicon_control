@@ -2,7 +2,7 @@
 
 This repository includes:
 
-* Tools to connect to and get frames from a computer running the propietary [Vicon Tracker](https://www.vicon.com/products/software/tracker)
+* Tools to connect to and get frames from a computer running the proprietary [Vicon Tracker](https://www.vicon.com/products/software/tracker)
 * Tools to send reference to / receive sensor data from a robot
 * Template software that can be used to close the control loop using Vicon Tracker data to create a reference for the robot
 * Template software to be run on the robot which listens to a reference, controls the actuators and sends sensor data
