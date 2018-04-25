@@ -28,8 +28,8 @@ The four components have been designed for ROS Lunar running on Ubuntu 16.04. Th
 * [Usage](https://github.com/SjoerdKoop/vicon_control#usage)
 	* [ROS workspaces](https://github.com/SjoerdKoop/vicon_control#ros-workspaces)
 	* [Robot control](https://github.com/SjoerdKoop/vicon_control#robot-control)
-	* [Robot control design](https://github.com/SjoerdKoop/vicon_control#robot-control-design)
-	* [Vision control design](https://github.com/SjoerdKoop/vicon_control#vision-control-design)
+	* [Robot controller design](https://github.com/SjoerdKoop/vicon_control#robot-controller-design)
+	* [Vision controller design](https://github.com/SjoerdKoop/vicon_control#vision-controller-design)
 * [Communication](https://github.com/SjoerdKoop/vicon_control#communication)
 	* [ROS: data_update](https://github.com/SjoerdKoop/vicon_control#ros-data_update)
 	* [ROS: object_update](https://github.com/SjoerdKoop/vicon_control#ros-object_update)
@@ -222,7 +222,7 @@ Finally, the controller can be run with:
 sudo bin/<program_name> <argument0> <argument1> ...
 ```
 
-## Robot control design
+## Robot controller design
 
 Robot controllers should inherit from *RobotController* and should override the *control* function. An example implementation of a robot can be seen in *robot_control/src/example_robot*. Actuators, sensors and controllers are added in the main source file of your project. Finally the *Makefile* has be be set up. In summary:
 
@@ -242,7 +242,7 @@ Robot controllers should inherit from *RobotController* and should override the 
 
 The software is designed so that one controller controls one actuator-sensor pair. Separate controllers for multiple pairs can be created and added using the same method. Additional actuators and sensors should be defined in the *actuators.cpp/actuators.h* and *sensors.cpp/sensors.h* in *robot_control/src/components* respectively. Make sure to remake the *components* project afterwards. Adding these new actuators and sensors can be achieved by adding functions to the *Robot* namespace defined in *robot.cpp/robot.h* in *robot_control/src/robot*.
 
-## Vision control design
+## Vision controller design
 
 Vision controllers should inherit from *VisionController* and should override the *objectsToReference* function. An example implementation can be seen as the example controller in the package *vision_control*. Afterwards create an instance of your controller in the main file and initialize with your controller. Finally the source file has to be added to the executable in the *CMakeLists.txt*. In summary:
 
