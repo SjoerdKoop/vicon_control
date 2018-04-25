@@ -165,7 +165,7 @@ Using this setup, all tasks are separated:
 
 Communication is achieved by reading to / writing from the shared memory that is available in the PRU subsystem as shown in the image below. PRU1 reads the pins of all encoders en stores their amount of counts (since PRU startup) in a certain location in the memory. The CPU then reads these counts and writes the speed of the actuator as a PWM duty cycle percentage (0 - 100) to other locations in the shared memory. It also writes directly to the directional pins of the motor. Finally PRU0 reads from the the latter memory locations and sets a PWM cycle with specified duty cycles on the corresponding motor PWM pins.
 
-![PRU shared memory](https://github.com/SjoerdKoop/vicon_control/images/pru_shared_memory.png)
+![PRU shared memory](/images/pru_shared_memory.png)
 
 ### Setting the pins
 
