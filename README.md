@@ -206,7 +206,7 @@ The firmware of the PRU's is defined in *robot_control/bbb_scripts/start_pru*. *
 
 The pin setup is done in *robot_control/bbb_scripts/set_pins*. **Change pin setup if needed.**
 
-After installing the *robot_control* package, directories *robot_control/bin* and *robot_control/firmware* are populated with programs. These programs, together with the scripts defined in *robot_control/bbb_scripts* can be send to the robot using *robot_control/send_files*. **Replace the IP address and "jurp" with your BeagleBoneBlack user if needed.**
+After installing the *robot_control* package, directories *robot_control/bin* and *robot_control/firmware* are populated with programs. These programs, together with the scripts defined in *robot_control/bbb_scripts* can be send to the robot using *robot_control/send_files*. **Replace the IP address and "jurp" with your BeagleBone Black user if needed.**
 
 ### On the BeagleBone Black
 
