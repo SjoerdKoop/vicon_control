@@ -19,8 +19,9 @@ ViconClient::ViconClient(int number_of_markers)
 	pub_ = n.advertise<vicon_tools::ros_object_array>("object_update", 1);
 
     // Populate objects_ if needed (markers only)
-    for (int i = 0; i < number_of_markers; i++) {
-        objects_.push_back(TrackedObject());
+    for (int i = 0; i < number_of_markers; i++)
+	{
+        objects_.push_back(new TrackedObject());
     }
 
 	// Create datastream client
@@ -47,7 +48,8 @@ bool ViconClient::connect(char* ip, char* port)
 	ROS_INFO("Connecting to %s at port %s ...", ip, port);
 	Result::Enum result = client_->Connect(host_name).Result;
 
-	if (result == Result::Success) {
+	if (result == Result::Success)
+	{
 		// Show info
 		ROS_INFO("Datastream Client connected!");
 
@@ -58,7 +60,8 @@ bool ViconClient::connect(char* ip, char* port)
 		// Return success
 		return true;
 	}
-	else {
+	else
+	{
 		// Show fatal error
 		ROS_FATAL("ERROR: Datastream client could not connect!");
 
@@ -78,7 +81,8 @@ vicon_tools::ros_object_array ViconClient::extractData()
 void ViconClient::run()
 {
 	// Main loop
-	while (true) {
+	while (true)
+	{
 		// Wait for new frame
 		client_->GetFrame();
 
@@ -97,91 +101,101 @@ void ViconClient::run()
 	}
 }
 
+
 // Generates ros_object_array from markers
 vicon_tools::ros_object_array ViconClient::getMarkers()
 {
-	vicon_tools::ros_object_array object_array;	// Holds ros_object_array message
+	vicon_tools::ros_object_array object_array;							// Holds ros_object_array message
+	double delta_time = 1 / client_->GetFrameRate().FrameRateHz;		// Elapsed time
+	std::vector<int> excluded_markers;									// Excluded markers
+	int marker_count = client_->GetUnlabeledMarkerCount().MarkerCount;	// Unlabeled marker count
 
-   // Holds time between this frame and the one before
-    double delta_time = 1 / client_->GetFrameRate().FrameRateHz;
-
-    // Excluded markers, start with no elements. Fills up when object and markers have been paired
-    std::vector<int> excluded_markers;
-
-    // Get unlabeled marker count
-	int marker_count = client_->GetUnlabeledMarkerCount().MarkerCount;
+	// Loop variables
+	int best_marker_id;						// Best marker ID
+	struct Vector3D best_marker_position;	// Best marker position
+	double best_norm;						// Best norm
+	double dx;								// X difference
+	double dy;								// Y difference
+	double dz;								// Z difference
+	double norm;							// Norm
 
 	// If there are markers
-    if (marker_count > 0) {
-        // For each object
-        for (int i = 0; i < objects_.size(); i++) {
-            // Most likely marker's ID and position
-            int best_marker_id;
-            struct Vector3D best_marker_position;
+	if (marker_count > 0)
+	{
+		// For each object
+		for (TrackedObject* object : objects_)
+		{
+			// Initialize norm to maximum
+			best_norm = DBL_MAX;
 
-            // Euclidian norm of predicted object position and the most like marker's position
-            double best_norm = DBL_MAX;
+			for (int j = 0; j < marker_count; j++)
+			{
+				// Look for marker in excluded markers
+				auto it = std::find(excluded_markers.begin(), excluded_markers.end(), j);
 
-            for (int j = 0; j < marker_count; j++) {
-                // Look for marker in excluded markers
-                auto it = std::find(excluded_markers.begin(), excluded_markers.end(), j);
+				// If marker is not excluded
+				if (it == excluded_markers.end())
+				{
+					// Get coordinates
+					Output_GetUnlabeledMarkerGlobalTranslation umgtOutput = client_->GetUnlabeledMarkerGlobalTranslation(j);
 
-                // If marker is not excluded
-                if (it == excluded_markers.end()) {
-                    // Get coordinates
-                    Output_GetUnlabeledMarkerGlobalTranslation umgtOutput = client_->GetUnlabeledMarkerGlobalTranslation(i);
+					// Calculate norm
+					dx = object->pos_.x_ - umgtOutput.Translation[0];
+					dy = object->pos_.y_ - umgtOutput.Translation[1];
+					dz = object->pos_.z_ - umgtOutput.Translation[2];
+					norm = std::sqrt(dx * dx + dy * dy + dz * dz);
 
-                    // Calculate norm
-                    double dx = objects_[i].pos_.x_ - umgtOutput.Translation[0];
-                    double dy = objects_[i].pos_.y_ - umgtOutput.Translation[1];
-                    double dz = objects_[i].pos_.z_ - umgtOutput.Translation[2];
-                    double norm = std::sqrt(dx * dx + dy * dy + dz * dz);
+					// If norm is smaller, set this marker to be the best fit for current object
+					if (norm < best_norm)
+					{
+						best_marker_id = j;
+						best_marker_position = Vector3D(umgtOutput.Translation);
+						best_norm = norm;
+					}
 
-                    // If norm is smaller, set this marker to be the best fit for current object
-                    if (norm < best_norm) {
-                        best_marker_id = j;
-                        best_marker_position = Vector3D(umgtOutput.Translation);
-                        best_norm = norm;
-                    }
+					// If this is the first detection of the object, the first detected marker is assumed to be the object
+					if (!object->is_initialized_)
+					{
+						break;
+					}
+				}
+			}
 
-                    // If this is the first detection of the object, the first detected marker is assumed to be the object
-                    if (!objects_[i].isInitialized_) {
-                        break;
-                    }
-                }
-            }
-
-            if (best_norm < NORM_THRESHOLD || !objects_[i].isInitialized_) {
-                // Update objects to most likely marker
-                objects_[i].updatePosition(best_marker_position, delta_time);
-
-                // Exclude marker from future pairings
-                excluded_markers.push_back(best_marker_id);
-            }
-        }
-    }
-
-	// Dummy zero variable;
-	double zero = 0;
-
-	// For each object
-	for (int i = 0; i < objects_.size(); i++) {
-		// Create new ros_object message
-		vicon_tools::ros_object object;
-
-		// Copy data to ros_object message
-		object.name = "marker" + std::to_string(i);
-		object.x = objects_[i].pos_.x_;
-		object.y = objects_[i].pos_.y_;
-		object.z = objects_[i].pos_.z_;
-		object.rx = 0;
-		object.ry = 0;
-		object.rz = 0;
-
-		// Add object to array
-		object_array.objects.push_back(object);
+			if (best_norm < NORM_THRESHOLD || !object->is_initialized_)
+			{
+				// Update objects to most likely marker
+				object->updatePosition(best_marker_position, delta_time);
+				std::cout << "Updating object" << std::endl;
+				// Exclude marker from future pairings
+				excluded_markers.push_back(best_marker_id);
+			}
+		}
 	}
 
+	// For each object
+	for (int i = 0; i < objects_.size(); i++)
+	{
+		// If the object has an update pending
+		if (objects_[i]->has_update_)
+		{
+			// Create new ros_object message
+			vicon_tools::ros_object ros_object;
+
+			// Copy data to ros_object message
+			ros_object.name = "marker" + std::to_string(i);
+			ros_object.x = objects_[i]->pos_.x_;
+			ros_object.y = objects_[i]->pos_.y_;
+			ros_object.z = objects_[i]->pos_.z_;
+			ros_object.rx = 0;
+			ros_object.ry = 0;
+			ros_object.rz = 0;
+
+			// Add object to array
+			object_array.objects.push_back(ros_object);
+		}
+	}
+	std::cout << "Marker objects: " << object_array.objects.size() << std::endl;
+	// Return ROS object array
 	return object_array;
 }
 

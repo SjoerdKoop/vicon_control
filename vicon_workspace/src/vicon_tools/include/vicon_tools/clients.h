@@ -56,7 +56,7 @@ class ViconClient
 
 	private:
 		ros::Publisher pub_;							// Publisher
-		std::vector<TrackedObject> objects_;			// Tracked objects
+		std::vector<TrackedObject*> objects_;			// Tracked objects
 
 };
 
