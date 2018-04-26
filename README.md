@@ -359,10 +359,10 @@ The following executables are helpful tools to assist in debugging:
 
 * Vision control tools (vision_control_tools): These tools print object updates and send reference updates.
 	* `rosrun vision_control_tools object_subscriber`
-	* `rosrun vision_control_tools reference_publisher` 
+	* `rosrun vision_control_tools reference_publisher <ref0> <ref1> <ref2> ...` 
 * Robot Workspace tools (robot_tools): These tools allow the user to send a set reference the robot at a given IP address and port and print data updates.
 	* `rosrun robot_tools data_subscriber`
-	* `rosrun robot_tools send_reference <robot IP address> <robot port>`
+	* `rosrun robot_tools send_reference <robot IP address> <robot port> <ref0> <ref1> <ref2> ...`
 * Robot control tools: These tools are to be run on the robot. They consist of a server of data updates and a listener to reference updates from a specific host at a given IP address and port and a tool that samples the shared memory with the PRU and prints the current data at an index.
 	* `data_server <user IP address> <user port>`
 	* `sudo read_shared_memory <index>`\
