@@ -3,7 +3,6 @@
 
 // Default period (in cycles @ 200 MHz)
 #define DEFAULT_PERIOD 200000		// 200000 cycles => 1 kHz
-//#define DEFAULT_PERIOD 200000000	// 200000000 cycles => 1 Hz
 
 // Shared memory starting address
 #define SHARED_MEMORY 0x00010000
@@ -20,7 +19,8 @@ class PRUPWM
 
 		// Updates the output signal of the PWM
 		void update(int cycles);
-int cycles_high_;	// How many cycles the PWM has to give a high signal
+		
+		int cycles_high_;	// How many cycles the PWM has to give a high signal
 		
 	private:
 		int pin_;			// Output pin
