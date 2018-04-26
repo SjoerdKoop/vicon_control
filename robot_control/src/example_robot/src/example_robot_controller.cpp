@@ -2,7 +2,7 @@
 #include "example_robot_controller.h"
 
 // Error threshold
-#define THRESHOLD 0.00001
+#define THRESHOLD 0.0001
 
 // Constructor
 ExampleRobotController::ExampleRobotController(float p)
