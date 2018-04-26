@@ -6,8 +6,9 @@
 #include "ros/ros.h"				// ros::init
 
 // System
-#include <iostream>					// std::cout, std::endl
 #include <cstring>					// memcpy, std::stoi
+#include <iostream>					// std::cout, std::endl
+
 
 // Checks whether provided arguments are correct
 bool checkArguments(int argc, char* argv[]) {

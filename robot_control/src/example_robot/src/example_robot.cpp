@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 		Robot::addEncoder("encoder0", 0, DISTANCE_PER_COUNT, true);
 
 		// Create controllers
-		ExampleRobotController* controller = new ExampleRobotController(5.0f);
+		ExampleRobotController* controller = new ExampleRobotController(40.0f);
 
 		// Add Controllers
 		Robot::addController(controller, "motor0", "encoder0");

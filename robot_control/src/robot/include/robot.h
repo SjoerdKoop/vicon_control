@@ -30,7 +30,7 @@ namespace Robot
 	void addEncoder(std::string name, int output_location, float dist_per_count, bool invert);
 
 	// Adds a Hall sensor
-	void addHallSensor(std::string name, int input_location);
+	void addHallSensor(std::string name, int pin);
 
 	// Adds a motor
 	void addMotor(std::string name, int input_location, int ccw_pin, int cw_pin, float max_speed, bool invert);

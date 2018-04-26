@@ -33,9 +33,8 @@ Peer::Peer(char* ip, int port) {
 	selfAddr.sin_port = htons(port);
 
 	// Bind socket if possible, else throw error
-	if (bind(sock, (const sockaddr*)&selfAddr, addrLength) == -1) {
-		ROS_FATAL("Could not bind socket to port %d!", port);
-	}
+	bind(sock, (const sockaddr*)&selfAddr, addrLength);
+
 }
 
 // Receives messages

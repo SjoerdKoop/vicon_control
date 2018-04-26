@@ -15,7 +15,7 @@ class ExampleRobotController : public RobotController
 		void control(std::vector<float> reference) override;
 
 	private:
-		float p_;						// Proportional gain
+		float p_;				// Proportional gain
 };
 
 #endif // ROBOT_CONTROL_EXAMPLE_ROBOT_CONTROLLER_H

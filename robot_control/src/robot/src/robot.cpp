@@ -57,10 +57,10 @@ namespace Robot
 
 
 	// Adds a Hall sensor
-	void addHallSensor(std::string name, int output_pin)
+	void addHallSensor(std::string name, int pin)
 	{
 		// Create Hall sesnsor
-		Hall* hall = new Hall(output_pin);
+		Hall* hall = new Hall(pin);
 
 		// Add hall sensor
 		sensors.emplace(std::make_pair(name, hall));

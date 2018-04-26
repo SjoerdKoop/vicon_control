@@ -3,7 +3,7 @@
 
 // System
 #include <string>			// std::string
-
+#include <iostream>
 // Path of the GPIO devices
 #define GPIO_PATH "/sys/class/gpio"
 
@@ -134,13 +134,26 @@ void Motor::setValue(float value)
 	// If speed is positive
 	else if (value > 0)
 	{
-		// If upper limit has been reached
-		if (upper_->getValue() == 0)
+		// If limits exists
+		if (has_limits_)
 		{
-			// Stop motor
-			stop();
+			// If upper limit has been reached
+			if (upper_->getValue() == 1)
+			{
+				// Stop motor
+				stop();
+			}
+			// If the motor is free to move up
+			else
+			{
+				// Set motor to turn clockwise
+				setClockwise();
+
+				// Set speed
+				setSpeed(value);
+			}
 		}
-		// If the motor is free to move up
+		// If there is no upper limit
 		else
 		{
 			// Set motor to turn clockwise
@@ -153,18 +166,31 @@ void Motor::setValue(float value)
 	// If speed is negative
 	else
 	{	
-		// If lower limit has been reached
-		if (lower_->getValue() == 0)
-		{
-			// Stop motor
-			stop();
+		// If limits exists
+		if (has_limits_)
+			{
+			// If lower limit has been reached
+			if (lower_->getValue() == 1)
+			{
+				// Stop motor
+				stop();
+			}
+			// If the motor is free to move down
+			else
+			{
+				// Set motor to turn counter clockwise	
+				setCounterClockwise();
+			
+				// Set positive speed
+				setSpeed(-value);
+			}
 		}
-		// If the motor is free to move down
+		// If there is no lower limit
 		else
 		{
 			// Set motor to turn counter clockwise	
 			setCounterClockwise();
-		
+			
 			// Set positive speed
 			setSpeed(-value);
 		}
