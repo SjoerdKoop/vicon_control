@@ -54,4 +54,18 @@ class Hall : public Sensor
 		std::ifstream output_file_;		// File of the output
 };
 
+// Class defining an Infrared sensor
+class IRSensor : public Sensor
+{
+	public:
+		// Constructor
+		IRSensor(int pin);
+
+		// Gets the value of the output
+		float getValue();
+
+	private:
+		std::ifstream output_file_;		// File of the output
+};
+
 #endif // ROBOT_CONTROL_SENSORS_H

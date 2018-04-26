@@ -12,12 +12,14 @@
 #define PRU_SHARED_MEMORY 0x00010000
 
 // Constructor
-PRU::PRU() {
+PRU::PRU()
+{
         // Open memory file for mapping
         int fd = open("/dev/mem", O_RDWR | O_SYNC);
 
         // If memory file cannot be opened
-        if (fd == -1) {
+        if (fd == -1)
+		{
                 // Return error and exit
                 std::cout << "ERROR: Could not open /dev/mem." << std::endl;
                 exit(EXIT_SUCCESS);
@@ -27,21 +29,23 @@ PRU::PRU() {
         int* pru = (int*) mmap(0, PRU_LENGTH, PROT_READ | PROT_WRITE, MAP_SHARED, fd, PRU_ADDRESS);
 
         // Map PRU memory to shared memory
-        sharedMemory = pru + PRU_SHARED_MEMORY / 4; 
+        shared_memory = pru + PRU_SHARED_MEMORY / 4; 
 }
 
 // Gets the reference for the variable at index
 int* PRU::getReference(int index)
 {
-	return &sharedMemory[index];
+	return &shared_memory[index];
 }
 
 // Gets variable at index
-int PRU::getVariable(int index) {
-	return sharedMemory[index];
+int PRU::getVariable(int index)
+{
+	return shared_memory[index];
 }
 
 // Sets variable at index
-void PRU::setVariable(int index, int value) {
-	sharedMemory[index] = value;
+void PRU::setVariable(int index, int value)
+{
+	shared_memory[index] = value;
 }

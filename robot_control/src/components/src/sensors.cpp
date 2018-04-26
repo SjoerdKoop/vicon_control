@@ -28,7 +28,6 @@ float Encoder::getValue()
 	return *output_ * dist_per_count_;
 }
 
-
 // Constructor
 Hall::Hall(int pin)
 {
@@ -40,7 +39,6 @@ Hall::Hall(int pin)
 	// Open value file at begin of the file
 	output_file_.open(output_string.c_str());
 }
-
 
 // Gets the value of the output
 float Hall::getValue()
@@ -55,4 +53,39 @@ float Hall::getValue()
 	output_file_ >> value;
 	
 	return value;
+}
+
+// Constructor
+IRSensor::IRSensor(int pin)
+{
+	std::string output_string;	// Holds output pin string
+
+	// Create strings
+	output_string.append(GPIO_PATH).append("/gpio").append(std::to_string(pin)).append("/value");
+
+	// Open value file at begin of the file
+	output_file_.open(output_string.c_str());
+}
+
+// Gets the value of the output
+float IRSensor::getValue()
+{
+	int value;			// Holds value
+
+	// Reset file to begin
+	output_file_.clear();
+	output_file_.seekg(0, std::ios::beg);
+
+	// Get value
+	output_file_ >> value;
+	
+	// Return inverse value
+	if (value == 0)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
 }

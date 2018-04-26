@@ -16,8 +16,7 @@ class PRU {
 		// Sets varaible at index
 		void setVariable(int index, int value);
 
-		// The shared memory between the processor and PRU's
-		int* sharedMemory;
+		int* shared_memory;		//Shared memory between processor and PRU's
 };
 
 #endif // ROBOT_CONTROL_PRU_H

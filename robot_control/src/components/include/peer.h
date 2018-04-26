@@ -23,12 +23,12 @@ class Peer {
 		void sendMessage(char* msg);
 
 	private:
-		char buffer[BUFFER_SIZE];			// Message buffer
-		int sock;							// Socket
-		struct sockaddr_in recvAddr;		// Receiving address information
-		struct sockaddr_in sendAddr;		// Address information
-		socklen_t addrLength;				// Length of the sender structure in bytes
-		char* robotIP;						// Valid IP of the robot
+		char buffer_[BUFFER_SIZE];			// Message buffer
+		int sock_;							// Socket
+		struct sockaddr_in recv_addr_;		// Receiving address information
+		struct sockaddr_in send_addr_;		// Address information
+		socklen_t addr_length_;				// Length of the sender structure in bytes
+		char* robot_ip_;					// Valid IP of the robot
 };
 
 #endif // ROBOT_CONTROLPEER_H

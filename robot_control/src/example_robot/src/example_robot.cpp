@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
 		// Add actuators
 		Robot::addMotor("motor0", 1, 49, 15, MAX_SPEED, true);
 
-		// Add encoders
+		// Add sensors
 		Robot::addEncoder("encoder0", 0, DISTANCE_PER_COUNT, true);
 
 		// Create controllers

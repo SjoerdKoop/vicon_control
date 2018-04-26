@@ -1,2 +1,7 @@
 #!/bin/bash
-rsync -r bbb_scripts/* bin firmware jurp@192.168.7.2:/home/jurp
+
+# Set script directory
+DIR=$(dirname "$(readlink -f "$BASH_SOURCE")")
+
+# Send files
+rsync -r $DIR/bbb_scripts/* $DIR/bin $DIR/firmware jurp@192.168.7.2:/home/jurp

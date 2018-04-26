@@ -3,7 +3,7 @@
 
 // System
 #include <string>			// std::string
-#include <iostream>
+
 // Path of the GPIO devices
 #define GPIO_PATH "/sys/class/gpio"
 
