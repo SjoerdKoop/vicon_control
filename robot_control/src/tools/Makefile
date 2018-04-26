@@ -53,10 +53,6 @@ create:
 	@ $(CXX) -c $(FLAGS) $(TOOLS_SRCS) -o tools.o
 	@ $(AR) crf $(LIB_PATH)/libtools.a -o tools.o
 
-	@ # Create data_server binary
-	@ $(CXX) $(FLAGS) $(DATA_SERVER_SRCS) $(DATA_SERVER_LIBS)\
-		-o $(BIN_PATH)/data_server
-
 	@ # Create read_shared_memory binary
 	@ $(CXX) $(FLAGS) $(READ_SHARED_MEMORY_SRCS) $(READ_SHARED_MEMORY_LIBS)\
 		-o $(BIN_PATH)/read_shared_memory

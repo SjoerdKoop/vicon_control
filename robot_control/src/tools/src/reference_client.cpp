@@ -11,12 +11,14 @@
 #include "tools.h"			// isValidIP, isValidPort
 
 // Checks whether provided arguments are correct
-bool checkArguments(int argc, char* argv[]) {
+bool checkArguments(int argc, char* argv[])
+{
 	// If the number of arguments is correct
-	if (argc == 3) {
+	if (argc == 3)
+	{
 		// If IP address and port are valid
-		if (isValidIp(argv[1]) && isValidPort(argv[2])) {
-
+		if (isValidIp(argv[1]) && isValidPort(argv[2]))
+		{
 			return true;
 		}
 		else 
