@@ -11,7 +11,8 @@
 #include "pru_encoder.h"				// PRUEncoder
 
 // Main function
-int main() {
+int main()
+{
 	// Enable OCP
 	CT_CFG.SYSCFG_bit.STANDBY_INIT = 0;
 
@@ -19,7 +20,8 @@ int main() {
 	PRUEncoder* encoder0 = new PRUEncoder(0, 1, 0);
 
 	// Loop infinitely
-	while(1) {
+	while(1)
+	{
 		// Update encoder
 		encoder0->update();
 	}

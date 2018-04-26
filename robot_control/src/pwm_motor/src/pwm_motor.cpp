@@ -12,7 +12,8 @@
 #include "pru_pwm.h"					// PRUPWM
 
 // Resets the IEP counter
-void resetIEP() {
+void resetIEP()
+{
 	// Set counter to 0
 	CT_IEP.TMR_CNT = 0x0;
 
@@ -21,13 +22,15 @@ void resetIEP() {
 }
 
 // Reads from the IEP counter
-int readIEP() {
+int readIEP()
+{
 	// Return current count
 	return CT_IEP.TMR_CNT;
 }
 
 // Main function
-int main() {
+int main()
+{
 	// Enable OCP
 	CT_CFG.SYSCFG_bit.STANDBY_INIT = 0;
 
@@ -38,7 +41,8 @@ int main() {
 	PRUPWM* pwm0 = new PRUPWM(0, 1);
 
 	// Loop infinitely
-	while(1) {
+	while(1)
+	{
 		// Reset IEP clock
 		resetIEP();
 
