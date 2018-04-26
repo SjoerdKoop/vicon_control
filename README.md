@@ -363,13 +363,12 @@ The following executables are helpful tools to assist in debugging:
 * Robot Workspace tools (robot_tools): These tools allow the user to send a set reference the robot at a given IP address and port and print data updates.
 	* `rosrun robot_tools data_subscriber`
 	* `rosrun robot_tools send_reference <robot IP address> <robot port> <ref0> <ref1> <ref2> ...`
-* Robot control tools: These tools are to be run on the robot. They consist of a server of data updates and a listener to reference updates from a specific host at a given IP address and port and a tool that samples the shared memory with the PRU and prints the current data at an index.
-	* `data_server <user IP address> <user port>`
-	* `sudo read_shared_memory <index>`\
-	  *(This executable has to be run as a super user, since it involves opening a global memory map.)*
+* Robot control tools: These tools are to be run on the robot. They consist of a listener to reference updates from a specific host at a given IP address and port and tools to read from / write to the shared memory space of host CPU and the PRU's.
 	* `reference_client <user IP address> <user port>`
+	* `sudo read_shared_memory <index>`\
+		*(This executable has to be run as a super user, since it involves opening a global memory map.)*
 	* `sudo write_shared_memory <index> <value>`\
-          *(This executable has to be run as a super user, since it involves opening a global memory map.)*
+    	*(This executable has to be run as a super user, since it involves opening a global memory map.)*
 
 # Troubleshooting
 
